@@ -111,6 +111,7 @@
 		7D09503E18289EA100ADCF9F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D09503D18289EA100ADCF9F /* SystemConfiguration.framework */; };
 		7D09504D1829C7D400ADCF9F /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D09504C1829C7D400ADCF9F /* libGoogleAnalyticsServices.a */; };
 		7D09504F1829C94500ADCF9F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D09504E1829C94500ADCF9F /* CoreData.framework */; };
+		7D3470571829D91C0049141B /* icon_120_120.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D3470561829D91C0049141B /* icon_120_120.png */; };
 		7D709297181B573A00CEA280 /* button_test.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D709296181B573A00CEA280 /* button_test.png */; };
 		7D70929B181B646600CEA280 /* ModalWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D709299181B646600CEA280 /* ModalWebViewController.m */; };
 		7D70929C181B646600CEA280 /* ModalWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D70929A181B646600CEA280 /* ModalWebViewController.xib */; };
@@ -382,6 +383,7 @@
 		7D09504B1829C7B700ADCF9F /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITracker.h; path = googleAnalytics/GAITracker.h; sourceTree = "<group>"; };
 		7D09504C1829C7D400ADCF9F /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = danuri/googleAnalytics/libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		7D09504E1829C94500ADCF9F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		7D3470561829D91C0049141B /* icon_120_120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_120_120.png; path = danuri/image/icon_120_120.png; sourceTree = "<group>"; };
 		7D709296181B573A00CEA280 /* button_test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_test.png; path = danuri/image/button_test.png; sourceTree = "<group>"; };
 		7D709298181B646600CEA280 /* ModalWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModalWebViewController.h; path = webView/ModalWebViewController.h; sourceTree = "<group>"; };
 		7D709299181B646600CEA280 /* ModalWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModalWebViewController.m; path = webView/ModalWebViewController.m; sourceTree = "<group>"; };
@@ -526,6 +528,7 @@
 		18ADD077181AD5CD005D484B = {
 			isa = PBXGroup;
 			children = (
+				7D3470561829D91C0049141B /* icon_120_120.png */,
 				7D094FB418279BAB00ADCF9F /* Default-568h@2x.png */,
 				18ADD089181AD5CD005D484B /* danuri */,
 				18ADD0BC181AD93A005D484B /* image */,
@@ -1149,7 +1152,7 @@
 				ORGANIZATIONNAME = Kjhong;
 				TargetAttributes = {
 					18ADD07F181AD5CD005D484B = {
-						DevelopmentTeam = HT9Q8SLVDW;
+						DevelopmentTeam = 3LBP7978EP;
 					};
 					18ADD0A0181AD5CD005D484B = {
 						TestTargetID = 18ADD07F181AD5CD005D484B;
@@ -1293,6 +1296,7 @@
 				18ADD0DE181ADD0D005D484B /* back_button_p_47_27.png in Resources */,
 				7D70951C181CBFFB00CEA280 /* icon_09.@2xpng.png in Resources */,
 				7D709334181C773A00CEA280 /* lang_base@2x.png in Resources */,
+				7D3470571829D91C0049141B /* icon_120_120.png in Resources */,
 				18ADD0E3181ADD0D005D484B /* complete_button_p_46_27@2x.png in Resources */,
 				7D709349181C7EFB00CEA280 /* lang_06@2x.png in Resources */,
 				7D709358181C9B2D00CEA280 /* back@2x.png in Resources */,
@@ -1512,7 +1516,7 @@
 					/Users/hongkijoo/danuri_github/danuri/googleAnalytics,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "31391F4A-006D-42E0-90E6-295BDA9650AC";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1521,8 +1525,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: kijoo Hong (3LBP7978EP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: kijoo Hong (3LBP7978EP)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "danuri/danuri-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1538,7 +1542,7 @@
 					/Users/hongkijoo/danuri_github/danuri/googleAnalytics,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "FCE82235-55B9-44E5-BB99-67BD267BB902";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
