@@ -1,0 +1,28 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+#endif
+
+#define SuccessCertification  @"SuccessCertification"
+#define FONT_SIZE(N)		[UIFont systemFontOfSize:(N)]
+
+#define OS_VERSION			[[[UIDevice currentDevice] systemVersion] floatValue]
+
+#define TRIM_WHITESPACE(STR, RETAIN) STR = [STR stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]; if( RETAIN == YES ) [STR retain];
+#define TRIM(STR) [STR stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]
+
+#define NSTR_ENCO_UTF8(s) [s stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
