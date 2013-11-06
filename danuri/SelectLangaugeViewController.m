@@ -9,6 +9,8 @@
 #import "SelectLangaugeViewController.h"
 #import "AppDelegate.h"
 #import "SKBounceAnimation.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
 
 CGFloat buttonScale = 1.0;
 int growDir = 0;
@@ -41,6 +43,14 @@ int moveCount = 0.1;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    
+    // This screen name value will remain set on the tracker and sent with
+    // hits until it is set to a new value or to nil.
+    [tracker set:kGAIScreenName value:@"언어선택화면"];
+    
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    
     if([[UIScreen mainScreen]bounds].size.height > 480.0000){
         padding = 70.f;
     }

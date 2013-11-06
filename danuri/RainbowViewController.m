@@ -52,6 +52,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    
+    // This screen name value will remain set on the tracker and sent with
+    // hits until it is set to a new value or to nil.
+    [tracker set:kGAIScreenName value:@"레인보우 +"];
+    
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
     if (!networkQueue) {
 		networkQueue = [[ASINetworkQueue alloc] init];
 	}
@@ -271,18 +278,18 @@
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
 //    NSLog(@"%d", pageControl.currentPage);
-//    NSString *year = nil;
-//    @try {
-//        year = [[_posts objectAtIndex:pageControl.currentPage] objectForKey:@"rb_year"];
-//        [self.view makeToast:year];
-//
-//    }
-//    @catch (NSException *exception) {
-//        return;
-//    }
-//    @finally {
-//        return;
-//    }
+    NSString *year = nil;
+    @try {
+        year = [[_posts objectAtIndex:pageControl.currentPage] objectForKey:@"rb_year"];
+        [self.view makeToast:year];
+
+    }
+    @catch (NSException *exception) {
+        return;
+    }
+    @finally {
+        return;
+    }
 }
 
 
@@ -293,6 +300,14 @@
 }
 -(void)didEntertainViewClicked:(EntertainView*)entertainView
 {
+    NSString *actionContent = [NSString stringWithFormat:@"%@ : %@ ",@"레인보우 +", [entertainView getTargetURL]];
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"레인보우 +"     // Event category (required)
+                                                          action:@"버튼클릭"  // Event action (required)
+                                                           label:actionContent          // Event label
+                                                           value:nil] build]];    // Event value
+    
     ASIHTTPRequest *request;
     NSURL *url = [NSURL URLWithString:[entertainView getTargetURL]];
 

@@ -4,7 +4,7 @@
 //
 //  Created by Kjhong on 2013. 10. 26..
 //  Copyright (c) 2013년 Kjhong. All rights reserved.
-//
+///Users/hongkijoo/danuri_github/danuri.xcodeproj
 
 #import "KoreanMovieViewController.h"
 #import "ConsultViewController.h"
@@ -31,6 +31,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    
+    // This screen name value will remain set on the tracker and sent with
+    // hits until it is set to a new value or to nil.
+    [tracker set:kGAIScreenName value:@"다문화 지원센터"];
+    
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
     UIButton *naviBarBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 53, 37)] ;
     [naviBarBtn setImage:[UIImage imageNamed:@"lang"] forState:UIControlStateNormal];
     [naviBarBtn setImage:[UIImage imageNamed:@"lang_p"] forState:UIControlStateHighlighted];

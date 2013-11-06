@@ -11,6 +11,8 @@
 #import "KoreanMovieViewController.h"
 #import "KoreaGuideViewController.h"
 #import "HelpCenterViewController.h"
+#import "GAI.h"
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate,UINavigationControllerDelegate, UINavigationBarDelegate, UITabBarControllerDelegate>
 {
     UITabBarController *tabbarController;
@@ -22,5 +24,6 @@
 }
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) NSString *type;
+@property(nonatomic, strong) id<GAITracker> tracker;
 
 @end

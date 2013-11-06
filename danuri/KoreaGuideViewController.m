@@ -48,6 +48,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    
+    // This screen name value will remain set on the tracker and sent with
+    // hits until it is set to a new value or to nil.
+    [tracker set:kGAIScreenName value:@"한국생활 가이드"];
+    
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
     UIButton *naviBarBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 53, 37)] ;
     [naviBarBtn setImage:[UIImage imageNamed:@"lang"] forState:UIControlStateNormal];
     [naviBarBtn setImage:[UIImage imageNamed:@"lang_p"] forState:UIControlStateHighlighted];
@@ -239,6 +246,14 @@
 }
 -(void)didEntertainViewClicked:(EntertainView*)entertainView
 {
+    NSString *actionContent = [NSString stringWithFormat:@"%@ : %@ ",@"한국생활 가이드", [entertainView getTargetURL]];
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"한국생활 가이드"     // Event category (required)
+                                                          action:@"버튼클릭"  // Event action (required)
+                                                           label:actionContent          // Event label
+                                                           value:nil] build]];    // Event value
+    
     ASIHTTPRequest *request;
     NSURL *url = [NSURL URLWithString:[entertainView getTargetURL]];
     

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
 @interface ConsultViewController : UIViewController
 
 @end

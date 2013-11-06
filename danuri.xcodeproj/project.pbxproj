@@ -109,6 +109,8 @@
 		7D09503A18289E8A00ADCF9F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D09503918289E8A00ADCF9F /* MobileCoreServices.framework */; };
 		7D09503C18289E9200ADCF9F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D09503B18289E9200ADCF9F /* Security.framework */; };
 		7D09503E18289EA100ADCF9F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D09503D18289EA100ADCF9F /* SystemConfiguration.framework */; };
+		7D09504D1829C7D400ADCF9F /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D09504C1829C7D400ADCF9F /* libGoogleAnalyticsServices.a */; };
+		7D09504F1829C94500ADCF9F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D09504E1829C94500ADCF9F /* CoreData.framework */; };
 		7D709297181B573A00CEA280 /* button_test.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D709296181B573A00CEA280 /* button_test.png */; };
 		7D70929B181B646600CEA280 /* ModalWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D709299181B646600CEA280 /* ModalWebViewController.m */; };
 		7D70929C181B646600CEA280 /* ModalWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D70929A181B646600CEA280 /* ModalWebViewController.xib */; };
@@ -372,6 +374,14 @@
 		7D09503918289E8A00ADCF9F /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		7D09503B18289E9200ADCF9F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		7D09503D18289EA100ADCF9F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		7D0950461829C7B700ADCF9F /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAI.h; path = googleAnalytics/GAI.h; sourceTree = "<group>"; };
+		7D0950471829C7B700ADCF9F /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIDictionaryBuilder.h; path = googleAnalytics/GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		7D0950481829C7B700ADCF9F /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIFields.h; path = googleAnalytics/GAIFields.h; sourceTree = "<group>"; };
+		7D0950491829C7B700ADCF9F /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAILogger.h; path = googleAnalytics/GAILogger.h; sourceTree = "<group>"; };
+		7D09504A1829C7B700ADCF9F /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITrackedViewController.h; path = googleAnalytics/GAITrackedViewController.h; sourceTree = "<group>"; };
+		7D09504B1829C7B700ADCF9F /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITracker.h; path = googleAnalytics/GAITracker.h; sourceTree = "<group>"; };
+		7D09504C1829C7D400ADCF9F /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = danuri/googleAnalytics/libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		7D09504E1829C94500ADCF9F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		7D709296181B573A00CEA280 /* button_test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_test.png; path = danuri/image/button_test.png; sourceTree = "<group>"; };
 		7D709298181B646600CEA280 /* ModalWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModalWebViewController.h; path = webView/ModalWebViewController.h; sourceTree = "<group>"; };
 		7D709299181B646600CEA280 /* ModalWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModalWebViewController.m; path = webView/ModalWebViewController.m; sourceTree = "<group>"; };
@@ -486,6 +496,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D09504F1829C94500ADCF9F /* CoreData.framework in Frameworks */,
+				7D09504D1829C7D400ADCF9F /* libGoogleAnalyticsServices.a in Frameworks */,
 				7D09503E18289EA100ADCF9F /* SystemConfiguration.framework in Frameworks */,
 				7D09503C18289E9200ADCF9F /* Security.framework in Frameworks */,
 				7D09503A18289E8A00ADCF9F /* MobileCoreServices.framework in Frameworks */,
@@ -535,6 +547,8 @@
 		18ADD082181AD5CD005D484B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7D09504E1829C94500ADCF9F /* CoreData.framework */,
+				7D09504C1829C7D400ADCF9F /* libGoogleAnalyticsServices.a */,
 				7D09503D18289EA100ADCF9F /* SystemConfiguration.framework */,
 				7D09503B18289E9200ADCF9F /* Security.framework */,
 				7D09503918289E8A00ADCF9F /* MobileCoreServices.framework */,
@@ -552,6 +566,7 @@
 		18ADD089181AD5CD005D484B /* danuri */ = {
 			isa = PBXGroup;
 			children = (
+				7D0950451829C68500ADCF9F /* googleAnalytics */,
 				7D094FB71828954700ADCF9F /* ASIHTTPRequest */,
 				7D7094D5181CB55600CEA280 /* category */,
 				7D70935F181CAA6500CEA280 /* Toast */,
@@ -899,6 +914,19 @@
 				7D09503118289D5100ADCF9F /* Reachability.m */,
 			);
 			name = External;
+			sourceTree = "<group>";
+		};
+		7D0950451829C68500ADCF9F /* googleAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				7D0950461829C7B700ADCF9F /* GAI.h */,
+				7D0950471829C7B700ADCF9F /* GAIDictionaryBuilder.h */,
+				7D0950481829C7B700ADCF9F /* GAIFields.h */,
+				7D0950491829C7B700ADCF9F /* GAILogger.h */,
+				7D09504A1829C7B700ADCF9F /* GAITrackedViewController.h */,
+				7D09504B1829C7B700ADCF9F /* GAITracker.h */,
+			);
+			name = googleAnalytics;
 			sourceTree = "<group>";
 		};
 		7D7092AA181B95CF00CEA280 /* 긴급연락처 */ = {
@@ -1478,6 +1506,11 @@
 				);
 				INFOPLIST_FILE = "danuri/danuri-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(SRCROOT)/danuri/googleAnalytics\\\"",
+					/Users/hongkijoo/danuri_github/danuri/googleAnalytics,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1499,6 +1532,11 @@
 				);
 				INFOPLIST_FILE = "danuri/danuri-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(SRCROOT)/danuri/googleAnalytics\\\"",
+					/Users/hongkijoo/danuri_github/danuri/googleAnalytics,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;

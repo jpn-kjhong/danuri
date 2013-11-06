@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "CustomPageControl.h"
 #import "EntertainView.h"
-
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
 @interface KoreaGuideViewController : UIViewController<UIScrollViewDelegate, EntertainViewDelegate,UIDocumentInteractionControllerDelegate>
 {
     

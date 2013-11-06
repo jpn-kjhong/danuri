@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "CustomPageControl.h"
 #import "EntertainView.h"
-
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
 @interface RainbowViewController : UIViewController<UIScrollViewDelegate, EntertainViewDelegate, UIDocumentInteractionControllerDelegate>
 {
     

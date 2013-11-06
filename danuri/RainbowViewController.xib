@@ -38,7 +38,7 @@
                         <outlet property="delegate" destination="-1" id="abQ-dF-JX5"/>
                     </connections>
                 </scrollView>
-                <pageControl opaque="NO" alpha="0.19999999999999968" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" id="eU2-BL-JcL" customClass="CustomPageControl">
+                <pageControl opaque="NO" alpha="0.14999999999999969" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" id="eU2-BL-JcL" customClass="CustomPageControl">
                     <rect key="frame" x="-1" y="376" width="320" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </pageControl>

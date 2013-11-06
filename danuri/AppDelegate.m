@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "SelectLangaugeViewController.h"
 #import "CustomTabbarItem.h"
+static NSString *const kTrackingId = @"UA-45495109-1";
 
 
 #pragma mark - UINavigationBarCategory(UINavigationBarCategory)
@@ -99,6 +100,11 @@
     // Override point for customization after application launch.
 //    SelectLangaugeViewController *selectLangaugeViewController = [[SelectLangaugeViewController alloc] initWithNibName:@"SelectLangaugeViewController" bundle:nil];
 //    self.window.rootViewController = selectLangaugeViewController;
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    [GAI sharedInstance].dispatchInterval = 20;
+    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+    self.tracker = [[GAI sharedInstance] trackerWithTrackingId:kTrackingId];
+    
     [self appInit];
     
     [self.window makeKeyAndVisible];

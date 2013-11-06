@@ -29,7 +29,7 @@
                     <rect key="frame" x="41" y="-83" width="238" height="551"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </scrollView>
-                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" id="0sI-9g-CbU" customClass="CustomPageControl">
+                <pageControl opaque="NO" alpha="0.14999999999999969" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" id="0sI-9g-CbU" customClass="CustomPageControl">
                     <rect key="frame" x="-1" y="537" width="320" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </pageControl>

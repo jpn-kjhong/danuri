@@ -32,6 +32,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    
+    // This screen name value will remain set on the tracker and sent with
+    // hits until it is set to a new value or to nil.
+    [tracker set:kGAIScreenName value:@"지원센터 찾기"];
+    
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+
     // Do any additional setup after loading the view from its nib.
 //    NSDictionary *param  = @{@"city": @"gangnamgu"};
 //    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];

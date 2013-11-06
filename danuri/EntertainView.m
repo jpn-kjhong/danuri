@@ -131,7 +131,7 @@
             [aivLoading setHidesWhenStopped:YES];
             [aivLoading setHidden:YES];
             self.progress = [[UIProgressView alloc] initWithFrame:CGRectZero];
-            self.progress.frame = CGRectMake(0, ivThumbnail.frame.origin.y + ivThumbnail.frame.size.height + 10, fThumbnailWidth, 20);
+            self.progress.frame = CGRectMake(0, ivThumbnail.frame.origin.y + ivThumbnail.frame.size.height - 5, fThumbnailWidth, 20);
             [self addSubview:ivThumbnail];
             [self addSubview:self.progress];
             [self.progress setHidden:YES];

@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
 @interface EmergencyViewController : UIViewController<UITableViewDataSource, UITableViewDelegate,UIAlertViewDelegate>
 {
     __weak IBOutlet UITableView *tableView;

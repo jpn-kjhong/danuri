@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "FPPopoverController.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
 @interface SupportViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 {
     __weak IBOutlet UIButton *cityButton;
