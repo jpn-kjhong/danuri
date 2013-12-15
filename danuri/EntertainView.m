@@ -58,12 +58,14 @@
     EntertainViewType               nEnterViewType;
     NSString                        *year;
     NSString                        *link;
+    UIButton                        *close;
 }
 
 @end
 
 @implementation EntertainView
 @synthesize progress;
+@synthesize close;
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, fViewWidth, fViewHeight)];
     
@@ -131,19 +133,27 @@
             [aivLoading setHidesWhenStopped:YES];
             [aivLoading setHidden:YES];
             self.progress = [[UIProgressView alloc] initWithFrame:CGRectZero];
-            self.progress.frame = CGRectMake(0, ivThumbnail.frame.origin.y + ivThumbnail.frame.size.height - 5, fThumbnailWidth, 20);
+            self.progress.frame = CGRectMake(0, ivThumbnail.frame.origin.y + ivThumbnail.frame.size.height - 10, fThumbnailWidth - 30, 20);
             [self addSubview:ivThumbnail];
             [self addSubview:self.progress];
             [self.progress setHidden:YES];
             [self addSubview:aivLoading];
             [self bringSubviewToFront:aivLoading];
-        } break;
+
+            close = [UIButton buttonWithType:UIButtonTypeCustom];
+            
+            [close setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+            close.frame = CGRectMake(self.progress.frame.origin.x + self.progress.frame.size.width + 7, ivThumbnail.frame.origin.y + ivThumbnail.frame.size.height - 5 - 10, 20, 20);
+            [close addTarget:self action:@selector(closeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:close];
+            [close setHidden:YES];
+            } break;
         default: {
         } break;
     }
     
     UIButton *btnStart = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btnStart setFrame:CGRectMake(0.0, 0.0, fViewWidth, fViewHeight)];
+    [btnStart setFrame:CGRectMake(0.0, 0.0, fViewWidth, fViewHeight - 30)];
     [btnStart addTarget:self action:@selector(startButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     [self addSubview:btnStart];
@@ -225,6 +235,26 @@
         case EntertainViewType_Normal: {
             if (idDelegate != nil && [idDelegate respondsToSelector:@selector(didEntertainViewClicked:)]) {
                 [idDelegate didEntertainViewClicked:self];
+            }
+        } break;
+        case EntertainViewType_Dummy: {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil // Alert Title Removed
+                                                                message:@"페이지 없음"
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+        } break;
+        default:
+            break;
+    }
+}
+
+-(void)closeButtonClicked:(id)sender {
+    switch (nEnterViewType) {
+        case EntertainViewType_Normal: {
+            if (idDelegate != nil && [idDelegate respondsToSelector:@selector(didCloseClicked:)]) {
+                [idDelegate didCloseClicked:self];
             }
         } break;
         case EntertainViewType_Dummy: {

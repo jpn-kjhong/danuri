@@ -29,10 +29,14 @@ typedef NSUInteger EntertainViewType;
 @property (nonatomic, strong) NSString *linkType;
 @property (nonatomic, strong) NSString *imageType;
 @property (nonatomic, strong) UIProgressView *progress;
+@property (nonatomic, strong) UIButton *close;
+
 @end
 
 @protocol EntertainViewDelegate <NSObject>
 
 -(void)didEntertainViewClicked:(EntertainView*)entertainView;
 
+@optional
+-(void)didCloseClicked:(EntertainView*)entertainView;
 @end

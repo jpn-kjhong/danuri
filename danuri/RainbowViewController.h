@@ -23,7 +23,7 @@
     
     NSArray                 *_posts;
     bool                    firstConnect;
-    
+    NSMutableArray          *requestList;
 }
 
 @end

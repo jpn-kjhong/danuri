@@ -23,5 +23,7 @@
     NSArray                 *_posts;
 
     __weak IBOutlet UIButton *titleButton;
+    NSMutableArray          *requestList;
+
 }
 @end

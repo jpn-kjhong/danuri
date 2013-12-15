@@ -51,6 +51,7 @@
 		18ACD640185D920D005D2CBA /* th_mn.json in Resources */ = {isa = PBXBuildFile; fileRef = 18ACD636185D920D005D2CBA /* th_mn.json */; };
 		18ACD641185D920D005D2CBA /* vn_mn.json in Resources */ = {isa = PBXBuildFile; fileRef = 18ACD637185D920D005D2CBA /* vn_mn.json */; };
 		18ACD645185D945A005D2CBA /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ACD644185D945A005D2CBA /* NSString+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		18ACD647185DE411005D2CBA /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 18ACD646185DE411005D2CBA /* close.png */; };
 		18ADD084181AD5CD005D484B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18ADD083181AD5CD005D484B /* Foundation.framework */; };
 		18ADD086181AD5CD005D484B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18ADD085181AD5CD005D484B /* CoreGraphics.framework */; };
 		18ADD088181AD5CD005D484B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18ADD087181AD5CD005D484B /* UIKit.framework */; };
@@ -319,6 +320,7 @@
 		18ACD642185D945A005D2CBA /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSON.h; path = JSON/JSON.h; sourceTree = "<group>"; };
 		18ACD643185D945A005D2CBA /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+SBJSON.h"; path = "JSON/NSString+SBJSON.h"; sourceTree = "<group>"; };
 		18ACD644185D945A005D2CBA /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+SBJSON.m"; path = "JSON/NSString+SBJSON.m"; sourceTree = "<group>"; };
+		18ACD646185DE411005D2CBA /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = close.png; path = danuri/image/close.png; sourceTree = "<group>"; };
 		18ADD080181AD5CD005D484B /* danuri.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = danuri.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18ADD083181AD5CD005D484B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		18ADD085181AD5CD005D484B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -828,6 +830,7 @@
 		18ADD0BC181AD93A005D484B /* image */ = {
 			isa = PBXGroup;
 			children = (
+				18ACD646185DE411005D2CBA /* close.png */,
 				18ACD5A2185D8895005D2CBA /* help_icon_01.png */,
 				18ACD5A3185D8895005D2CBA /* help_icon_02.png */,
 				18ACD5A4185D8895005D2CBA /* help_icon_03.png */,
@@ -1481,6 +1484,7 @@
 				7D70952F181CCBF900CEA280 /* 4page_02_333_148@2x.png in Resources */,
 				7D709516181CBFFB00CEA280 /* icon_03@2x.png in Resources */,
 				7D709345181C7EFB00CEA280 /* lang_02@2x.png in Resources */,
+				18ACD647185DE411005D2CBA /* close.png in Resources */,
 				18ACD5A7185D8895005D2CBA /* help_icon_01.png in Resources */,
 				18ACD62B185D91FF005D2CBA /* ru.json in Resources */,
 				18ACD63B185D920D005D2CBA /* kh_mn.json in Resources */,

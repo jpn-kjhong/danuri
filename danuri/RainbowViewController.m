@@ -45,6 +45,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(successCertification)
                                                      name:SuccessCertification object:nil];
+        requestList = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -97,6 +98,16 @@
 - (void)imageFetchComplete:(ASIHTTPRequest *)request
 {
     NSLog(@"%@", request);
+    for(EntertainView *temp in requestList)
+    {
+        if([[[request url] absoluteString] isEqualToString:[temp getTargetURL]]){
+            [temp.progress setHidden:YES];
+            [temp.close setHidden:YES];
+            [requestList removeObject:temp];
+            break;
+        }
+    }
+    
     NSArray *comp = [[NSArray alloc] initWithArray:[request.url pathComponents]];
     NSString *file = [comp objectAtIndex:[comp count]-1];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -113,6 +124,16 @@
 
 - (void)imageFetchFailed:(ASIHTTPRequest *)request
 {
+    for(EntertainView *temp in requestList)
+    {
+        if([[[request url] absoluteString] isEqualToString:[temp getTargetURL]]){
+            [temp.progress setHidden:YES];
+            [temp.close setHidden:YES];
+            [requestList removeObject:temp];
+            break;
+        }
+    }
+    
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Download failed" message:@"Failed to download pdf" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alertView show];
 }
@@ -298,6 +319,18 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void)didCloseClicked:(EntertainView*)entertainView
+{
+    for(EntertainView *temp in requestList)
+    {
+        if([[entertainView getTargetURL]  isEqualToString:[temp getTargetURL]]){
+            [networkQueue cancelAllOperations];
+            break;
+        }
+    }
+}
+
+
 -(void)didEntertainViewClicked:(EntertainView*)entertainView
 {
     NSString *actionContent = [NSString stringWithFormat:@"%@ : %@ ",@"레인보우 +", [entertainView getTargetURL]];
@@ -338,7 +371,11 @@
         [request setUserInfo:[NSDictionary dictionaryWithObject:@"request1" forKey:@"name"]];
         [networkQueue addOperation:request];
         [entertainView.progress setHidden:NO];
+        [entertainView.close setHidden:NO];
+
         [networkQueue go];
+        NSLog(@"%@",[[request url] absoluteString]);
+        [requestList addObject:entertainView];
     }
 }
 
