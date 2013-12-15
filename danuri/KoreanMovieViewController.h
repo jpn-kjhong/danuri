@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "GAIFields.h"
 #import "GAIDictionaryBuilder.h"
-@interface KoreanMovieViewController : UIViewController<UIAlertViewDelegate>
+@interface KoreanMovieViewController : UIViewController<UIAlertViewDelegate>{
+    
+    __weak IBOutlet UILabel *titleLabel;
+}
 
 @end

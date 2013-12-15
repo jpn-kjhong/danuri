@@ -102,7 +102,7 @@ static NSString *const kTrackingId = @"UA-45495109-1";
 //    self.window.rootViewController = selectLangaugeViewController;
     [GAI sharedInstance].trackUncaughtExceptions = YES;
     [GAI sharedInstance].dispatchInterval = 20;
-    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelError];
     self.tracker = [[GAI sharedInstance] trackerWithTrackingId:kTrackingId];
     
     [self appInit];

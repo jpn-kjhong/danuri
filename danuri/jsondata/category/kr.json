@@ -1,0 +1,166 @@
+[
+    {
+        "attrs": {
+            "value": "0"
+        },
+        "content": 
+            {
+                "text": "시/도"
+            }
+        ,
+        "type": "option"
+    },
+    {
+        "attrs": {
+            "value": "1"
+        },
+        "content": {
+            "text": "서울"
+        },
+        "type": "option"
+    },
+    {
+        "attrs": {
+            "value": "14"
+        },
+        "content": {
+            "text": "부산"
+        },
+        "type": "option"
+    },
+    {
+        "attrs": {
+            "value": "12"
+        },
+        "content": {
+            "text": "대구"
+        },
+        "type": "option"
+    },
+    {
+        "attrs": {
+            "value": "2"
+        },
+        "content": {
+            "text": "인천"
+        },
+        "type": "option"
+    },
+    {
+        "attrs": {
+            "value": "3"
+        },
+        "content": {
+            "text": "광주"
+        },
+        "type": "option"
+    },
+    {
+        "attrs": {
+            "value": "11"
+        },
+        "content": {
+            "text": "대전"
+        },
+        "type": "option"
+    },
+    {
+        "attrs": {
+            "value": "10"
+        },
+        "content": {
+            "text": "울산"
+        },
+        "type": "option"
+    },
+    {
+        "attrs": {
+            "value": "17"
+        },
+        "content": {
+            "text": "세종"
+        },
+        "type": "option"
+    },
+    {
+        "attrs": {
+            "value": "4"
+        },
+        "content": {
+            "text": "경기"
+        },
+        "type": "option"
+    },
+    {
+        "attrs": {
+            "value": "5"
+        },
+        "content": {
+            "text": "강원"
+        },
+        "type": "option"
+    },
+    {
+        "attrs": {
+            "value": "6"
+        },
+        "content": {
+            "text": "충북"
+        },
+        "type": "option"
+    },
+    {
+        "attrs": {
+            "value": "7"
+        },
+        "content": {
+            "text": "충남"
+        },
+        "type": "option"
+    },
+    {
+        "attrs": {
+            "value": "8"
+        },
+        "content": {
+            "text": "전북"
+        },
+        "type": "option"
+    },
+    {
+        "attrs": {
+            "value": "9"
+        },
+        "content": {
+            "text": "전남"
+        },
+        "type": "option"
+    },
+    {
+        "attrs": {
+            "value": "13"
+        },
+        "content": {
+            "text": "경북"
+        },
+        "type": "option"
+    },
+    {
+        "attrs": {
+            "value": "15"
+        },
+        "content": {
+            "text": "경남"
+        },
+        "type": "option"
+    },
+    {
+        "attrs": {
+            "value": "16"
+        },
+        "content": {
+            "text": "제주"
+        },
+        "type": "option"
+    }
+]

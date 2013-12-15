@@ -22,5 +22,6 @@
     
     NSArray                 *_posts;
 
+    __weak IBOutlet UIButton *titleButton;
 }
 @end

@@ -15,6 +15,7 @@
 #import "ModalWebViewController.h"
 #import "ASIHTTPRequest.h"
 #import "ASINetworkQueue.h"
+#import "JSON.h"
 #define Height_UITabBar                         54
 #define Height_UINavigationBar                  44
 #define Height_StatusBar                        20
@@ -89,8 +90,48 @@
         //        [_activityIndicatorView stopAnimating];
         //        self.navigationItem.rightBarButtonItem.enabled = YES;
     }];
-}
+    
 
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSString *path;
+    if([appDelegate.type isEqualToString:@"kr"]){
+        path = @"/kr_mn.json";
+    }else if([appDelegate.type isEqualToString:@"en"]){
+        path = @"/en_mn.json";
+    }else if([appDelegate.type isEqualToString:@"cn"]){
+        path = @"/cn_mn.json";
+    }else if([appDelegate.type isEqualToString:@"vn"]){
+        path = @"/vn_mn.json";
+    }else if([appDelegate.type isEqualToString:@"ph"]){
+        path = @"/ph_mn.json";
+    }else if([appDelegate.type isEqualToString:@"kh"]){
+        path = @"/kh_mn.json";
+    }else if([appDelegate.type isEqualToString:@"mn"]){
+        path = @"/mn_mn.json";
+    }else if([appDelegate.type isEqualToString:@"ru"]){
+        path = @"/ru_mn.json";
+    }else if([appDelegate.type isEqualToString:@"jp"]){
+        path = @"/jp_mn.json";
+    }else if([appDelegate.type isEqualToString:@"th"]){
+        path = @"/th_mn.json";
+    }else {
+        path = @"/kr_mn.json";
+    }
+    
+    NSString *myJsonPath = [[[NSBundle mainBundle] resourcePath]  stringByAppendingString:path];
+    NSString *myJSON = [[NSString alloc] initWithContentsOfFile:myJsonPath encoding:NSUTF8StringEncoding error:NULL];
+    if (!myJSON) {
+        NSLog(@"File couldn't be read!");
+        return;
+    }
+    NSDictionary *jsonData = [myJSON JSONValue];
+    NSString *title = [jsonData objectForKey:@"guidebook"] ;
+    
+    [titleButton setTitle:title forState:UIControlStateNormal];
+}
 
 - (void)imageFetchComplete:(ASIHTTPRequest *)request
 {
