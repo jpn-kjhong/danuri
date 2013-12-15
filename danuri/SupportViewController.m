@@ -253,8 +253,22 @@
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SupportCell" owner:self options:nil];
         cell = (SupportCell *)[nib objectAtIndex:0];
     }
-    cell.address.text = [[_posts objectAtIndex:indexPath.row] objectForKey:@"mbAddress"];
-    cell.subAddress.text = [[_posts objectAtIndex:indexPath.row] objectForKey:@"mbAddressNew"];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSString *country;
+    if([appDelegate.type isEqualToString:@"kr"]){
+        country = @"kr";
+    }else if ([appDelegate.type isEqualToString:@"jp"]){
+        country = @"jp";
+    }else if ([appDelegate.type isEqualToString:@"cn"]){
+        country = @"cn";
+    }else{
+        country = @"en";
+    }
+    NSString *mbAddress = [NSString stringWithFormat:@"%@_%@",@"mb_Address",country];
+    NSString *mbAddressNew = [NSString stringWithFormat:@"%@_%@",@"mb_AddressNew",country];
+
+    cell.address.text = [[_posts objectAtIndex:indexPath.row] objectForKey:mbAddress];
+    cell.subAddress.text = [[_posts objectAtIndex:indexPath.row] objectForKey:mbAddressNew];
     cell.number.text = [[_posts objectAtIndex:indexPath.row] objectForKey:@"mbPhone"];
 //    cell.link = [[_posts objectAtIndex:indexPath.row] objectForKey:@"link"];
     cell.link = [NSString stringWithFormat:@"http://liveinkorea.kr/center/default.asp?pzt=ct&cc=%@",stateCode];
