@@ -11,5 +11,17 @@
 #import "GAIFields.h"
 #import "GAIDictionaryBuilder.h"
 @interface HelpCenterViewController : UIViewController<UIAlertViewDelegate>
-
+{
+    __weak IBOutlet UIButton *titleButton;
+    __weak IBOutlet UIButton *callButton;
+    __weak IBOutlet UIImageView *callImage;
+    __weak IBOutlet UILabel *callTitle;
+    __weak IBOutlet UILabel *callDes;
+    __weak IBOutlet UILabel *callNumber;
+    
+    __weak IBOutlet UIButton *emerButton;
+    
+    __weak IBOutlet UIImageView *emerImage;
+    __weak IBOutlet UILabel *emerTitleLabel;
+}
 @end
