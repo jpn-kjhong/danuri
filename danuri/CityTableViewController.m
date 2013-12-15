@@ -13,7 +13,7 @@
 @end
 
 @implementation CityTableViewController
-
+@synthesize cityArray;
 - (id)initWithStyle:(UITableViewStyle)style delegate:(id)delegate
 {
     self = [super initWithStyle:style];
@@ -34,13 +34,13 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"KoreaCity" ofType:@"plist"]];
-    
-    dataArray = [[NSArray alloc] initWithArray:[dic objectForKey:@"cityArray"]];
-    cityArray = [[NSMutableArray alloc] initWithCapacity:100];
-    for(NSDictionary *dic in dataArray){
-        [cityArray addObject:[dic objectForKey:@"city"]];
-    }
+//    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"KoreaCity" ofType:@"plist"]];
+//    
+//    dataArray = [[NSArray alloc] initWithArray:[dic objectForKey:@"cityArray"]];
+//    cityArray = [[NSMutableArray alloc] initWithCapacity:100];
+//    for(NSDictionary *dic in dataArray){
+//        [cityArray addObject:[dic objectForKey:@"city"]];
+//    }
     
 }
 
@@ -56,7 +56,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [dataArray count];
+    return [cityArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -68,7 +68,11 @@
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"%@",[cityArray objectAtIndex:indexPath.row]];
+    
+        NSDictionary *temp = [cityArray objectAtIndex:[indexPath row]];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@",[[temp objectForKey:@"content"] objectForKey:@"text"]];
+    
+//    cell.textLabel.text = [NSString stringWithFormat:@"%@",[cityArray objectAtIndex:indexPath.row]];
     
     return cell;
 }

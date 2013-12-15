@@ -14,6 +14,7 @@
 #import "StateTableViewController.h"
 #import "Toast+UIView.h"
 #import "AppDelegate.h"
+#import "JSON.h"
 @interface SupportViewController ()
 
 @end
@@ -57,10 +58,60 @@
 //        
 //    }];
 }
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSString *path;
+    if([appDelegate.type isEqualToString:@"kr"]){
+        path = @"/kr.json";
+    }else if([appDelegate.type isEqualToString:@"en"]){
+        path = @"/en.json";
+    }else if([appDelegate.type isEqualToString:@"cn"]){
+        path = @"/cn.json";
+    }else if([appDelegate.type isEqualToString:@"vn"]){
+        path = @"/vn.json";
+    }else if([appDelegate.type isEqualToString:@"ph"]){
+        path = @"/ph.json";
+    }else if([appDelegate.type isEqualToString:@"kh"]){
+        path = @"/kh.json";
+    }else if([appDelegate.type isEqualToString:@"mn"]){
+        path = @"/mn.json";
+    }else if([appDelegate.type isEqualToString:@"ru"]){
+        path = @"/ru.json";
+    }else if([appDelegate.type isEqualToString:@"jp"]){
+        path = @"/jp.json";
+    }else if([appDelegate.type isEqualToString:@"th"]){
+        path = @"/th.json";
+    }else {
+        path = @"/kr.json";
+    }
+    
+    NSString *myJsonPath = [[[NSBundle mainBundle] resourcePath]  stringByAppendingString:path];
+    NSString *myJSON = [[NSString alloc] initWithContentsOfFile:myJsonPath encoding:NSUTF8StringEncoding error:NULL];
+    if (!myJSON) {
+        NSLog(@"File couldn't be read!");
+        return;
+    }
+    cityArray = [myJSON JSONValue];
+    for (NSDictionary *temp in cityArray) {
+        if([[[temp objectForKey:@"attrs"] objectForKey:@"value"] isEqualToString:@"0"]){
+            [cityButton setTitle:[[temp objectForKey:@"content"] objectForKey:@"text"] forState:UIControlStateNormal];
+            [cityArray removeObject:temp];
+            break;
+        }
+        
+    }
+//    NSString *title = [[jsonData objectForKey:@"help"] objectForKey:@"title"];
+    
+}
+
+
 - (IBAction)clickCityButton:(id)sender {
     [self closePopover];
     CityTableViewController *controller = [[CityTableViewController alloc] initWithStyle:UITableViewStylePlain];
     controller.delegate = self;
+    controller.cityArray = cityArray;
     cityPopover = [[FPPopoverController alloc] initWithViewController:controller] ;
     cityPopover.tint = FPPopoverDefaultTint;
     
@@ -82,12 +133,12 @@
     [stateButton setEnabled:NO];
 }
 
--(void)selectedTableRow:(NSInteger)row rowData:(NSString *)data
+-(void)selectedTableRow:(NSInteger)row rowData:(NSDictionary *)data
 {
     [self closePopover];
     NSLog(@"SELECTED ROW %d data %@",row, data);
     currentCityIndex = row;
-    [cityButton setTitle:data forState:UIControlStateNormal];
+    [cityButton setTitle:[[data objectForKey:@"content"] objectForKey:@"text"] forState:UIControlStateNormal];
     [cityButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [stateButton setEnabled:YES];
     [stateButton setTitle:@"" forState:UIControlStateNormal];
@@ -152,7 +203,7 @@
     _posts = [NSMutableArray array];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 //    http://1.209.82.166:8180/danuri/mobile/support?city=gunposi
-    NSDictionary *param  = @{@"language": @"kr",@"mbidx": stateCode};
+    NSDictionary *param  = @{@"language": appDelegate.type,@"mbidx": stateCode};
     [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     [Post globalTimelinePostsWithParameter:param withPath:@"include/json/center_json.asp" Block:^(NSArray *posts, NSError *error) {
         if (error) {

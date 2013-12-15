@@ -30,6 +30,7 @@
     NSInteger              currentCityIndex;
     NSString                *currentNumber;
     NSString                *currentLink;
+    NSArray                 *cityList;
 
 }
 -(void)selectedTableRow:(NSInteger)row rowData:(NSString *)data;

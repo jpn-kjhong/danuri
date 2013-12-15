@@ -11,9 +11,10 @@
 @interface CityTableViewController : UITableViewController
 {
     NSArray *dataArray;
-    NSMutableArray *cityArray;
+//    NSMutableArray *cityArray;
 }
 @property(nonatomic,assign) SupportViewController *delegate;
+@property(nonatomic,strong) NSMutableArray *cityArray;
 
 - (id)initWithStyle:(UITableViewStyle)style delegate:(id)delegate;
 @end
