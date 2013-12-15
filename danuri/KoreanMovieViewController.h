@@ -11,7 +11,10 @@
 #import "GAIDictionaryBuilder.h"
 @interface KoreanMovieViewController : UIViewController<UIAlertViewDelegate>{
     
+    __weak IBOutlet UIButton *familyButton;
     __weak IBOutlet UILabel *titleLabel;
+    
+    __weak IBOutlet UIImageView *familyImage;
 }
 
 @end

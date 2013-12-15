@@ -98,6 +98,10 @@
     NSString *title = [[jsonData objectForKey:@"help"] objectForKey:@"text1"];
     
     [titleLabel setText:title];
+    [familyImage setFrame:CGRectMake(familyImage.frame.origin.x, familyButton.frame.origin.y  + 25, familyImage.frame.size.width, familyImage.frame.size.height)];
+    
+    [titleLabel setFrame:CGRectMake(titleLabel.frame.origin.x, familyImage.frame.origin.y + familyImage.frame.size.height + 5, titleLabel.frame.size.width, titleLabel.frame.size.height)];
+    
 }
 - (void) backToIntro{
     SelectLangaugeViewController *sel = [[SelectLangaugeViewController alloc] initWithNibName:@"SelectLangaugeViewController" bundle:nil];

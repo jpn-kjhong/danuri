@@ -7,6 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KoreanMovieViewController">
             <connections>
+                <outlet property="familyButton" destination="vUR-pm-iek" id="28o-7D-d7T"/>
+                <outlet property="familyImage" destination="cVu-UI-23v" id="xio-2o-f4o"/>
                 <outlet property="titleLabel" destination="qMI-HB-Hqc" id="xeV-zZ-l13"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
@@ -21,7 +23,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vUR-pm-iek">
-                    <rect key="frame" x="20" y="55" width="280" height="186"/>
+                    <rect key="frame" x="20" y="55" width="280" height="165"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal" backgroundImage="button_empty.png">
@@ -38,7 +40,7 @@
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="다문화 가족 지원센터" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qMI-HB-Hqc">
                     <rect key="frame" x="55" y="152" width="210" height="52"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
