@@ -256,17 +256,23 @@
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSString *country;
     if([appDelegate.type isEqualToString:@"kr"]){
-        country = @"kr";
+        country = @"";
     }else if ([appDelegate.type isEqualToString:@"jp"]){
-        country = @"jp";
+        country = @"_jp";
     }else if ([appDelegate.type isEqualToString:@"cn"]){
-        country = @"cn";
+        country = @"_cn";
     }else{
-        country = @"en";
+        country = @"_en";
     }
-    NSString *mbAddress = [NSString stringWithFormat:@"%@_%@",@"mb_Address",country];
-    NSString *mbAddressNew = [NSString stringWithFormat:@"%@_%@",@"mb_AddressNew",country];
-
+    NSString *mbAddress;
+    NSString *mbAddressNew;
+    if([appDelegate.type isEqualToString:@"kr"]){
+        mbAddress = [NSString stringWithFormat:@"%@",@"mbAddress"];
+        mbAddressNew = [NSString stringWithFormat:@"%@",@"mbAddressNew"];
+    }else{
+        mbAddress = [NSString stringWithFormat:@"%@%@",@"mb_Address",country];
+        mbAddressNew = [NSString stringWithFormat:@"%@%@",@"mb_AddressNew",country];
+    }
     cell.address.text = [[_posts objectAtIndex:indexPath.row] objectForKey:mbAddress];
     cell.subAddress.text = [[_posts objectAtIndex:indexPath.row] objectForKey:mbAddressNew];
     cell.number.text = [[_posts objectAtIndex:indexPath.row] objectForKey:@"mbPhone"];
@@ -279,7 +285,7 @@
 
 - (void)tableView:(UITableView *)_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    currentNumber = [[_posts objectAtIndex:indexPath.row] objectForKey:@"phone"];
+    currentNumber = [[_posts objectAtIndex:indexPath.row] objectForKey:@"mbPhone"];
 
     currentLink = [NSString stringWithFormat:@"http://liveinkorea.kr/center/default.asp?pzt=ct&cc=%@",[[_posts objectAtIndex:indexPath.row] objectForKey:@"mbidx"]];
 
@@ -330,5 +336,6 @@
             break;
     }
 }
+
 
 @end

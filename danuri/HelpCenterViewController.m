@@ -157,5 +157,29 @@
     [alertView show];
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [alertView dismissWithClickedButtonIndex:buttonIndex animated:YES];
+    
+    NSLog(@"%d %d",alertView.tag,buttonIndex);
+    
+    
+    switch (alertView.tag) {
+        case 0:
+        {
+            if(buttonIndex == 1) {
+                [self callWithOpenURL:@"1577-5432"];
+            }else if(buttonIndex == 2){
+
+            }
+        }
+            break;
+    }
+}
+
+- (void) callWithOpenURL:(NSString *)phoneNumber {
+    NSURL *url = [NSURL URLWithString:[@"tel://" stringByAppendingString:phoneNumber]];
+    [[UIApplication sharedApplication] openURL:url];
+}
 
 @end
