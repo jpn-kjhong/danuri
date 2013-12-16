@@ -24,6 +24,5 @@
 
     __weak IBOutlet UIButton *titleButton;
     NSMutableArray          *requestList;
-
 }
 @end

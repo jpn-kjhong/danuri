@@ -26,3 +26,4 @@
 #define NSTR_ENCO_UTF8(s) [s stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define IS_IPHONE5                      (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) && ([UIScreen mainScreen].bounds.size.height > 480.0f)

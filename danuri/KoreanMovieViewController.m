@@ -58,6 +58,26 @@
 //    NSDictionary *jsonData = [myJSON JSONValue];
 //    NSString *title = [[jsonData objectForKey:@"help"] objectForKey:@"text1"];
 
+    if(IS_IPHONE5){
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
+            [familyButton setFrame:CGRectMake(familyButton.frame.origin.x, familyButton.frame.origin.y + 50, familyButton.frame.size.width, familyButton.frame.size.height)];
+        }
+        else{
+            
+            
+        }
+    }else{
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
+            [familyButton setFrame:CGRectMake(familyButton.frame.origin.x, familyButton.frame.origin.y + 50, familyButton.frame.size.width, familyButton.frame.size.height)];
+        }
+        else{
+            
+        }
+    }
+    
+    [familyImage setFrame:CGRectMake(familyImage.frame.origin.x, familyButton.frame.origin.y  + 25, familyImage.frame.size.width, familyImage.frame.size.height)];
+    
+    [titleLabel setFrame:CGRectMake(titleLabel.frame.origin.x, familyImage.frame.origin.y + familyImage.frame.size.height + 5, titleLabel.frame.size.width, titleLabel.frame.size.height)];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -98,9 +118,6 @@
     NSString *title = [[jsonData objectForKey:@"help"] objectForKey:@"text1"];
     
     [titleLabel setText:title];
-    [familyImage setFrame:CGRectMake(familyImage.frame.origin.x, familyButton.frame.origin.y  + 25, familyImage.frame.size.width, familyImage.frame.size.height)];
-    
-    [titleLabel setFrame:CGRectMake(titleLabel.frame.origin.x, familyImage.frame.origin.y + familyImage.frame.size.height + 5, titleLabel.frame.size.width, titleLabel.frame.size.height)];
     
 }
 - (void) backToIntro{

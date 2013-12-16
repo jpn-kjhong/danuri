@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RainbowViewController">
@@ -38,7 +38,7 @@
                         <outlet property="delegate" destination="-1" id="abQ-dF-JX5"/>
                     </connections>
                 </scrollView>
-                <pageControl opaque="NO" alpha="0.14999999999999969" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" id="eU2-BL-JcL" customClass="CustomPageControl">
+                <pageControl hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.14999999999999969" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" id="eU2-BL-JcL" customClass="CustomPageControl">
                     <rect key="frame" x="-1" y="376" width="320" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </pageControl>

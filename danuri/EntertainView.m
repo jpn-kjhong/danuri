@@ -1,5 +1,5 @@
 #define fThumbnailWidth             236.0
-#define fThumbnailHeight            329.0
+
 #define fShadowWidth                186.0
 #define fShadowHeight               14.0
 #define fBottomWidth                225.0
@@ -110,15 +110,35 @@
 
 -(void)setEntertainViewType:(EntertainViewType)type {
     nEnterViewType = type;
-    
+
+    float fThumbnailHeight = 0;
+    float fThumbnailHeightPadding = 0;
     switch (type) {
         case EntertainViewType_Normal: {
+
+            if(IS_IPHONE5){
+                if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
+                    fThumbnailHeight = 416.0;
+                }
+                else{
+                    fThumbnailHeight = 329.0;
+                }
+            }else
+            {
+                if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
+                    fThumbnailHeight = 409.0;
+                    fThumbnailHeightPadding = 30;
+                }
+                else{
+                    fThumbnailHeight = 329.0;
+                }
+            }
             UIImage *imgNoImage = [UIImage imageNamed:ImgAddr_Entertain_no_image];
             
             ivThumbnail = [[UIImageView alloc] initWithImage:imgNoImage];
-            [ivThumbnail setFrame:CGRectMake(0.0, 0.0, fThumbnailWidth, fThumbnailHeight)];
+            [ivThumbnail setFrame:CGRectMake(0.0, fThumbnailHeightPadding, fThumbnailWidth, fThumbnailHeight)];
             [ivThumbnail setContentMode:UIViewContentModeScaleAspectFit];
-            [ivThumbnail setCenter:CGPointMake(fViewWidth/2.0, fThumbnailHeight/2.0)];
+            [ivThumbnail setCenter:CGPointMake(fViewWidth/2.0, (fThumbnailHeight + fThumbnailHeightPadding )/2.0)];
             [ivThumbnail setBackgroundColor:[UIColor clearColor]];
             
             UIBezierPath *bpMask = [UIBezierPath bezierPathWithRoundedRect:ivThumbnail.bounds byRoundingCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) cornerRadii:CGSizeMake(12.5, 12.5)];
@@ -133,17 +153,29 @@
             [aivLoading setHidesWhenStopped:YES];
             [aivLoading setHidden:YES];
             self.progress = [[UIProgressView alloc] initWithFrame:CGRectZero];
-            self.progress.frame = CGRectMake(0, ivThumbnail.frame.origin.y + ivThumbnail.frame.size.height - 10, fThumbnailWidth - 30, 20);
+            self.progress.frame = CGRectMake(0, fThumbnailHeight - fThumbnailHeightPadding, fThumbnailWidth , 20);
             [self addSubview:ivThumbnail];
             [self addSubview:self.progress];
             [self.progress setHidden:YES];
             [self addSubview:aivLoading];
             [self bringSubviewToFront:aivLoading];
 
-            close = [UIButton buttonWithType:UIButtonTypeCustom];
+            UIButton *btnStart = [UIButton buttonWithType:UIButtonTypeCustom];
+            [btnStart setFrame:CGRectMake(0.0, 0.0, fViewWidth, fThumbnailHeight)];
+            [btnStart addTarget:self action:@selector(startButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+            [btnStart setBackgroundColor:[UIColor clearColor]];
+            [btnStart setAlpha:0.30];
+            [self addSubview:btnStart];
             
-            [close setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
-            close.frame = CGRectMake(self.progress.frame.origin.x + self.progress.frame.size.width + 7, ivThumbnail.frame.origin.y + ivThumbnail.frame.size.height - 5 - 10, 20, 20);
+            close = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+            [close setTitle:@"Cancel" forState:UIControlStateNormal];
+            if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
+                [close setBackgroundColor:[UIColor whiteColor]];
+            }else{
+                [close setBackgroundColor:[UIColor clearColor]];
+            }
+            close.frame = CGRectMake(self.progress.frame.origin.x + self.progress.frame.size.width + 3, fThumbnailHeight - 5 - fThumbnailHeightPadding, 100, 30);
+            [close setCenter:CGPointMake(fViewWidth/2.0, (fThumbnailHeight + fThumbnailHeightPadding )/2.0)];
             [close addTarget:self action:@selector(closeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:close];
             [close setHidden:YES];
@@ -152,11 +184,7 @@
         } break;
     }
     
-    UIButton *btnStart = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btnStart setFrame:CGRectMake(0.0, 0.0, fViewWidth, fViewHeight - 30)];
-    [btnStart addTarget:self action:@selector(startButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self addSubview:btnStart];
+
 }
 
 -(void)startIndicator {

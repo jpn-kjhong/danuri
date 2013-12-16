@@ -42,21 +42,32 @@
     [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 
     // Do any additional setup after loading the view from its nib.
-//    NSDictionary *param  = @{@"city": @"gangnamgu"};
-//    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-//    [Post globalTimelinePostsWithParameter:param withPath:@"danuri/mobile/support" Block:^(NSArray *posts, NSError *error) {
-//        if (error) {
-//            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
-//        } else {
-//            NSLog(@"%@",posts);
-//            
-//            _posts = posts;
-//            [tableView reloadData];
-//        }
-//        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
-//        
-//        
-//    }];
+    
+    if(IS_IPHONE5){
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
+            [titleLabel setFrame:CGRectMake(titleLabel.frame.origin.x, titleLabel.frame.origin.y + 50, titleLabel.frame.size.width, titleLabel.frame.size.height)];
+            [cityButton setFrame:CGRectMake(cityButton.frame.origin.x, cityButton.frame.origin.y + 50, cityButton.frame.size.width, cityButton.frame.size.height)];
+            [stateButton setFrame:CGRectMake(stateButton.frame.origin.x, stateButton.frame.origin.y + 50, stateButton.frame.size.width, stateButton.frame.size.height)];
+            [searchButton setFrame:CGRectMake(searchButton.frame.origin.x, searchButton.frame.origin.y + 50, searchButton.frame.size.width, searchButton.frame.size.height)];
+            [tableView setFrame:CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y + 50, tableView.frame.size.width, tableView.frame.size.height)];
+        }
+        else{
+            
+
+        }
+    }else{
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
+            [tableView setFrame:CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y, tableView.frame.size.width, tableView.frame.size.height)];
+
+            [titleLabel setFrame:CGRectMake(titleLabel.frame.origin.x, titleLabel.frame.origin.y + 50, titleLabel.frame.size.width, titleLabel.frame.size.height)];
+            [cityButton setFrame:CGRectMake(cityButton.frame.origin.x, cityButton.frame.origin.y + 50, cityButton.frame.size.width, cityButton.frame.size.height)];
+            [stateButton setFrame:CGRectMake(stateButton.frame.origin.x, stateButton.frame.origin.y + 50, stateButton.frame.size.width, stateButton.frame.size.height)];
+            [searchButton setFrame:CGRectMake(searchButton.frame.origin.x, searchButton.frame.origin.y + 50, searchButton.frame.size.width, searchButton.frame.size.height)];
+        }
+        else{
+
+        }
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated

@@ -8,6 +8,8 @@
 
 #import "EmergencyViewController.h"
 #import "EmergencyCell.h"
+#import "JSON.h"
+#import "AppDelegate.h"
 #define RGB(r, g, b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 
 @interface EmergencyViewController ()
@@ -36,27 +38,61 @@
     
     [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSString *path;
+    if([appDelegate.type isEqualToString:@"kr"]){
+        path = @"/kr_call.json";
+    }else if([appDelegate.type isEqualToString:@"en"]){
+        path = @"/en_call.json";
+    }else if([appDelegate.type isEqualToString:@"cn"]){
+        path = @"/cn_call.json";
+    }else if([appDelegate.type isEqualToString:@"vn"]){
+        path = @"/vn_call.json";
+    }else if([appDelegate.type isEqualToString:@"ph"]){
+        path = @"/ph_call.json";
+    }else if([appDelegate.type isEqualToString:@"kh"]){
+        path = @"/kh_call.json";
+    }else if([appDelegate.type isEqualToString:@"mn"]){
+        path = @"/mn_call.json";
+    }else if([appDelegate.type isEqualToString:@"ru"]){
+        path = @"/ru_call.json";
+    }else if([appDelegate.type isEqualToString:@"jp"]){
+        path = @"/jp_call.json";
+    }else if([appDelegate.type isEqualToString:@"th"]){
+        path = @"/th_call.json";
+    }else {
+        path = @"/kr_call.json";
+    }
+    
+    NSString *myJsonPath = [[[NSBundle mainBundle] resourcePath]  stringByAppendingString:path];
+    NSString *myJSON = [[NSString alloc] initWithContentsOfFile:myJsonPath encoding:NSUTF8StringEncoding error:NULL];
+    if (!myJSON) {
+        NSLog(@"File couldn't be read!");
+        return;
+    }
+    NSArray *callArray = [myJSON JSONValue];
+    
     // Do any additional setup after loading the view from its nib.
     numbers = [NSMutableArray arrayWithCapacity:2];
     contents1 = [NSMutableArray array];
     contents2 = [NSMutableArray array];
 
-    [contents1 addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"icon_01",@"image",@"이주여성긴급지원센터",@"title",@"Support Center for Women’s Hotline",@"detail",@"1577-1366",@"number", nil]];
-    [contents1 addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"icon_02",@"image",@"화재 구급 구조 재난신고",@"title",@"Fire, First Aid, Rescue and Disaster Report",@"detail",@"119",@"number", nil]];
-    [contents1 addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"icon_03",@"image",@"응급의료 병원진료",@"title",@"Emergency Center and Hospital Information",@"detail",@"1339",@"number", nil]];
-    [contents1 addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"icon_04",@"image",@"범죄신고",@"title",@"Police",@"detail",@"112",@"number", nil]];
+    [contents1 addObject:[NSDictionary dictionaryWithObjectsAndKeys:[[callArray objectAtIndex:2] objectForKey:@"icon"],@"image",[[callArray objectAtIndex:2] objectForKey:@"title"],@"title",[[callArray objectAtIndex:2] objectForKey:@"subtitle"],@"detail",@"1577-1366",@"number", nil]];
+    [contents1 addObject:[NSDictionary dictionaryWithObjectsAndKeys:[[callArray objectAtIndex:3] objectForKey:@"icon"],@"image",[[callArray objectAtIndex:3] objectForKey:@"title"],@"title",[[callArray objectAtIndex:3] objectForKey:@"subtitle"],@"detail",@"119",@"number", nil]];
+    [contents1 addObject:[NSDictionary dictionaryWithObjectsAndKeys:[[callArray objectAtIndex:4] objectForKey:@"icon"],@"image",[[callArray objectAtIndex:4] objectForKey:@"title"],@"title",[[callArray objectAtIndex:4] objectForKey:@"subtitle"],@"detail",@"1339",@"number", nil]];
+    [contents1 addObject:[NSDictionary dictionaryWithObjectsAndKeys:[[callArray objectAtIndex:5] objectForKey:@"icon"],@"image",[[callArray objectAtIndex:5] objectForKey:@"title"],@"title",[[callArray objectAtIndex:5] objectForKey:@"subtitle"],@"detail",@"112",@"number", nil]];
     
     [numbers addObject:contents1];
 
-    [contents2 addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"icon_05",@"image",@"외국인 등록 및 체류허가 등",@"title",@"Alien Registration and Permits",@"detail",@"1345",@"number", nil]];
-    [contents2 addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"icon_06",@"image",@"여성새로일하기센터 상담",@"title",@"New Job Centers for Women",@"detail",@"1544-1199",@"number", nil]];
-    [contents2 addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"icon_07",@"image",@"창업자금상담",@"title",@"Venture Capital Counseling",@"detail",@"1357",@"number", nil]];
-    [contents2 addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"icon_08",@"image",@"창아동학대 신고 상담",@"title",@"Child Abuse Reporting",@"detail",@"1577-1391",@"number", nil]];
-    [contents2 addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"icon_09",@"image",@"정부통합민원서비스",@"title",@"Government Call Center",@"detail",@"110",@"number", nil]];
-    [contents2 addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"icon_10",@"image",@"금융관련상담",@"title",@"Loan Shark Reporting",@"detail",@"1332",@"number", nil]];
-    [contents2 addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"icon_11",@"image",@"소비자상담",@"title",@"Consumer Counseling",@"detail",@"1372",@"number", nil]];
-    [contents2 addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"icon_12",@"image",@"보건복지(보육) 관련 상담",@"title",@"Health & Welfare (Childcare) Counseling",@"detail",@"129",@"number", nil]];
-    [contents2 addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"icon_13",@"image",@"고용관련상담",@"title",@"Employment Counseling",@"detail",@"1350",@"number", nil]];
+    [contents2 addObject:[NSDictionary dictionaryWithObjectsAndKeys:[[callArray objectAtIndex:6] objectForKey:@"icon"],@"image",[[callArray objectAtIndex:6] objectForKey:@"title"],@"title",[[callArray objectAtIndex:6] objectForKey:@"subtitle"],@"detail",@"1345",@"number", nil]];
+    [contents2 addObject:[NSDictionary dictionaryWithObjectsAndKeys:[[callArray objectAtIndex:7] objectForKey:@"icon"],@"image",[[callArray objectAtIndex:7] objectForKey:@"title"],@"title",[[callArray objectAtIndex:7] objectForKey:@"subtitle"],@"detail",@"1544-1199",@"number", nil]];
+    [contents2 addObject:[NSDictionary dictionaryWithObjectsAndKeys:[[callArray objectAtIndex:8] objectForKey:@"icon"],@"image",[[callArray objectAtIndex:8] objectForKey:@"title"],@"title",[[callArray objectAtIndex:8] objectForKey:@"subtitle"],@"detail",@"1357",@"number", nil]];
+    [contents2 addObject:[NSDictionary dictionaryWithObjectsAndKeys:[[callArray objectAtIndex:9] objectForKey:@"icon"],@"image",[[callArray objectAtIndex:9] objectForKey:@"title"],@"title",[[callArray objectAtIndex:9] objectForKey:@"subtitle"],@"detail",@"1577-1391",@"number", nil]];
+    [contents2 addObject:[NSDictionary dictionaryWithObjectsAndKeys:[[callArray objectAtIndex:10] objectForKey:@"icon"],@"image",[[callArray objectAtIndex:10] objectForKey:@"title"],@"title",[[callArray objectAtIndex:10] objectForKey:@"subtitle"],@"detail",@"110",@"number", nil]];
+    [contents2 addObject:[NSDictionary dictionaryWithObjectsAndKeys:[[callArray objectAtIndex:11] objectForKey:@"icon"],@"image",[[callArray objectAtIndex:11] objectForKey:@"title"],@"title",[[callArray objectAtIndex:11] objectForKey:@"subtitle"],@"detail",@"1332",@"number", nil]];
+    [contents2 addObject:[NSDictionary dictionaryWithObjectsAndKeys:[[callArray objectAtIndex:12] objectForKey:@"icon"],@"image",[[callArray objectAtIndex:12] objectForKey:@"title"],@"title",[[callArray objectAtIndex:12] objectForKey:@"subtitle"],@"detail",@"1372",@"number", nil]];
+    [contents2 addObject:[NSDictionary dictionaryWithObjectsAndKeys:[[callArray objectAtIndex:13] objectForKey:@"icon"],@"image",[[callArray objectAtIndex:13] objectForKey:@"title"],@"title",[[callArray objectAtIndex:13] objectForKey:@"subtitle"],@"detail",@"129",@"number", nil]];
+    [contents2 addObject:[NSDictionary dictionaryWithObjectsAndKeys:[[callArray objectAtIndex:14] objectForKey:@"icon"],@"image",[[callArray objectAtIndex:14] objectForKey:@"title"],@"title",[[callArray objectAtIndex:14] objectForKey:@"subtitle"],@"detail",@"1350",@"number", nil]];
     
     [numbers addObject:contents2];
     

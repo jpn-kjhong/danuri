@@ -29,7 +29,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" id="a03-3q-Ldj">
-                    <rect key="frame" x="30" y="20" width="261" height="25"/>
+                    <rect key="frame" x="34" y="23" width="261" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                     <state key="normal" title="도움받는 곳" backgroundImage="title_center.png">
@@ -37,7 +37,7 @@
                     </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JWa-IL-10Z">
-                    <rect key="frame" x="29" y="65" width="263" height="187"/>
+                    <rect key="frame" x="28" y="65" width="263" height="187"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal" backgroundImage="button_empty.png">
@@ -48,7 +48,7 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="help_icon_03.png" id="KXJ-rM-0q6">
-                    <rect key="frame" x="131" y="80" width="58" height="58"/>
+                    <rect key="frame" x="135" y="80" width="58" height="58"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="다누리 콜센터" textAlignment="center" lineBreakMode="characterWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="6" id="xDn-XB-I6T">
@@ -58,7 +58,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="한국생활에 필요한 생활안내, 정보제공, 기관연계, 생활통역서비스 등을 10개 언어로 제공" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="5" id="LZk-sX-svT">
-                    <rect key="frame" x="48" y="157" width="230" height="62"/>
+                    <rect key="frame" x="46" y="157" width="230" height="62"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="9"/>
                     <nil key="highlightedColor"/>
@@ -70,7 +70,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ifQ-is-dbN">
-                    <rect key="frame" x="29" y="295" width="263" height="120"/>
+                    <rect key="frame" x="28" y="295" width="263" height="120"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal" backgroundImage="button_empty.png">
@@ -81,11 +81,11 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="help_icon_02.png" id="IYl-mq-OKa">
-                    <rect key="frame" x="131" y="311" width="58" height="58"/>
+                    <rect key="frame" x="135" y="311" width="58" height="58"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="긴급연락처" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8qf-Ey-zJj">
-                    <rect key="frame" x="48" y="373" width="227" height="30"/>
+                    <rect key="frame" x="47" y="373" width="227" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <nil key="highlightedColor"/>

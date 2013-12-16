@@ -46,6 +46,23 @@
     [naviBarBtn addTarget:self action:@selector(backToIntro) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:naviBarBtn];
     self.navigationItem.rightBarButtonItem = rightButton;
+
+    if(IS_IPHONE5){
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
+            [titleButton setFrame:CGRectMake(titleButton.frame.origin.x, titleButton.frame.origin.y + 54, titleButton.frame.size.width, titleButton.frame.size.height)];
+        }
+        else{
+            [titleButton setFrame:CGRectMake(titleButton.frame.origin.x, titleButton.frame.origin.y , titleButton.frame.size.width, titleButton.frame.size.height)];
+        }
+    }else{
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
+            [titleButton setFrame:CGRectMake(titleButton.frame.origin.x, titleButton.frame.origin.y + 54, titleButton.frame.size.width, titleButton.frame.size.height)];
+        }
+        else{
+            [titleButton setFrame:CGRectMake(titleButton.frame.origin.x, titleButton.frame.origin.y , titleButton.frame.size.width, titleButton.frame.size.height)];
+        }
+    }
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated

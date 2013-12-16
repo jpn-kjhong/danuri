@@ -286,7 +286,7 @@
 #pragma mark - UIPageControl Action
 
 -(void)pageControlValueChanged:(id)sender {
-    [scrollView setContentOffset:CGPointMake(pageControl.currentPage * fViewWidth, 0) animated:YES];
+//    [scrollView setContentOffset:CGPointMake(pageControl.currentPage * fViewWidth, 0) animated:YES];
 }
 
 #pragma mark - UIScrollViewDelegate

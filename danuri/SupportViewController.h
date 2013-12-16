@@ -12,11 +12,13 @@
 #import "GAIDictionaryBuilder.h"
 @interface SupportViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 {
+    __weak IBOutlet UILabel *titleLabel;
     __weak IBOutlet UIButton *cityButton;
     __weak IBOutlet UIButton *stateButton;
     
     __weak IBOutlet UIButton *searchButton;
     __weak IBOutlet UITableView *tableView;
+    
     FPPopoverController *cityPopover;
     FPPopoverController *statePopover;
     NSString *cityString;

@@ -144,22 +144,40 @@ static NSString *const kTrackingId = @"UA-45495109-1";
     navi2.delegate = self;
     navi3.delegate = self;
     navi4.delegate = self;
-    
     CustomTabBarItem *tabBarItem1 = [[CustomTabBarItem alloc] init];
-    tabBarItem1.customStdImage = [UIImage imageNamed:@"bot_01"];
-    tabBarItem1.customHighlightedImage = [UIImage imageNamed:@"bot_01_on"];
-    
     CustomTabBarItem *tabBarItem2 = [[CustomTabBarItem alloc] init] ;
-    tabBarItem2.customStdImage = [UIImage imageNamed:@"bot_02"];
-    tabBarItem2.customHighlightedImage = [UIImage imageNamed:@"bot_02_on"];
-    
     CustomTabBarItem *tabBarItem3 = [[CustomTabBarItem alloc] init] ;
-    tabBarItem3.customStdImage = [UIImage imageNamed:@"bot_03"];
-    tabBarItem3.customHighlightedImage = [UIImage imageNamed:@"bot_03_on"];
-    
     CustomTabBarItem *tabBarItem4 = [[CustomTabBarItem alloc] init] ;
-    tabBarItem4.customStdImage = [UIImage imageNamed:@"bot_04"];
-    tabBarItem4.customHighlightedImage = [UIImage imageNamed:@"bot_04_on"];
+
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+    {
+        tabBarItem1.customStdImage = [[UIImage imageNamed:@"bot_01"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        tabBarItem1.customHighlightedImage = [[UIImage imageNamed:@"bot_01_on"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        
+        tabBarItem2.customStdImage = [[UIImage imageNamed:@"bot_02"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        tabBarItem2.customHighlightedImage = [[UIImage imageNamed:@"bot_02_on"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        
+        tabBarItem3.customStdImage = [[UIImage imageNamed:@"bot_03"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        tabBarItem3.customHighlightedImage = [[UIImage imageNamed:@"bot_03_on"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        
+        tabBarItem4.customStdImage = [[UIImage imageNamed:@"bot_04"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        tabBarItem4.customHighlightedImage = [[UIImage imageNamed:@"bot_04_on"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        
+    }else{
+        tabBarItem1.customStdImage = [UIImage imageNamed:@"bot_01"];
+        tabBarItem1.customHighlightedImage = [UIImage imageNamed:@"bot_01_on"];
+        
+        tabBarItem2.customStdImage = [UIImage imageNamed:@"bot_02"];
+        tabBarItem2.customHighlightedImage = [UIImage imageNamed:@"bot_02_on"];
+        
+        tabBarItem3.customStdImage = [UIImage imageNamed:@"bot_03"];
+        tabBarItem3.customHighlightedImage = [UIImage imageNamed:@"bot_03_on"];
+        
+        tabBarItem4.customStdImage = [UIImage imageNamed:@"bot_04"];
+        tabBarItem4.customHighlightedImage = [UIImage imageNamed:@"bot_04_on"];
+    }
+    
+
     
     [navi1 setTabBarItem:tabBarItem1];
     [navi2 setTabBarItem:tabBarItem2];

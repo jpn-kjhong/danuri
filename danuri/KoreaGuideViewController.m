@@ -93,7 +93,21 @@
         //        self.navigationItem.rightBarButtonItem.enabled = YES;
     }];
     
-
+    if(IS_IPHONE5){
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
+            [titleButton setFrame:CGRectMake(titleButton.frame.origin.x, titleButton.frame.origin.y + 60, titleButton.frame.size.width, titleButton.frame.size.height)];
+        }else{
+            [titleButton setFrame:CGRectMake(titleButton.frame.origin.x, titleButton.frame.origin.y, titleButton.frame.size.width, titleButton.frame.size.height)];
+        }
+    }else
+    {
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
+            [titleButton setFrame:CGRectMake(titleButton.frame.origin.x, titleButton.frame.origin.y + 50, titleButton.frame.size.width, titleButton.frame.size.height)];
+//            [scrollView setFrame:CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y + 50, scrollView.frame.size.width, scrollView.frame.size.height)];
+        }else{
+            
+        }
+    }
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -287,7 +301,7 @@
 
 -(void)pageControlValueChanged:(id)sender {
 
-    [scrollView setContentOffset:CGPointMake(pageControl.currentPage * fViewWidth, 0) animated:YES];
+//    [scrollView setContentOffset:CGPointMake(pageControl.currentPage * fViewWidth, 0) animated:YES];
 }
 
 #pragma mark - UIScrollViewDelegate
