@@ -1,0 +1,86 @@
+[
+	{
+        "title": "Số điện thoại khẩn cấp"
+    },
+    {
+        "title": "Số điện thoại hỗ trợ"
+    },
+    {
+        "title": "이주여성긴급지원센터",
+        "subtitle": "Đường dây nóng Trung Tâm hỗ trợ cho Phụ nữ",
+        "phone": "1577-1366",
+        "icon": "icon_01"
+    },
+    {
+        "title": "화재,구급,구조,화재신고",
+        "subtitle": "Hỏa hoạn, cấp cứu, cứu hộ và thiên tai",
+        "phone": "119",
+        "icon": "icon_02"
+    },
+    {
+        "title": "응급,의료 병원안내",
+        "subtitle": "Trung tâm cấp cứu và thông tin về bệnh viện",
+        "phone": "1339",
+        "icon": "icon_03"
+    },
+    {
+        "title": "범죄신고",
+        "subtitle": "Cảnh sát",
+        "phone": "112",
+        "icon": "icon_04"
+    },
+    {
+        "title": "외국인 등록 및 체류허가 등",
+        "subtitle": "Cấp phép và đăng ký cho người nước ngoài",
+        "phone": "1345",
+        "icon": "icon_05"
+    },
+    {
+        "title": "여성새로일하기센터 상담",
+        "subtitle": "Trung tâm giới thiệu việc làm cho phụ nữ",
+        "phone": "1544-1199",
+        "icon": "icon_06"
+    },
+    {
+        "title": "창업자금상담",
+        "subtitle": "Tư vấn đầu tư",
+        "phone": "1356",
+        "icon": "icon_07"
+    },
+    {
+        "title": "아동학대 신고·상담",
+        "subtitle": "Nơi khai báo và tư vấn về xâm hại trẻ em",
+        "phone": "1577-1391",
+        "icon": "icon_08"
+    },
+    {
+        "title": "정부통합민원서비스",
+        "subtitle": "Tổng đài chính phủ",
+        "phone": "110",
+        "icon": "icon_09"
+    },
+    {
+        "title": "금융관련상담",
+        "subtitle": "Báo cáo các dịch vụ cho vay cắt cổ",
+        "phone": "1332",
+        "icon": "icon_10"
+    },
+    {
+        "title": "소비자상담",
+        "subtitle": "Tư vấn tiêu dùng",
+        "phone": "1372",
+        "icon": "icon_11"
+    },
+    {
+        "title": "보건복지(보육) 관련 상담",
+        "subtitle": "Tư vấn về sức khỏe và phúc lợi (cho trẻ em)",
+        "phone": "129",
+        "icon": "icon_12"
+    },
+    {
+        "title": "고용관련상담",
+        "subtitle": "Tư vấn việc làm",
+        "phone": "1350",
+        "icon": "icon_13"
+    }
+]

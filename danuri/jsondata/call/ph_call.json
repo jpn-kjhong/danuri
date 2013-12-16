@@ -1,0 +1,86 @@
+[
+	{
+        "title": "Pang-emerhensiyang mga Numero ng Telepono"
+    },
+    {
+        "title": "Mga Numero ng Telepono para sa Tulong"
+    },
+    {
+        "title": "이주여성긴급지원센터",
+        "subtitle": "Sentro ng Suporta para sa Hotline sa mga Babae",
+        "phone": "1577-1366",
+        "icon": "icon_01"
+    },
+    {
+        "title": "화재,구급,구조,화재신고",
+        "subtitle": "Sunog, Paunang Lunas, Pagsagip, at Ulat Sakuna",
+        "phone": "119",
+        "icon": "icon_02"
+    },
+    {
+        "title": "응급,의료 병원안내",
+        "subtitle": "Sentro ng Kagipitan at Impormasyon ukol sa mga Ospital",
+        "phone": "1339",
+        "icon": "icon_03"
+    },
+    {
+        "title": "범죄신고",
+        "subtitle": "Pulis",
+        "phone": "112",
+        "icon": "icon_04"
+    },
+    {
+        "title": "외국인 등록 및 체류허가 등",
+        "subtitle": "Dayuhang Rehistrasyon at mga Pahintulot",
+        "phone": "1345",
+        "icon": "icon_05"
+    },
+    {
+        "title": "여성새로일하기센터 상담",
+        "subtitle": "Bagong Mga Sentro ng Trabaho para sa mga Babae",
+        "phone": "1544-1199",
+        "icon": "icon_06"
+    },
+    {
+        "title": "창업자금상담",
+        "subtitle": "Pagpapayo sa Pakikipagsapalaran sa Pangangapi",
+        "phone": "1356",
+        "icon": "icon_07"
+    },
+    {
+        "title": "아동학대 신고·상담",
+        "subtitle": "Pag-uulat ukol sa Pang-aabuso sa mga Bata at Pagpapayo",
+        "phone": "1577-1391",
+        "icon": "icon_08"
+    },
+    {
+        "title": "정부통합민원서비스",
+        "subtitle": "Panggobyernong Call Center",
+        "phone": "110",
+        "icon": "icon_09"
+    },
+    {
+        "title": "금융관련상담",
+        "subtitle": "Pangungutang sa mga Manggagantso (Loan Shark) na Pag-uulat",
+        "phone": "1332",
+        "icon": "icon_10"
+    },
+    {
+        "title": "소비자상담",
+        "subtitle": "Pangkonsyumer na Pagpapayo",
+        "phone": "1372",
+        "icon": "icon_11"
+    },
+    {
+        "title": "보건복지(보육) 관련 상담",
+        "subtitle": "Pangkalusugan at Pangkagalingang (Pag-aalaga sa Bata) Pagpapayo",
+        "phone": "129",
+        "icon": "icon_12"
+    },
+    {
+        "title": "고용관련상담",
+        "subtitle": "Pagpapayong Pantrabaho",
+        "phone": "1350",
+        "icon": "icon_13"
+    }
+]

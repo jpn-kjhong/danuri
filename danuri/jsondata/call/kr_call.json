@@ -1,0 +1,86 @@
+[
+	{
+        "title": "Emergency Telephone Numbers"
+    },
+    {
+        "title": "Telephone Numbers for Assistance"
+    },
+    {
+        "title": "이주여성긴급지원센터",
+        "subtitle": "Support Center for Women's Hotline",
+        "phone": "1577-1366",
+        "icon": "icon_01"
+    },
+    {
+        "title": "화재,구급,구조,화재신고",
+        "subtitle": "Fire, First Aid, Rescue and Disaster Report",
+        "phone": "119",
+        "icon": "icon_02"
+    },
+    {
+        "title": "응급,의료 병원안내",
+        "subtitle": "Emergency Center and Hospital Information",
+        "phone": "1339",
+        "icon": "icon_03"
+    },
+    {
+        "title": "범죄신고",
+        "subtitle": "Police",
+        "phone": "112",
+        "icon": "icon_04"
+    },
+    {
+        "title": "외국인 등록 및 체류허가 등",
+        "subtitle": "Alien Registration and Permits",
+        "phone": "1345",
+        "icon": "icon_05"
+    },
+    {
+        "title": "여성새로일하기센터 상담",
+        "subtitle": "New Job Centers for Women",
+        "phone": "1544-1199",
+        "icon": "icon_06"
+    },
+    {
+        "title": "창업자금상담",
+        "subtitle": "Venture Capital Counseling",
+        "phone": "1356",
+        "icon": "icon_07"
+    },
+    {
+        "title": "아동학대 신고·상담",
+        "subtitle": "Child Abuse Reporting",
+        "phone": "1577-1391",
+        "icon": "icon_08"
+    },
+    {
+        "title": "정부통합민원서비스",
+        "subtitle": "Government Call Center",
+        "phone": "110",
+        "icon": "icon_09"
+    },
+    {
+        "title": "금융관련상담",
+        "subtitle": "Loan Shark Reporting",
+        "phone": "1332",
+        "icon": "icon_10"
+    },
+    {
+        "title": "소비자상담",
+        "subtitle": "Consumer Counseling",
+        "phone": "1372",
+        "icon": "icon_11"
+    },
+    {
+        "title": "보건복지(보육) 관련 상담",
+        "subtitle": "Health & Welfare (Childcare) Counseling",
+        "phone": "129",
+        "icon": "icon_12"
+    },
+    {
+        "title": "고용관련상담",
+        "subtitle": "Employment Counseling",
+        "phone": "1350",
+        "icon": "icon_13"
+    }
+]

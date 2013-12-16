@@ -1,13 +1,13 @@
 {
     "call": {
-        "title": "다누리 콜센터",
-        "subtitle" : "한국생활에 필요한 생활안내, 정보제공, 기관연계, 생활통역서비스 등을 10개 언어로 제공",
+        "title": "Danuri Call Center",
+        "subtitle" : "Provides information regarding Multicultural Family Support Center's Current Programs, Korean Daily Lifestyle, Multicultural Family Welfare Support and even Interpretation Service to residing Multicultural Families.",
         "phone" : "1577 - 5432"
     },
     "help": {
-            "title": "도움받는 기관",
-            "text1": "다문화가족지원센터",
-            "text2": "긴급연락처 안내"
+            "title": "Support center’s",
+            "text1": "Multicultural Family Support Center",
+            "text2": "Emergency Contact Information"
     },
-    "guidebook": "한국생활 가이드북"
+    "guidebook": "Guidebook for Living in Korea"
 }
