@@ -13,11 +13,13 @@
 {
     NSArray *dataArray;
     NSMutableArray *cityArray;
-    NSMutableArray *stateArray;
+//    NSMutableArray *stateArray;
 
     NSMutableDictionary *stateDic;
 }
 @property(nonatomic,assign) SupportViewController *delegate;
+@property(nonatomic,strong) NSArray *stateArray;
+
 @property NSInteger cityIndex;
 - (id)initWithStyle:(UITableViewStyle)style delegate:(id)delegate;
 @end

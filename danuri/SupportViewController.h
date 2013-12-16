@@ -27,7 +27,10 @@
     NSMutableArray *stateArray;
     
     NSArray                 *_posts;
+    NSArray                 *_sigungu;
+
     NSString                *stateCode;
+    NSString                *attrs;
     
     NSInteger              currentCityIndex;
     NSString                *currentNumber;

@@ -49,7 +49,7 @@
             [cityButton setFrame:CGRectMake(cityButton.frame.origin.x, cityButton.frame.origin.y + 50, cityButton.frame.size.width, cityButton.frame.size.height)];
             [stateButton setFrame:CGRectMake(stateButton.frame.origin.x, stateButton.frame.origin.y + 50, stateButton.frame.size.width, stateButton.frame.size.height)];
             [searchButton setFrame:CGRectMake(searchButton.frame.origin.x, searchButton.frame.origin.y + 50, searchButton.frame.size.width, searchButton.frame.size.height)];
-            [tableView setFrame:CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y + 50, tableView.frame.size.width, tableView.frame.size.height)];
+            [tableView setFrame:CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y , tableView.frame.size.width, tableView.frame.size.height)];
         }
         else{
             
@@ -148,6 +148,8 @@
 {
     [self closePopover];
     NSLog(@"SELECTED ROW %d data %@",row, data);
+    attrs = [NSString stringWithFormat:@"%d",[[[data objectForKey:@"attrs"] objectForKey:@"value"] integerValue]];
+
     currentCityIndex = row;
     [cityButton setTitle:[[data objectForKey:@"content"] objectForKey:@"text"] forState:UIControlStateNormal];
     [cityButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -158,8 +160,33 @@
 
 - (IBAction)clickStateClick:(id)sender {
     [self closePopover];
+
+    NSLog(@"in");
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    _sigungu = [NSMutableArray array];
+    NSDictionary *param  = @{@"language": appDelegate.type,@"num": attrs};
+    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    [Post globalTimelinePostsWithParameter:param withPath:@"include/json/gugun_json.asp" Block:^(NSArray *posts, NSError *error) {
+        if (error) {
+            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+        } else {
+            NSLog(@"%@",posts);
+            
+            _sigungu = posts;
+            [self listUp];
+        }
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+        
+        
+    }];
+    
+}
+
+-(void)listUp
+{
     StateTableViewController *controller = [[StateTableViewController alloc] initWithStyle:UITableViewStylePlain];
     controller.delegate = self;
+    controller.stateArray = _sigungu;
     controller.cityIndex = currentCityIndex;
     statePopover = [[FPPopoverController alloc] initWithViewController:controller] ;
     statePopover.tint = FPPopoverDefaultTint;
@@ -178,15 +205,13 @@
     [statePopover presentPopoverFromPoint: CGPointMake(self.view.center.x + 50, stateButton.frame.origin.y + stateButton.frame.size.height + 5)];
     
     [self.view insertSubview:statePopover.view aboveSubview:stateButton];
-    
 }
-
 -(void)selectedStateTableRow:(NSInteger)row rowData:(NSDictionary *)data
 {
     [self closePopover];
     NSLog(@"SELECTED ROW %d data code %@",row, data);
-    stateCode = [data objectForKey:@"code"];
-    [stateButton setTitle:[data objectForKey:@"state"] forState:UIControlStateNormal];
+    stateCode = [data objectForKey:@"mbidx"];
+    [stateButton setTitle:[data objectForKey:@"mbname"] forState:UIControlStateNormal];
     [stateButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 }
 

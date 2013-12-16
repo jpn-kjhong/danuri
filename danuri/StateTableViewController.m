@@ -34,15 +34,16 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"KoreaCity" ofType:@"plist"]];
+//    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"KoreaCity" ofType:@"plist"]];
+//    
+//    dataArray = [[NSArray alloc] initWithArray:[dic objectForKey:@"cityArray"]];
+//    cityArray = [[NSMutableArray alloc] initWithCapacity:100];
+//    for(NSDictionary *dic in dataArray){
+//        [cityArray addObject:[dic objectForKey:@"state"]];
+//    }
+//    
+//    stateArray =[cityArray objectAtIndex:cityIndex];
     
-    dataArray = [[NSArray alloc] initWithArray:[dic objectForKey:@"cityArray"]];
-    cityArray = [[NSMutableArray alloc] initWithCapacity:100];
-    for(NSDictionary *dic in dataArray){
-        [cityArray addObject:[dic objectForKey:@"state"]];
-    }
-    
-    stateArray =[cityArray objectAtIndex:cityIndex];
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,7 +58,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [stateArray count];
+    return [self.stateArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -69,7 +70,7 @@
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"%@",[[stateArray objectAtIndex:indexPath.row] objectForKey:@"state"]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@",[[self.stateArray objectAtIndex:indexPath.row] objectForKey:@"mbname"]];
     
     return cell;
 }
@@ -119,7 +120,7 @@
 {
     if([[self delegate] respondsToSelector:@selector(selectedStateTableRow:rowData:)])
     {
-        [[self delegate] selectedStateTableRow:indexPath.row rowData:[stateArray objectAtIndex:indexPath.row]];
+        [[self delegate] selectedStateTableRow:indexPath.row rowData:[self.stateArray objectAtIndex:indexPath.row]];
     }
 }
 
