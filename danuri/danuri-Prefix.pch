@@ -16,6 +16,8 @@
 #endif
 
 #define SuccessCertification  @"SuccessCertification"
+#define LanguageChanged @"LanguageChanged"
+
 #define FONT_SIZE(N)		[UIFont systemFontOfSize:(N)]
 
 #define OS_VERSION			[[[UIDevice currentDevice] systemVersion] floatValue]

@@ -49,6 +49,9 @@
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(successCertification)
                                                      name:SuccessCertification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(languageChanged)
+                                                     name:LanguageChanged object:nil];
         requestList = [[NSMutableArray alloc] init];
     }
     return self;
@@ -230,24 +233,7 @@
 
 
 - (void) selectLanguage{
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    _posts = [NSMutableArray array];
-
-    NSDictionary *param  = @{@"language": appDelegate.type};
-    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    [Post globalTimelinePostsWithParameter:param withPath:@"include/json/rainbow_json.asp" Block:^(NSArray *posts, NSError *error) {
-        if (error) {
-            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
-        } else {
-            NSLog(@"%@",posts);
-            
-            _posts = posts;
-            [self setThumbnail];
-        }
-        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
-        
-        
-    }];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LanguageChanged object:nil];
 }
 
 - (void) backToIntro{
@@ -332,6 +318,29 @@
     }
 
 }
+
+- (void) languageChanged
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    _posts = [NSMutableArray array];
+    
+    NSDictionary *param  = @{@"language": appDelegate.type};
+    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    [Post globalTimelinePostsWithParameter:param withPath:@"include/json/rainbow_json.asp" Block:^(NSArray *posts, NSError *error) {
+        if (error) {
+            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+        } else {
+            NSLog(@"%@",posts);
+            
+            _posts = posts;
+            [self setThumbnail];
+        }
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+        
+        
+    }];
+}
+
 - (void) successCertification
 {
     NSLog(@"in");

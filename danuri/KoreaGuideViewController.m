@@ -43,6 +43,9 @@
         // Custom initialization
 //        self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostViewed tag:1];
         requestList = [[NSMutableArray alloc] init];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(languageChanged)
+                                                     name:LanguageChanged object:nil];
 
     }
     return self;
@@ -281,8 +284,8 @@
     [self selectLanguage];
 }
 
-
-- (void) selectLanguage{
+- (void) languageChanged
+{
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSString *path;
     if([appDelegate.type isEqualToString:@"kr"]){
@@ -320,7 +323,10 @@
     
     [titleButton setTitle:title forState:UIControlStateNormal];
     [scrollView setContentOffset:CGPointMake([self getGuideBookIndex] * fViewWidth, 0) animated:YES];
+}
 
+- (void) selectLanguage{
+    [[NSNotificationCenter defaultCenter] postNotificationName:LanguageChanged object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -389,6 +395,28 @@
     controller.UTI = @"com.adobe.pdf";
     //CGRect rect = CGRectMake(0, 0, 300, 300);
     [controller presentPreviewAnimated:YES];
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSDictionary *param  = @{@"language": appDelegate.type};
+    _posts = [NSMutableArray array];
+    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    [Post globalTimelinePostsWithParameter:param withPath:@"include/json/guidebook_json.asp" Block:^(NSArray *posts, NSError *error) {
+        if (error) {
+            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+        } else {
+            NSLog(@"%@",posts);
+            
+            _posts = posts;
+            [self setThumbnail];
+
+            //            [self.tableView reloadData];
+        }
+        
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+        //        [_activityIndicatorView stopAnimating];
+        //        self.navigationItem.rightBarButtonItem.enabled = YES;
+    }];
+    
 }
 
 - (void)imageFetchFailed:(ASIHTTPRequest *)request
@@ -459,6 +487,19 @@
         [viewEntertainment setEntertainViewType:EntertainViewType_Normal];
         [viewEntertainment setDataFromDictionary:dictEntData];
         
+        NSURL *url = [NSURL URLWithString:[viewEntertainment getTargetURL]];
+        
+        NSArray *comp = [[NSArray alloc] initWithArray:[url pathComponents]];
+        NSString *file = [comp objectAtIndex:[comp count]-1];
+        NSString *filename = file;
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *uniquePath = [documentsDirectory stringByAppendingPathComponent: filename];
+        // Check for a cached version
+        if([[NSFileManager defaultManager] fileExistsAtPath: uniquePath])
+            [viewEntertainment setIsExist:YES];
+        else
+            [viewEntertainment setIsExist:NO];
         [arrayEntertainment addObject:viewEntertainment];
     }
     [self refreshView];
@@ -550,9 +591,63 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 -(void)didEntertainViewClicked:(EntertainView*)entertainView
 {
-    NSString *actionContent = [NSString stringWithFormat:@"%@ : %@ ",@"한국생활 가이드", [entertainView getTargetURL]];
+    currentItem = entertainView;
+    
+    NSURL *url = [NSURL URLWithString:[currentItem getTargetURL]];
+    
+    NSArray *comp = [[NSArray alloc] initWithArray:[url pathComponents]];
+    NSString *file = [comp objectAtIndex:[comp count]-1];
+    NSString *filename = file;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *uniquePath = [documentsDirectory stringByAppendingPathComponent: filename];
+    // Check for a cached version
+    if([[NSFileManager defaultManager] fileExistsAtPath: uniquePath])
+    {
+        NSLog(@"file  exist");
+        NSURL *fileURL = [NSURL fileURLWithPath:uniquePath];
+        
+        UIDocumentInteractionController *controller = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
+        controller.delegate = self;
+        controller.UTI = @"com.adobe.pdf";
+        [controller presentPreviewAnimated:YES];
+        return;
+    }
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"다운"                                                        message:@"다운받으시겠습니까?"
+                                                       delegate:self
+                                              cancelButtonTitle:@"취소"
+                                              otherButtonTitles:@"확인", nil];
+    [alertView setTag:0];
+    alertView.delegate = self;
+    [alertView show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [alertView dismissWithClickedButtonIndex:buttonIndex animated:YES];
+    
+    NSLog(@"%d %d",alertView.tag,buttonIndex);
+    
+    
+    switch (alertView.tag) {
+        case 0:
+        {
+            if(buttonIndex == 1) {
+                [self prepareForDownload];
+            }else if(buttonIndex == 2){
+                
+            }
+        }
+            break;
+    }
+}
+
+- (void) prepareForDownload {
+    NSString *actionContent = [NSString stringWithFormat:@"%@ : %@ ",@"한국생활 가이드", [currentItem getTargetURL]];
     id tracker = [[GAI sharedInstance] defaultTracker];
     
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"한국생활 가이드"     // Event category (required)
@@ -561,7 +656,7 @@
                                                            value:nil] build]];    // Event value
     
     ASIHTTPRequest *request;
-    NSURL *url = [NSURL URLWithString:[entertainView getTargetURL]];
+    NSURL *url = [NSURL URLWithString:[currentItem getTargetURL]];
     
 	request = [ASIHTTPRequest requestWithURL:url];
     
@@ -586,16 +681,15 @@
     {
         NSLog(@"file not exist - so get a new one");
         [request setDownloadDestinationPath:[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:file]];
-        [request setDownloadProgressDelegate:entertainView.progress];
+        [request setDownloadProgressDelegate:currentItem.progress];
         [request setUserInfo:[NSDictionary dictionaryWithObject:@"request1" forKey:@"name"]];
         [networkQueue addOperation:request];
-        [entertainView.progress setHidden:NO];
-        [entertainView.close setHidden:NO];
-
+        [currentItem.progress setHidden:NO];
+        [currentItem.close setHidden:NO];
+        
         [networkQueue go];
         NSLog(@"%@",[[request url] absoluteString]);
-        [requestList addObject:entertainView];
-
+        [requestList addObject:currentItem];
     }
 }
 

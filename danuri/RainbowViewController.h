@@ -28,6 +28,7 @@
     UIToolbar *mypickerToolbar;
     UIActionSheet *sheet;
     EntertainView *currentItem;
+    NSString *currentLanguage;
 }
 
 @end

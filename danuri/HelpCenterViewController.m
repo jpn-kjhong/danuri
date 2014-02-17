@@ -24,6 +24,9 @@
     if (self) {
         // Custom initialization
 //        self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostViewed tag:3];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(languageChanged)
+                                                     name:LanguageChanged object:nil];
         
     }
     return self;
@@ -208,6 +211,13 @@
 
 
 - (void) selectLanguage{
+    [[NSNotificationCenter defaultCenter] postNotificationName:LanguageChanged object:nil];
+
+}
+
+
+- (void) languageChanged
+{
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSString *path;
     if([appDelegate.type isEqualToString:@"kr"]){
@@ -258,6 +268,7 @@
     NSString *emer = [[jsonData objectForKey:@"help"] objectForKey:@"text2"];
     [emerTitleLabel setText:emer];
 }
+
 
 -(void)viewWillAppear:(BOOL)animated
 {

@@ -11,7 +11,7 @@
 #import "EntertainView.h"
 #import "GAIFields.h"
 #import "GAIDictionaryBuilder.h"
-@interface KoreaGuideViewController : UIViewController<UIScrollViewDelegate, EntertainViewDelegate,UIDocumentInteractionControllerDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
+@interface KoreaGuideViewController : UIViewController<UIScrollViewDelegate, EntertainViewDelegate,UIDocumentInteractionControllerDelegate,UIPickerViewDataSource,UIPickerViewDelegate, UIAlertViewDelegate>
 {
     
     __weak IBOutlet UIScrollView *scrollView;
@@ -28,6 +28,7 @@
     UIPickerView *pktStatePicker;
     UIToolbar *mypickerToolbar;
     UIActionSheet *sheet;
+    EntertainView *currentItem;
 
 }
 @end
