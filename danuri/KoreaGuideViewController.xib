@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KoreaGuideViewController">
             <connections>
-                <outlet property="pageControl" destination="0sI-9g-CbU" id="dzm-bt-10T"/>
+                <outlet property="pageControl" destination="0sI-9g-CbU" id="8t3-gz-JUe"/>
                 <outlet property="scrollView" destination="b7T-UO-kcD" id="VZP-CF-1n5"/>
                 <outlet property="titleButton" destination="ghW-fB-WGt" id="Jiq-0T-TA1"/>
                 <outlet property="view" destination="1" id="3"/>

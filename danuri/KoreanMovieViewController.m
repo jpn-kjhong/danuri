@@ -44,7 +44,7 @@
     UIButton *naviBarBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 53, 37)] ;
     [naviBarBtn setImage:[UIImage imageNamed:@"lang"] forState:UIControlStateNormal];
     [naviBarBtn setImage:[UIImage imageNamed:@"lang_p"] forState:UIControlStateHighlighted];
-    [naviBarBtn addTarget:self action:@selector(backToIntro) forControlEvents:UIControlEventTouchUpInside];
+    [naviBarBtn addTarget:self action:@selector(addPickerView) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:naviBarBtn];
     self.navigationItem.rightBarButtonItem = rightButton;
     // Do any additional setup after loading the view from its nib.
@@ -99,8 +99,7 @@
     [mypickerToolbar setItems:barItems animated:YES];
 }
 
-
--(int) setPickInitValue
+-(int) getLaguageIndex
 {
     int value = 0;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -127,8 +126,12 @@
     }else {
         value = 0;
     }
-    [pktStatePicker selectRow:value inComponent:0 animated:YES];
     return value;
+}
+
+-(void) setPickInitValue
+{
+    [pktStatePicker selectRow:[self getLaguageIndex] inComponent:0 animated:YES];
 }
 
 -(void)addPickerView

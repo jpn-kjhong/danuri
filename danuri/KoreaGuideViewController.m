@@ -85,6 +85,7 @@
             
             _posts = posts;
             [self setThumbnail];
+            [scrollView setContentOffset:CGPointMake([self getGuideBookIndex] * fViewWidth, 0) animated:YES];
             //            [self.tableView reloadData];
         }
         
@@ -129,7 +130,7 @@
     [mypickerToolbar setItems:barItems animated:YES];
 }
 
--(int) setPickInitValue
+-(int) getLaguageIndex
 {
     int value = 0;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -156,8 +157,42 @@
     }else {
         value = 0;
     }
-    [pktStatePicker selectRow:value inComponent:0 animated:YES];
     return value;
+}
+
+-(int) getGuideBookIndex
+{
+    int value = 0;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if([appDelegate.type isEqualToString:@"kr"]){
+        value = 0;
+    }else if([appDelegate.type isEqualToString:@"en"]){
+        value = 2;
+    }else if([appDelegate.type isEqualToString:@"cn"]){
+        value = 7;
+    }else if([appDelegate.type isEqualToString:@"vn"]){
+        value = 8;
+    }else if([appDelegate.type isEqualToString:@"ph"]){
+        value = 5;
+    }else if([appDelegate.type isEqualToString:@"kh"]){
+        value = 1;
+    }else if([appDelegate.type isEqualToString:@"mn"]){
+        value = 4;
+    }else if([appDelegate.type isEqualToString:@"ru"]){
+        value = 6;
+    }else if([appDelegate.type isEqualToString:@"jp"]){
+        value = 3;
+    }else if([appDelegate.type isEqualToString:@"th"]){
+        value = 2;
+    }else {
+        value = 0;
+    }
+    return value;
+}
+
+-(void) setPickInitValue
+{
+    [pktStatePicker selectRow:[self getLaguageIndex] inComponent:0 animated:YES];
 }
 
 -(void)addPickerView
@@ -284,6 +319,8 @@
     NSString *title = [jsonData objectForKey:@"guidebook"] ;
     
     [titleButton setTitle:title forState:UIControlStateNormal];
+    [scrollView setContentOffset:CGPointMake([self getGuideBookIndex] * fViewWidth, 0) animated:YES];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated

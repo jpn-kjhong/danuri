@@ -85,8 +85,7 @@
     
 }
 
-
--(int) setPickInitValue
+-(int) getLaguageIndex
 {
     int value = 0;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -113,8 +112,12 @@
     }else {
         value = 0;
     }
-    [pktStatePicker selectRow:value inComponent:0 animated:YES];
     return value;
+}
+
+-(void) setPickInitValue
+{
+    [pktStatePicker selectRow:[self getLaguageIndex] inComponent:0 animated:YES];
 }
 
 -(void)addPickerView
