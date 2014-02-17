@@ -43,7 +43,7 @@
     UIButton *naviBarBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 53, 37)] ;
     [naviBarBtn setImage:[UIImage imageNamed:@"lang"] forState:UIControlStateNormal];
     [naviBarBtn setImage:[UIImage imageNamed:@"lang_p"] forState:UIControlStateHighlighted];
-    [naviBarBtn addTarget:self action:@selector(backToIntro) forControlEvents:UIControlEventTouchUpInside];
+    [naviBarBtn addTarget:self action:@selector(addPickerView) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:naviBarBtn];
     self.navigationItem.rightBarButtonItem = rightButton;
 
@@ -63,6 +63,197 @@
         }
     }
     
+    
+    pktStatePicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 43 , 320, 480)];
+    pktStatePicker.delegate = self;
+    pktStatePicker.dataSource = self;
+    [pktStatePicker  setShowsSelectionIndicator:YES];
+    
+    // Create done button in UIPickerView
+    mypickerToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 56)];
+    mypickerToolbar.barStyle = UIBarStyleBlackOpaque;
+    [mypickerToolbar sizeToFit];
+    
+    NSMutableArray *barItems = [[NSMutableArray alloc] init];
+    
+    UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    [barItems addObject:flexSpace];
+    
+    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pickerDoneClicked)];
+    [barItems addObject:doneBtn];
+    [mypickerToolbar setItems:barItems animated:YES];
+    
+}
+
+
+-(int) setPickInitValue
+{
+    int value = 0;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if([appDelegate.type isEqualToString:@"kr"]){
+        value = 0;
+    }else if([appDelegate.type isEqualToString:@"en"]){
+        value = 1;
+    }else if([appDelegate.type isEqualToString:@"cn"]){
+        value = 2;
+    }else if([appDelegate.type isEqualToString:@"vn"]){
+        value = 3;
+    }else if([appDelegate.type isEqualToString:@"ph"]){
+        value = 4;
+    }else if([appDelegate.type isEqualToString:@"kh"]){
+        value = 5;
+    }else if([appDelegate.type isEqualToString:@"mn"]){
+        value = 6;
+    }else if([appDelegate.type isEqualToString:@"ru"]){
+        value = 7;
+    }else if([appDelegate.type isEqualToString:@"jp"]){
+        value = 8;
+    }else if([appDelegate.type isEqualToString:@"th"]){
+        value = 9;
+    }else {
+        value = 0;
+    }
+    [pktStatePicker selectRow:value inComponent:0 animated:YES];
+    return value;
+}
+
+-(void)addPickerView
+{
+    sheet = [[UIActionSheet alloc] initWithTitle:nil
+                                        delegate:self
+                               cancelButtonTitle:@"Done"
+                          destructiveButtonTitle:nil
+                               otherButtonTitles:nil];
+    [sheet addSubview:pktStatePicker];
+    [sheet showInView:self.view.superview];
+    [sheet addSubview:mypickerToolbar];
+    [sheet showInView:self.view.superview];
+    [sheet setBounds:CGRectMake(0, 20, 320, 430)];
+    [self setPickInitValue];
+}
+
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return [appDelegate.arrState count];
+}
+
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return [appDelegate.arrState objectAtIndex:row];
+}
+
+
+- (void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSLog(@"You selected this: %@", [appDelegate.arrState objectAtIndex: row]);
+    switch (row) {
+        case 0:
+            appDelegate.type = @"kr";
+            break;
+        case 1:
+            appDelegate.type = @"en";
+            break;
+        case 2:
+            appDelegate.type = @"cn";
+            break;
+        case 3:
+            appDelegate.type = @"vn";
+            break;
+        case 4:
+            appDelegate.type = @"ph";
+            break;
+        case 5:
+            appDelegate.type = @"kh";
+            break;
+        case 6:
+            appDelegate.type = @"mn";
+            break;
+        case 7:
+            appDelegate.type = @"ru";
+            break;
+        case 8:
+            appDelegate.type = @"jp";
+            break;
+        case 9:
+            appDelegate.type = @"th";
+            break;
+        default:
+            appDelegate.type = @"kr";
+            break;
+    }
+    
+}
+
+
+- (void)pickerDoneClicked
+{
+    NSLog(@"Done Clicked");
+    [sheet dismissWithClickedButtonIndex:0 animated:YES];
+    [self selectLanguage];
+}
+
+
+- (void) selectLanguage{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSString *path;
+    if([appDelegate.type isEqualToString:@"kr"]){
+        path = @"/kr_mn.json";
+    }else if([appDelegate.type isEqualToString:@"en"]){
+        path = @"/en_mn.json";
+    }else if([appDelegate.type isEqualToString:@"cn"]){
+        path = @"/cn_mn.json";
+    }else if([appDelegate.type isEqualToString:@"vn"]){
+        path = @"/vn_mn.json";
+    }else if([appDelegate.type isEqualToString:@"ph"]){
+        path = @"/ph_mn.json";
+    }else if([appDelegate.type isEqualToString:@"kh"]){
+        path = @"/kh_mn.json";
+    }else if([appDelegate.type isEqualToString:@"mn"]){
+        path = @"/mn_mn.json";
+    }else if([appDelegate.type isEqualToString:@"ru"]){
+        path = @"/ru_mn.json";
+    }else if([appDelegate.type isEqualToString:@"jp"]){
+        path = @"/jp_mn.json";
+    }else if([appDelegate.type isEqualToString:@"th"]){
+        path = @"/th_mn.json";
+    }else {
+        path = @"/kr_mn.json";
+    }
+    
+    NSString *myJsonPath = [[[NSBundle mainBundle] resourcePath]  stringByAppendingString:path];
+    NSString *myJSON = [[NSString alloc] initWithContentsOfFile:myJsonPath encoding:NSUTF8StringEncoding error:NULL];
+    if (!myJSON) {
+        NSLog(@"File couldn't be read!");
+        return;
+    }
+    
+    NSDictionary *jsonData = [myJSON JSONValue];
+    NSString *title = [[jsonData objectForKey:@"help"] objectForKey:@"title"];
+    
+    [titleButton setTitle:title forState:UIControlStateNormal];
+    
+    NSString *call = [[jsonData objectForKey:@"call"] objectForKey:@"title"];
+    [callTitle setText:call];
+    
+    NSString *des = [[jsonData objectForKey:@"call"] objectForKey:@"subtitle"];
+    [callDes setText:des];
+    
+    NSString *phone = [[jsonData objectForKey:@"call"] objectForKey:@"phone"];
+    [callNumber setText:phone];
+    
+    NSString *emer = [[jsonData objectForKey:@"help"] objectForKey:@"text2"];
+    [emerTitleLabel setText:emer];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -133,6 +324,9 @@
     
     [emerTitleLabel setFrame:CGRectMake(emerTitleLabel.frame.origin.x, emerImage.frame.origin.y + emerImage.frame.size.height + 5, emerTitleLabel.frame.size.width, emerTitleLabel.frame.size.height)];
 }
+
+
+
 - (void) backToIntro{
     SelectLangaugeViewController *sel = [[SelectLangaugeViewController alloc] initWithNibName:@"SelectLangaugeViewController" bundle:nil];
     [self.navigationController presentViewController:sel animated:NO completion:^{
@@ -147,6 +341,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (IBAction)buttonClicked:(UIButton *)sender {
 //    SupportViewController *sup = [[SupportViewController alloc] initWithNibName:@"SupportViewController" bundle:nil];
     EmergencyViewController *emergency = [[EmergencyViewController alloc] initWithNibName:@"EmergencyViewController" bundle:nil];

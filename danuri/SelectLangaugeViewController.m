@@ -53,21 +53,29 @@ int moveCount = 0.1;
     
     if([[UIScreen mainScreen]bounds].size.height > 480.0000){
         padding = 70.f;
+
+        button6.frame = CGRectMake(button6.frame.origin.x, button6.frame.origin.y + padding, button6.frame.size.width, button6.frame.size.height);
+        button7.frame = CGRectMake(button7.frame.origin.x, button7.frame.origin.y + padding, button7.frame.size.width, button7.frame.size.height);
+        button8.frame = CGRectMake(button8.frame.origin.x, button8.frame.origin.y + padding, button8.frame.size.width, button8.frame.size.height);
+        button9.frame = CGRectMake(button9.frame.origin.x, button9.frame.origin.y + padding, button9.frame.size.width, button9.frame.size.height);
+        button10.frame = CGRectMake(button10.frame.origin.x, button10.frame.origin.y + padding, button10.frame.size.width, button10.frame.size.height);
+        
+        
     }
     // Do any additional setup after loading the view from its nib.
 //    [self performSelectorOnMainThread:@selector(addBounceAnimation) withObject:nil waitUntilDone:<#(BOOL)#>]
     buttonArray = [[NSArray alloc] initWithObjects:button2, button3, button4, button5, button6, button7, button8, button9, nil];
-    [self performSelector:@selector(buttonMove) withObject:nil afterDelay:0.0];
-    [self performSelector:@selector(buttonMove1) withObject:nil afterDelay:0.3];
-    [self performSelector:@selector(buttonMove2) withObject:nil afterDelay:0.6];
-    [self performSelector:@selector(buttonMove3) withObject:nil afterDelay:0.9];
-    [self performSelector:@selector(buttonMove4) withObject:nil afterDelay:1.2];
-    
-    [self performSelector:@selector(buttonMove5) withObject:nil afterDelay:0.0];
-    [self performSelector:@selector(buttonMove6) withObject:nil afterDelay:0.3];
-    [self performSelector:@selector(buttonMove7) withObject:nil afterDelay:0.6];
-    [self performSelector:@selector(buttonMove8) withObject:nil afterDelay:0.9];
-    [self performSelector:@selector(buttonMove9) withObject:nil afterDelay:1.2];
+//    [self performSelector:@selector(buttonMove) withObject:nil afterDelay:0.0];
+//    [self performSelector:@selector(buttonMove1) withObject:nil afterDelay:0.3];
+//    [self performSelector:@selector(buttonMove2) withObject:nil afterDelay:0.6];
+//    [self performSelector:@selector(buttonMove3) withObject:nil afterDelay:0.9];
+//    [self performSelector:@selector(buttonMove4) withObject:nil afterDelay:1.2];
+//    
+//    [self performSelector:@selector(buttonMove5) withObject:nil afterDelay:0.0];
+//    [self performSelector:@selector(buttonMove6) withObject:nil afterDelay:0.3];
+//    [self performSelector:@selector(buttonMove7) withObject:nil afterDelay:0.6];
+//    [self performSelector:@selector(buttonMove8) withObject:nil afterDelay:0.9];
+//    [self performSelector:@selector(buttonMove9) withObject:nil afterDelay:1.2];
 }
 
 -(IBAction) buttonBounce {
@@ -450,7 +458,7 @@ int moveCount = 0.1;
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:SuccessCertification object:nil];
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

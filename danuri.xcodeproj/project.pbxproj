@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		18ACD595185D749D005D2CBA /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D09504C1829C7D400ADCF9F /* libGoogleAnalyticsServices.a */; };
 		18ACD59F185D7E2C005D2CBA /* title_center.png in Resources */ = {isa = PBXBuildFile; fileRef = 18ACD59E185D7E2C005D2CBA /* title_center.png */; };
 		18ACD5A1185D863B005D2CBA /* button_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 18ACD5A0185D863B005D2CBA /* button_empty.png */; };
 		18ACD5A7185D8895005D2CBA /* help_icon_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 18ACD5A2185D8895005D2CBA /* help_icon_01.png */; };
@@ -257,6 +256,7 @@
 		7D709530181CCBF900CEA280 /* 4page_banner_215_42@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D70952D181CCBF900CEA280 /* 4page_banner_215_42@2x.png */; };
 		7D709533181CD6D200CEA280 /* 3_4_page_p@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D709531181CD6D200CEA280 /* 3_4_page_p@2x.png */; };
 		7D709534181CD6D200CEA280 /* 3_4_page@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D709532181CD6D200CEA280 /* 3_4_page@2x.png */; };
+		7DEB940518B093D1008481F5 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D09504C1829C7D400ADCF9F /* libGoogleAnalyticsServices.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -621,7 +621,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18ACD595185D749D005D2CBA /* libGoogleAnalyticsServices.a in Frameworks */,
+				7DEB940518B093D1008481F5 /* libGoogleAnalyticsServices.a in Frameworks */,
 				7D09504F1829C94500ADCF9F /* CoreData.framework in Frameworks */,
 				7D09503E18289EA100ADCF9F /* SystemConfiguration.framework in Frameworks */,
 				7D09503C18289E9200ADCF9F /* Security.framework in Frameworks */,
@@ -1808,15 +1808,16 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "danuri/danuri-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\\\\\"$(SRCROOT)/danuri/googleAnalytics\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/danuri/googleAnalytics\\\\\\\\\\\\\\\"",
 					/Users/hongkijoo/danuri_github/danuri/googleAnalytics,
 					/Users/Apple/danuri/danuri/googleAnalytics,
+					/Users/hongkijoo/danuri/danuri/googleAnalytics,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "78E8BAA3-50DE-4EF7-954A-A43A11B72DDF";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1825,8 +1826,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: kijoo Hong (3LBP7978EP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: kijoo Hong (3LBP7978EP)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "danuri/danuri-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1835,15 +1836,16 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "danuri/danuri-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\\\\\"$(SRCROOT)/danuri/googleAnalytics\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/danuri/googleAnalytics\\\\\\\\\\\\\\\"",
 					/Users/hongkijoo/danuri_github/danuri/googleAnalytics,
 					/Users/Apple/danuri/danuri/googleAnalytics,
+					/Users/hongkijoo/danuri/danuri/googleAnalytics,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "FCE82235-55B9-44E5-BB99-67BD267BB902";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

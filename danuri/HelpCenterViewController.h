@@ -10,7 +10,7 @@
 #import "GAI.h"
 #import "GAIFields.h"
 #import "GAIDictionaryBuilder.h"
-@interface HelpCenterViewController : UIViewController<UIAlertViewDelegate>
+@interface HelpCenterViewController : UIViewController<UIAlertViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
 {
     __weak IBOutlet UIButton *titleButton;
     __weak IBOutlet UIButton *callButton;
@@ -23,5 +23,9 @@
     
     __weak IBOutlet UIImageView *emerImage;
     __weak IBOutlet UILabel *emerTitleLabel;
+    UIPickerView *pktStatePicker;
+    UIToolbar *mypickerToolbar;
+    UIActionSheet *sheet;
+
 }
 @end

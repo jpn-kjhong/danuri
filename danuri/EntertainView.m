@@ -118,35 +118,31 @@
 
             if(IS_IPHONE5){
                 if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
+                    fThumbnailHeightPadding = 15;
                     fThumbnailHeight = 416.0;
                 }
                 else{
-                    fThumbnailHeight = 329.0;
+                    fThumbnailHeightPadding = 15;
+                    fThumbnailHeight = 416.0;
                 }
             }else
             {
                 if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
-                    fThumbnailHeight = 409.0;
-                    fThumbnailHeightPadding = 30;
+                    fThumbnailHeight = 349.0;
+                    fThumbnailHeightPadding = 15;
                 }
                 else{
-                    fThumbnailHeight = 329.0;
+                    fThumbnailHeight = 349.0;
+                    fThumbnailHeightPadding = 20;
                 }
             }
             UIImage *imgNoImage = [UIImage imageNamed:ImgAddr_Entertain_no_image];
             
             ivThumbnail = [[UIImageView alloc] initWithImage:imgNoImage];
-            [ivThumbnail setFrame:CGRectMake(0.0, fThumbnailHeightPadding, fThumbnailWidth, fThumbnailHeight)];
+            [ivThumbnail setFrame:CGRectMake(0.0, 0.0, fThumbnailWidth, fThumbnailHeight)];
             [ivThumbnail setContentMode:UIViewContentModeScaleAspectFit];
-            [ivThumbnail setCenter:CGPointMake(fViewWidth/2.0, (fThumbnailHeight + fThumbnailHeightPadding )/2.0)];
+//            [ivThumbnail setCenter:CGPointMake(fViewWidth/2.0, (fThumbnailHeight + fThumbnailHeightPadding )/2.0)];
             [ivThumbnail setBackgroundColor:[UIColor clearColor]];
-            
-            UIBezierPath *bpMask = [UIBezierPath bezierPathWithRoundedRect:ivThumbnail.bounds byRoundingCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) cornerRadii:CGSizeMake(12.5, 12.5)];
-            
-            CAShapeLayer *caslMask = [[CAShapeLayer alloc] init];
-            caslMask.frame = ivThumbnail.bounds;
-            caslMask.path = bpMask.CGPath;
-            ivThumbnail.layer.mask = caslMask;
             
             aivLoading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
             [aivLoading setCenter:CGPointMake(self.frame.size.width/2.0, self.frame.size.height/2.0)];

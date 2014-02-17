@@ -16,6 +16,10 @@
 #import "Toast+UIView.h"
 #import "ASIHTTPRequest.h"
 #import "ASINetworkQueue.h"
+#import "CityTableViewController.h"
+#import "FPPopoverController.h"
+#import "JSON.h"
+
 #define Height_UITabBar                         54
 #define Height_UINavigationBar                  44
 #define Height_StatusBar                        20
@@ -70,9 +74,7 @@
     
     firstConnect = YES;
     SelectLangaugeViewController *sel = [[SelectLangaugeViewController alloc] initWithNibName:@"SelectLangaugeViewController" bundle:nil];
-    [self.navigationController presentViewController:sel animated:NO completion:^{
-        
-        
+    [self.navigationController presentViewController:sel animated:NO completion:^{        
     }
      ];
     // Do any additional setup after loading the view from its nib.
@@ -80,10 +82,167 @@
     UIButton *naviBarBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 53, 37)] ;
     [naviBarBtn setImage:[UIImage imageNamed:@"lang"] forState:UIControlStateNormal];
     [naviBarBtn setImage:[UIImage imageNamed:@"lang_p"] forState:UIControlStateHighlighted];
-    [naviBarBtn addTarget:self action:@selector(backToIntro) forControlEvents:UIControlEventTouchUpInside];
+    [naviBarBtn addTarget:self action:@selector(addPickerView) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:naviBarBtn];
     self.navigationItem.rightBarButtonItem = rightButton;
     
+    pktStatePicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 43 , 320, 480)];
+    pktStatePicker.delegate = self;
+    pktStatePicker.dataSource = self;
+    [pktStatePicker  setShowsSelectionIndicator:YES];
+    
+    // Create done button in UIPickerView
+    mypickerToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 56)];
+    mypickerToolbar.barStyle = UIBarStyleBlackOpaque;
+    [mypickerToolbar sizeToFit];
+    
+    NSMutableArray *barItems = [[NSMutableArray alloc] init];
+    
+    UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    [barItems addObject:flexSpace];
+    
+    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pickerDoneClicked)];
+    [barItems addObject:doneBtn];
+    [mypickerToolbar setItems:barItems animated:YES];
+}
+
+-(int) setPickInitValue
+{
+    int value = 0;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if([appDelegate.type isEqualToString:@"kr"]){
+        value = 0;
+    }else if([appDelegate.type isEqualToString:@"en"]){
+        value = 1;
+    }else if([appDelegate.type isEqualToString:@"cn"]){
+        value = 2;
+    }else if([appDelegate.type isEqualToString:@"vn"]){
+        value = 3;
+    }else if([appDelegate.type isEqualToString:@"ph"]){
+        value = 4;
+    }else if([appDelegate.type isEqualToString:@"kh"]){
+        value = 5;
+    }else if([appDelegate.type isEqualToString:@"mn"]){
+        value = 6;
+    }else if([appDelegate.type isEqualToString:@"ru"]){
+        value = 7;
+    }else if([appDelegate.type isEqualToString:@"jp"]){
+        value = 8;
+    }else if([appDelegate.type isEqualToString:@"th"]){
+        value = 9;
+    }else {
+        value = 0;
+    }
+    [pktStatePicker selectRow:value inComponent:0 animated:YES];
+    return value;
+}
+-(void)addPickerView
+{
+    sheet = [[UIActionSheet alloc] initWithTitle:nil
+                                        delegate:self
+                               cancelButtonTitle:@"Done"
+                          destructiveButtonTitle:nil
+                               otherButtonTitles:nil];
+    [sheet addSubview:pktStatePicker];
+    [sheet showInView:self.view.superview];
+    [sheet addSubview:mypickerToolbar];
+    [sheet showInView:self.view.superview];
+    [sheet setBounds:CGRectMake(0, 20, 320, 430)];
+    [self setPickInitValue];
+
+}
+
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return [appDelegate.arrState count];
+}
+
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return [appDelegate.arrState objectAtIndex:row];
+}
+
+
+- (void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSLog(@"You selected this: %@", [appDelegate.arrState objectAtIndex: row]);
+    switch (row) {
+        case 0:
+            appDelegate.type = @"kr";
+            break;
+        case 1:
+            appDelegate.type = @"en";
+            break;
+        case 2:
+            appDelegate.type = @"cn";
+            break;
+        case 3:
+            appDelegate.type = @"vn";
+            break;
+        case 4:
+            appDelegate.type = @"ph";
+            break;
+        case 5:
+            appDelegate.type = @"kh";
+            break;
+        case 6:
+            appDelegate.type = @"mn";
+            break;
+        case 7:
+            appDelegate.type = @"ru";
+            break;
+        case 8:
+            appDelegate.type = @"jp";
+            break;
+        case 9:
+            appDelegate.type = @"th";
+            break;
+        default:
+            appDelegate.type = @"kr";
+            break;
+    }
+    
+}
+
+
+- (void)pickerDoneClicked
+{
+    NSLog(@"Done Clicked");
+    [sheet dismissWithClickedButtonIndex:0 animated:YES];
+    [self selectLanguage];
+}
+
+
+- (void) selectLanguage{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    _posts = [NSMutableArray array];
+
+    NSDictionary *param  = @{@"language": appDelegate.type};
+    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    [Post globalTimelinePostsWithParameter:param withPath:@"include/json/rainbow_json.asp" Block:^(NSArray *posts, NSError *error) {
+        if (error) {
+            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+        } else {
+            NSLog(@"%@",posts);
+            
+            _posts = posts;
+            [self setThumbnail];
+        }
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+        
+        
+    }];
 }
 
 - (void) backToIntro{
@@ -97,7 +256,7 @@
 
 - (void)imageFetchComplete:(ASIHTTPRequest *)request
 {
-    NSLog(@"%@", request);
+    NSLog(@"imageFetchComplete : %@", request);
     for(EntertainView *temp in requestList)
     {
         if([[[request url] absoluteString] isEqualToString:[temp getTargetURL]]){
@@ -253,8 +412,22 @@
     
     CGFloat fCardYPoint = 9.0; // Default
     
-    if (sizeWindow.height > 480.0) {
-        fCardYPoint = 50.0;
+    if(IS_IPHONE5){
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
+            fCardYPoint = 70.0;
+        }
+        else{
+        }
+    }else
+    {
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
+            fCardYPoint = 70.0;
+
+        }
+        else{
+            fCardYPoint = 20.0;
+
+        }
     }
     
     for (int i=0; i<[arrayEntertainment count]; i++) {

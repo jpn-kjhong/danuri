@@ -9,12 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "GAIFields.h"
 #import "GAIDictionaryBuilder.h"
-@interface KoreanMovieViewController : UIViewController<UIAlertViewDelegate>{
+@interface KoreanMovieViewController : UIViewController<UIAlertViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate>{
     
     __weak IBOutlet UIButton *familyButton;
     __weak IBOutlet UILabel *titleLabel;
     
     __weak IBOutlet UIImageView *familyImage;
+    UIPickerView *pktStatePicker;
+    UIToolbar *mypickerToolbar;
+    UIActionSheet *sheet;
 }
 
 @end

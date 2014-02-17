@@ -25,5 +25,6 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) NSString *type;
 @property(nonatomic, strong) id<GAITracker> tracker;
+@property (strong, nonatomic) NSArray *arrState;
 
 @end
