@@ -30,6 +30,7 @@ typedef NSUInteger EntertainViewType;
 @property (nonatomic, strong) NSString *imageType;
 @property (nonatomic, strong) UIProgressView *progress;
 @property (nonatomic, strong) UIButton *close;
+@property (nonatomic) BOOL isExist;
 
 @end
 

@@ -214,6 +214,7 @@
                 
                 if (imageThumbnail !=nil) {
                     [ivThumbnail setImage:imageThumbnail];
+                    
                 } else {
                     [self loadImage:strThumbnail];
                 }
@@ -227,6 +228,12 @@
     }
 }
 
+-(void) setIsExist:(BOOL)isExist{
+    if(isExist==YES)
+        [ivThumbnail setAlpha:1.0];
+    else
+        [ivThumbnail setAlpha:0.4];
+}
 -(void)loadImage:(NSString*)strURL {
     [self startIndicator];
     
