@@ -465,7 +465,7 @@
     }else
     {
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
-            fCardYPoint = 50.0;
+            fCardYPoint = 70.0;
             
         }
         else{

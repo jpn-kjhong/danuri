@@ -425,7 +425,6 @@
 
         }
         else{
-            fCardYPoint = 20.0;
 
         }
     }
