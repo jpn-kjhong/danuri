@@ -107,6 +107,21 @@
     UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pickerDoneClicked)];
     [barItems addObject:doneBtn];
     [mypickerToolbar setItems:barItems animated:YES];
+    
+    if(IS_IPHONE5){
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
+            [yearButton setFrame:CGRectMake(yearButton.frame.origin.x, yearButton.frame.origin.y + 60, yearButton.frame.size.width, yearButton.frame.size.height)];
+        }else{
+            [yearButton setFrame:CGRectMake(yearButton.frame.origin.x, yearButton.frame.origin.y, yearButton.frame.size.width, yearButton.frame.size.height)];
+        }
+    }else
+    {
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
+            [yearButton setFrame:CGRectMake(yearButton.frame.origin.x, yearButton.frame.origin.y + 45, yearButton.frame.size.width, yearButton.frame.size.height)];
+        }else{
+            [yearButton setFrame:CGRectMake(yearButton.frame.origin.x, yearButton.frame.origin.y - 16, yearButton.frame.size.width, yearButton.frame.size.height)];
+        }
+    }
 }
 
 
@@ -475,7 +490,8 @@
     NSString *year = nil;
     @try {
         year = [[_posts objectAtIndex:pageControl.currentPage] objectForKey:@"rb_year"];
-        [self.view makeToast:year];
+//        [self.view makeToast:year];
+        [yearButton setTitle:year forState:UIControlStateNormal];
         
     }
     @catch (NSException *exception) {
@@ -505,7 +521,8 @@
     NSString *year = nil;
     @try {
         year = [[_posts objectAtIndex:pageControl.currentPage] objectForKey:@"rb_year"];
-        [self.view makeToast:year];
+//        [self.view makeToast:year];
+        [yearButton setTitle:year forState:UIControlStateNormal];
 
     }
     @catch (NSException *exception) {

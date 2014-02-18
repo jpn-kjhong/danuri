@@ -16,6 +16,7 @@
     
     __weak IBOutlet UIScrollView *scrollView;
     __weak IBOutlet CustomPageControl *pageControl;
+    __weak IBOutlet UIButton *yearButton;
     
     NSMutableArray          *arrayEntertainment;
     

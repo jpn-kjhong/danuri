@@ -10,6 +10,7 @@
                 <outlet property="pageControl" destination="eU2-BL-JcL" id="sCm-Xc-oQs"/>
                 <outlet property="scrollView" destination="g0W-v6-UhZ" id="nmb-hu-290"/>
                 <outlet property="view" destination="1" id="3"/>
+                <outlet property="yearButton" destination="tA4-Nx-Fjl" id="NYO-h9-Qde"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -38,6 +39,14 @@
                         <outlet property="delegate" destination="-1" id="abQ-dF-JX5"/>
                     </connections>
                 </scrollView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" id="tA4-Nx-Fjl">
+                    <rect key="frame" x="110" y="20" width="100" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                    <state key="normal" title="2013" backgroundImage="title_center.png">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
                 <pageControl hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.14999999999999969" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" id="eU2-BL-JcL" customClass="CustomPageControl">
                     <rect key="frame" x="-1" y="376" width="320" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -49,5 +58,6 @@
     </objects>
     <resources>
         <image name="sub_01.png" width="320" height="383"/>
+        <image name="title_center.png" width="430" height="81"/>
     </resources>
 </document>
