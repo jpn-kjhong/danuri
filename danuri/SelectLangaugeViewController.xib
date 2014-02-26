@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
@@ -32,6 +32,7 @@
                     <state key="normal" backgroundImage="lang_01.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="highlighted" backgroundImage="lang_01_p.png"/>
                     <connections>
                         <action selector="ClickButton:" destination="-1" eventType="touchUpInside" id="OKR-IP-51o"/>
                     </connections>
@@ -43,6 +44,7 @@
                     <state key="normal" backgroundImage="lang_03.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="highlighted" backgroundImage="lang_03_p.png"/>
                     <connections>
                         <action selector="ClickButton:" destination="-1" eventType="touchUpInside" id="JXQ-He-EtV"/>
                     </connections>
@@ -54,6 +56,7 @@
                     <state key="normal" backgroundImage="lang_09.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="highlighted" backgroundImage="lang_09_p.png"/>
                     <connections>
                         <action selector="ClickButton:" destination="-1" eventType="touchUpInside" id="vA4-G5-OYa"/>
                     </connections>
@@ -65,6 +68,7 @@
                     <state key="normal" backgroundImage="lang_05.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="highlighted" backgroundImage="lang_05_p.png"/>
                     <connections>
                         <action selector="ClickButton:" destination="-1" eventType="touchUpInside" id="UVR-6h-FfC"/>
                     </connections>
@@ -76,6 +80,7 @@
                     <state key="normal" backgroundImage="lang_02.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="highlighted" backgroundImage="lang_02_p.png"/>
                     <connections>
                         <action selector="ClickButton:" destination="-1" eventType="touchUpInside" id="rNA-LE-hCC"/>
                     </connections>
@@ -87,6 +92,7 @@
                     <state key="normal" backgroundImage="lang_10.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="highlighted" backgroundImage="lang_10_p.png"/>
                     <connections>
                         <action selector="ClickButton:" destination="-1" eventType="touchUpInside" id="L8X-eC-5Ij"/>
                     </connections>
@@ -98,6 +104,7 @@
                     <state key="normal" backgroundImage="lang_07.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="highlighted" backgroundImage="lang_07_p.png"/>
                     <connections>
                         <action selector="ClickButton:" destination="-1" eventType="touchUpInside" id="7ql-e1-FRV"/>
                     </connections>
@@ -109,6 +116,7 @@
                     <state key="normal" backgroundImage="lang_06.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="highlighted" backgroundImage="lang_06_p.png"/>
                     <connections>
                         <action selector="ClickButton:" destination="-1" eventType="touchUpInside" id="DjR-Ok-ZHE"/>
                     </connections>
@@ -120,6 +128,7 @@
                     <state key="normal" backgroundImage="lang_04.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="highlighted" backgroundImage="lang_04_p.png"/>
                     <connections>
                         <action selector="ClickButton:" destination="-1" eventType="touchUpInside" id="kx2-9s-yai"/>
                     </connections>
@@ -131,6 +140,7 @@
                     <state key="normal" backgroundImage="lang_08.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="highlighted" backgroundImage="lang_08_p.png"/>
                     <connections>
                         <action selector="ClickButton:" destination="-1" eventType="touchUpInside" id="Zkm-Ry-Opt"/>
                     </connections>
@@ -146,16 +156,26 @@
         </view>
     </objects>
     <resources>
-        <image name="lang_01.png" width="85" height="85"/>
-        <image name="lang_02.png" width="85" height="85"/>
-        <image name="lang_03.png" width="85" height="85"/>
-        <image name="lang_04.png" width="85" height="85"/>
-        <image name="lang_05.png" width="85" height="85"/>
-        <image name="lang_06.png" width="85" height="85"/>
-        <image name="lang_07.png" width="85" height="85"/>
-        <image name="lang_08.png" width="85" height="85"/>
-        <image name="lang_09.png" width="85" height="85"/>
-        <image name="lang_10.png" width="85" height="85"/>
+        <image name="lang_01.png" width="60" height="60"/>
+        <image name="lang_01_p.png" width="60" height="60"/>
+        <image name="lang_02.png" width="60" height="60"/>
+        <image name="lang_02_p.png" width="60" height="60"/>
+        <image name="lang_03.png" width="60" height="60"/>
+        <image name="lang_03_p.png" width="60" height="60"/>
+        <image name="lang_04.png" width="60" height="60"/>
+        <image name="lang_04_p.png" width="60" height="60"/>
+        <image name="lang_05.png" width="60" height="60"/>
+        <image name="lang_05_p.png" width="60" height="60"/>
+        <image name="lang_06.png" width="60" height="60"/>
+        <image name="lang_06_p.png" width="60" height="60"/>
+        <image name="lang_07.png" width="60" height="60"/>
+        <image name="lang_07_p.png" width="60" height="60"/>
+        <image name="lang_08.png" width="60" height="60"/>
+        <image name="lang_08_p.png" width="60" height="60"/>
+        <image name="lang_09.png" width="60" height="60"/>
+        <image name="lang_09_p.png" width="60" height="60"/>
+        <image name="lang_10.png" width="60" height="60"/>
+        <image name="lang_10_p.png" width="60" height="60"/>
         <image name="lang_base.png" width="320" height="480"/>
     </resources>
 </document>

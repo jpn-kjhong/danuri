@@ -15,6 +15,14 @@
     __weak IBOutlet UILabel *titleLabel;
     
     __weak IBOutlet UIImageView *familyImage;
+    
+    __weak IBOutlet UIButton *homeButton;
+    __weak IBOutlet UILabel *homeLabel;
+    
+    __weak IBOutlet UIImageView *homeImage;
+    
+    
+    
     UIPickerView *pktStatePicker;
     UIToolbar *mypickerToolbar;
     UIActionSheet *sheet;

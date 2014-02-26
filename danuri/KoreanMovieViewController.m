@@ -61,26 +61,32 @@
 //    NSDictionary *jsonData = [myJSON JSONValue];
 //    NSString *title = [[jsonData objectForKey:@"help"] objectForKey:@"text1"];
 
+    float padding ;
     if(IS_IPHONE5){
-        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
-            [familyButton setFrame:CGRectMake(familyButton.frame.origin.x, familyButton.frame.origin.y + 50, familyButton.frame.size.width, familyButton.frame.size.height)];
-        }
-        else{
-            
-            
-        }
+        padding = 80;
     }else{
-        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
-            [familyButton setFrame:CGRectMake(familyButton.frame.origin.x, familyButton.frame.origin.y + 50, familyButton.frame.size.width, familyButton.frame.size.height)];
-        }
-        else{
-            
-        }
+        padding = 55;
     }
     
-    [familyImage setFrame:CGRectMake(familyImage.frame.origin.x, familyButton.frame.origin.y  + 25, familyImage.frame.size.width, familyImage.frame.size.height)];
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
+        [familyButton setFrame:CGRectMake(familyButton.frame.origin.x, familyButton.frame.origin.y + padding, familyButton.frame.size.width, familyButton.frame.size.height)];
+        
+        [familyImage setFrame:CGRectMake(familyImage.frame.origin.x, familyImage.frame.origin.y  + padding, familyImage.frame.size.width, familyImage.frame.size.height)];
+
+        [titleLabel setFrame:CGRectMake(titleLabel.frame.origin.x, titleLabel.frame.origin.y + padding, titleLabel.frame.size.width, titleLabel.frame.size.height)];
+
+        [homeButton setFrame:CGRectMake(homeButton.frame.origin.x, homeButton.frame.origin.y + padding, homeButton.frame.size.width, homeButton.frame.size.height)];
+
+        [homeImage setFrame:CGRectMake(homeImage.frame.origin.x, homeImage.frame.origin.y  + padding, homeImage.frame.size.width, homeImage.frame.size.height)];
+        
+        [homeLabel setFrame:CGRectMake(homeLabel.frame.origin.x, homeLabel.frame.origin.y +  padding, homeLabel.frame.size.width, homeLabel.frame.size.height)];
+        
+    }
+    else{
+
+    }
     
-    [titleLabel setFrame:CGRectMake(titleLabel.frame.origin.x, familyImage.frame.origin.y + familyImage.frame.size.height + 5, titleLabel.frame.size.width, titleLabel.frame.size.height)];
+    NSLog(@"%f %f  %f %f",familyButton.frame.origin.y, familyButton.frame.size.height, homeButton.frame.origin.y,homeButton.frame.size.height);
     
     pktStatePicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 43 , 320, 480)];
     pktStatePicker.delegate = self;
@@ -328,8 +334,14 @@
 }
 
 - (IBAction)callClick:(id)sender {
-    SupportViewController *sup = [[SupportViewController alloc] initWithNibName:@"SupportViewController" bundle:nil];
-    [self.navigationController pushViewController:sup animated:YES];
+    if([sender tag]== 0){
+        SupportViewController *sup = [[SupportViewController alloc] initWithNibName:@"SupportViewController" bundle:nil];
+        [self.navigationController pushViewController:sup animated:YES];
+    }else if([sender tag] == 1)
+    {
+        NSURL *url = [NSURL URLWithString:@"http://liveinkorea.kr/"];
+        [[UIApplication sharedApplication] openURL:url];
+    }
 
     
 }
