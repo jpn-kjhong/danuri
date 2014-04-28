@@ -61,11 +61,11 @@
 //    NSDictionary *jsonData = [myJSON JSONValue];
 //    NSString *title = [[jsonData objectForKey:@"help"] objectForKey:@"text1"];
 
-    float padding ;
+    float padding = 0;
     if(IS_IPHONE5){
-        padding = 80;
+//        padding = 80;
     }else{
-        padding = 55;
+//        padding = 55;
     }
     
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){

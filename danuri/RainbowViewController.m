@@ -110,14 +110,14 @@
     
     if(IS_IPHONE5){
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
-            [yearButton setFrame:CGRectMake(yearButton.frame.origin.x, yearButton.frame.origin.y + 60, yearButton.frame.size.width, yearButton.frame.size.height)];
+            [yearButton setFrame:CGRectMake(yearButton.frame.origin.x, yearButton.frame.origin.y, yearButton.frame.size.width, yearButton.frame.size.height)];
         }else{
             [yearButton setFrame:CGRectMake(yearButton.frame.origin.x, yearButton.frame.origin.y, yearButton.frame.size.width, yearButton.frame.size.height)];
         }
     }else
     {
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
-            [yearButton setFrame:CGRectMake(yearButton.frame.origin.x, yearButton.frame.origin.y + 45, yearButton.frame.size.width, yearButton.frame.size.height)];
+            [yearButton setFrame:CGRectMake(yearButton.frame.origin.x, yearButton.frame.origin.y - 16, yearButton.frame.size.width, yearButton.frame.size.height)];
         }else{
             [yearButton setFrame:CGRectMake(yearButton.frame.origin.x, yearButton.frame.origin.y - 16, yearButton.frame.size.width, yearButton.frame.size.height)];
         }
@@ -460,14 +460,14 @@
     
     if(IS_IPHONE5){
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
-            fCardYPoint = 70.0;
+//            fCardYPoint = 70.0;
         }
         else{
         }
     }else
     {
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
-            fCardYPoint = 70.0;
+//            fCardYPoint = 70.0;
 
         }
         else{
@@ -576,7 +576,7 @@
         return;
     }
     
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"다운"                                                        message:@"다운받으시겠습니까?"
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"다운로드"                                                        message:@"다운받으시겠습니까?"
                                                        delegate:self
                                               cancelButtonTitle:@"취소"
                                               otherButtonTitles:@"확인", nil];

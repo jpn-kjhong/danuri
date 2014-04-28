@@ -50,19 +50,20 @@
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:naviBarBtn];
     self.navigationItem.rightBarButtonItem = rightButton;
 
+    float padding = 0;
     if(IS_IPHONE5){
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
-            [titleButton setFrame:CGRectMake(titleButton.frame.origin.x, titleButton.frame.origin.y + 54, titleButton.frame.size.width, titleButton.frame.size.height)];
+            [titleButton setFrame:CGRectMake(titleButton.frame.origin.x, titleButton.frame.origin.y  + padding, titleButton.frame.size.width, titleButton.frame.size.height)];
         }
         else{
-            [titleButton setFrame:CGRectMake(titleButton.frame.origin.x, titleButton.frame.origin.y , titleButton.frame.size.width, titleButton.frame.size.height)];
+            [titleButton setFrame:CGRectMake(titleButton.frame.origin.x, titleButton.frame.origin.y  , titleButton.frame.size.width, titleButton.frame.size.height)];
         }
     }else{
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
-            [titleButton setFrame:CGRectMake(titleButton.frame.origin.x, titleButton.frame.origin.y + 54, titleButton.frame.size.width, titleButton.frame.size.height)];
+            [titleButton setFrame:CGRectMake(titleButton.frame.origin.x, titleButton.frame.origin.y - 16 + padding, titleButton.frame.size.width, titleButton.frame.size.height)];
         }
         else{
-            [titleButton setFrame:CGRectMake(titleButton.frame.origin.x, titleButton.frame.origin.y , titleButton.frame.size.width, titleButton.frame.size.height)];
+            [titleButton setFrame:CGRectMake(titleButton.frame.origin.x, titleButton.frame.origin.y - 16 , titleButton.frame.size.width, titleButton.frame.size.height)];
         }
     }
     

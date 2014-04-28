@@ -99,17 +99,17 @@
     
     if(IS_IPHONE5){
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
-            [titleButton setFrame:CGRectMake(titleButton.frame.origin.x, titleButton.frame.origin.y + 60, titleButton.frame.size.width, titleButton.frame.size.height)];
+            [titleButton setFrame:CGRectMake(titleButton.frame.origin.x, titleButton.frame.origin.y , titleButton.frame.size.width, titleButton.frame.size.height)];
         }else{
-            [titleButton setFrame:CGRectMake(titleButton.frame.origin.x, titleButton.frame.origin.y, titleButton.frame.size.width, titleButton.frame.size.height)];
+            [titleButton setFrame:CGRectMake(titleButton.frame.origin.x, titleButton.frame.origin.y , titleButton.frame.size.width, titleButton.frame.size.height)];
         }
     }else
     {
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
-            [titleButton setFrame:CGRectMake(titleButton.frame.origin.x, titleButton.frame.origin.y + 50, titleButton.frame.size.width, titleButton.frame.size.height)];
+            [titleButton setFrame:CGRectMake(titleButton.frame.origin.x, titleButton.frame.origin.y - 16, titleButton.frame.size.width, titleButton.frame.size.height)];
 //            [scrollView setFrame:CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y + 50, scrollView.frame.size.width, scrollView.frame.size.height)];
         }else{
-            
+            [titleButton setFrame:CGRectMake(titleButton.frame.origin.x, titleButton.frame.origin.y - 16, titleButton.frame.size.width, titleButton.frame.size.height)];
         }
     }
     
@@ -536,18 +536,18 @@
     
     if(IS_IPHONE5){
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
-            fCardYPoint = 70.0;
+//            fCardYPoint = 70.0;
         }
         else{
         }
     }else
     {
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
-            fCardYPoint = 70.0;
+//            fCardYPoint = 70.0;
             
         }
         else{
-            fCardYPoint = 20.0;
+//            fCardYPoint = 20.0;
 
         }
     }
@@ -617,7 +617,7 @@
         return;
     }
     
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"다운"                                                        message:@"다운받으시겠습니까?"
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"다운로드"                                                        message:@"다운받으시겠습니까?"
                                                        delegate:self
                                               cancelButtonTitle:@"취소"
                                               otherButtonTitles:@"확인", nil];

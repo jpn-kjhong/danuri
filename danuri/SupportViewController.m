@@ -42,13 +42,13 @@
     [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 
     // Do any additional setup after loading the view from its nib.
-    
+    float padding = 0;
     if(IS_IPHONE5){
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
-            [titleLabel setFrame:CGRectMake(titleLabel.frame.origin.x, titleLabel.frame.origin.y + 50, titleLabel.frame.size.width, titleLabel.frame.size.height)];
-            [cityButton setFrame:CGRectMake(cityButton.frame.origin.x, cityButton.frame.origin.y + 50, cityButton.frame.size.width, cityButton.frame.size.height)];
-            [stateButton setFrame:CGRectMake(stateButton.frame.origin.x, stateButton.frame.origin.y + 50, stateButton.frame.size.width, stateButton.frame.size.height)];
-            [searchButton setFrame:CGRectMake(searchButton.frame.origin.x, searchButton.frame.origin.y + 50, searchButton.frame.size.width, searchButton.frame.size.height)];
+            [titleLabel setFrame:CGRectMake(titleLabel.frame.origin.x, titleLabel.frame.origin.y + padding, titleLabel.frame.size.width, titleLabel.frame.size.height)];
+            [cityButton setFrame:CGRectMake(cityButton.frame.origin.x, cityButton.frame.origin.y + padding, cityButton.frame.size.width, cityButton.frame.size.height)];
+            [stateButton setFrame:CGRectMake(stateButton.frame.origin.x, stateButton.frame.origin.y + padding, stateButton.frame.size.width, stateButton.frame.size.height)];
+            [searchButton setFrame:CGRectMake(searchButton.frame.origin.x, searchButton.frame.origin.y + padding, searchButton.frame.size.width, searchButton.frame.size.height)];
             [tableView setFrame:CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y , tableView.frame.size.width, tableView.frame.size.height)];
         }
         else{
@@ -59,10 +59,10 @@
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
             [tableView setFrame:CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y, tableView.frame.size.width, tableView.frame.size.height)];
 
-            [titleLabel setFrame:CGRectMake(titleLabel.frame.origin.x, titleLabel.frame.origin.y + 50, titleLabel.frame.size.width, titleLabel.frame.size.height)];
-            [cityButton setFrame:CGRectMake(cityButton.frame.origin.x, cityButton.frame.origin.y + 50, cityButton.frame.size.width, cityButton.frame.size.height)];
-            [stateButton setFrame:CGRectMake(stateButton.frame.origin.x, stateButton.frame.origin.y + 50, stateButton.frame.size.width, stateButton.frame.size.height)];
-            [searchButton setFrame:CGRectMake(searchButton.frame.origin.x, searchButton.frame.origin.y + 50, searchButton.frame.size.width, searchButton.frame.size.height)];
+            [titleLabel setFrame:CGRectMake(titleLabel.frame.origin.x, titleLabel.frame.origin.y + padding, titleLabel.frame.size.width, titleLabel.frame.size.height)];
+            [cityButton setFrame:CGRectMake(cityButton.frame.origin.x, cityButton.frame.origin.y + padding, cityButton.frame.size.width, cityButton.frame.size.height)];
+            [stateButton setFrame:CGRectMake(stateButton.frame.origin.x, stateButton.frame.origin.y + padding, stateButton.frame.size.width, stateButton.frame.size.height)];
+            [searchButton setFrame:CGRectMake(searchButton.frame.origin.x, searchButton.frame.origin.y + padding, searchButton.frame.size.width, searchButton.frame.size.height)];
         }
         else{
 
