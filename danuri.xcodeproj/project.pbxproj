@@ -256,6 +256,10 @@
 		7D709530181CCBF900CEA280 /* 4page_banner_215_42@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D70952D181CCBF900CEA280 /* 4page_banner_215_42@2x.png */; };
 		7D709533181CD6D200CEA280 /* 3_4_page_p@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D709531181CD6D200CEA280 /* 3_4_page_p@2x.png */; };
 		7D709534181CD6D200CEA280 /* 3_4_page@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D709532181CD6D200CEA280 /* 3_4_page@2x.png */; };
+		BE16A0C3199B36E800A8C4B8 /* UIWebView+Javascript.m in Sources */ = {isa = PBXBuildFile; fileRef = BE16A0C2199B36E800A8C4B8 /* UIWebView+Javascript.m */; };
+		BE3E216D1999B244007AAA47 /* KoreaStoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3E216B1999B244007AAA47 /* KoreaStoryViewController.m */; };
+		BE3E216E1999B244007AAA47 /* KoreaStoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3E216C1999B244007AAA47 /* KoreaStoryViewController.xib */; };
+		BE7EAA98199E2CA5001B4F6F /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7EAA97199E2CA5001B4F6F /* MediaPlayer.framework */; };
 		BE8575A618BDECEB0045F08D /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D09504C1829C7D400ADCF9F /* libGoogleAnalyticsServices.a */; };
 		BE8575B118BDEFBF0045F08D /* lang_01_p@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE8575A718BDEFBF0045F08D /* lang_01_p@2x.png */; };
 		BE8575B218BDEFBF0045F08D /* lang_02_p@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE8575A818BDEFBF0045F08D /* lang_02_p@2x.png */; };
@@ -625,6 +629,12 @@
 		7D70952D181CCBF900CEA280 /* 4page_banner_215_42@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "4page_banner_215_42@2x.png"; path = "danuri/image/consult/4page_banner_215_42@2x.png"; sourceTree = "<group>"; };
 		7D709531181CD6D200CEA280 /* 3_4_page_p@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "3_4_page_p@2x.png"; path = "danuri/image/consult/3_4_page_p@2x.png"; sourceTree = "<group>"; };
 		7D709532181CD6D200CEA280 /* 3_4_page@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "3_4_page@2x.png"; path = "danuri/image/consult/3_4_page@2x.png"; sourceTree = "<group>"; };
+		BE16A0C1199B36E800A8C4B8 /* UIWebView+Javascript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+Javascript.h"; sourceTree = "<group>"; };
+		BE16A0C2199B36E800A8C4B8 /* UIWebView+Javascript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+Javascript.m"; sourceTree = "<group>"; };
+		BE3E216A1999B244007AAA47 /* KoreaStoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KoreaStoryViewController.h; sourceTree = "<group>"; };
+		BE3E216B1999B244007AAA47 /* KoreaStoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KoreaStoryViewController.m; sourceTree = "<group>"; };
+		BE3E216C1999B244007AAA47 /* KoreaStoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KoreaStoryViewController.xib; sourceTree = "<group>"; };
+		BE7EAA97199E2CA5001B4F6F /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		BE8575A718BDEFBF0045F08D /* lang_01_p@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "lang_01_p@2x.png"; path = "danuri/image/lang/lang_01_p@2x.png"; sourceTree = "<group>"; };
 		BE8575A818BDEFBF0045F08D /* lang_02_p@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "lang_02_p@2x.png"; path = "danuri/image/lang/lang_02_p@2x.png"; sourceTree = "<group>"; };
 		BE8575A918BDEFBF0045F08D /* lang_03_p@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "lang_03_p@2x.png"; path = "danuri/image/lang/lang_03_p@2x.png"; sourceTree = "<group>"; };
@@ -643,6 +653,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE7EAA98199E2CA5001B4F6F /* MediaPlayer.framework in Frameworks */,
 				BE8575A618BDECEB0045F08D /* libGoogleAnalyticsServices.a in Frameworks */,
 				7D09504F1829C94500ADCF9F /* CoreData.framework in Frameworks */,
 				7D09503E18289EA100ADCF9F /* SystemConfiguration.framework in Frameworks */,
@@ -788,6 +799,7 @@
 		18ADD082181AD5CD005D484B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE7EAA97199E2CA5001B4F6F /* MediaPlayer.framework */,
 				7D09504E1829C94500ADCF9F /* CoreData.framework */,
 				7D09504C1829C7D400ADCF9F /* libGoogleAnalyticsServices.a */,
 				7D09503D18289EA100ADCF9F /* SystemConfiguration.framework */,
@@ -807,6 +819,7 @@
 		18ADD089181AD5CD005D484B /* danuri */ = {
 			isa = PBXGroup;
 			children = (
+				BE3E21691999B210007AAA47 /* 한국생활영상 */,
 				18ACD5EB185D9097005D2CBA /* JSON */,
 				18ACD5AC185D8A69005D2CBA /* jsondata */,
 				7D0950451829C68500ADCF9F /* googleAnalytics */,
@@ -822,11 +835,11 @@
 				18D52494181B088100CDF355 /* AFNetworking */,
 				18D523E8181AE73300CDF355 /* CustomTabbarItem.h */,
 				18D523E9181AE73300CDF355 /* CustomTabbarItem.m */,
-				18ADD0F8181AE18A005D484B /* 도움받는곳 */,
-				18ADD0F7181AE17B005D484B /* 한국생활동영상 */,
-				18ADD0F6181AE171005D484B /* 한국생활가이드 */,
-				18ADD0F5181AE161005D484B /* 레인보우+ */,
-				18ADD0F4181ADDED005D484B /* 언어선택화면 */,
+				18ADD0F8181AE18A005D484B /* 도움받는곳 */,
+				18ADD0F7181AE17B005D484B /* 한국생활동영상 */,
+				18ADD0F6181AE171005D484B /* 한국생활가이드 */,
+				18ADD0F5181AE161005D484B /* 레인보우+ */,
+				18ADD0F4181ADDED005D484B /* 언어선택화면 */,
 				18ADD092181AD5CD005D484B /* AppDelegate.h */,
 				18ADD093181AD5CD005D484B /* AppDelegate.m */,
 				18ADD098181AD5CD005D484B /* ViewController.h */,
@@ -894,7 +907,7 @@
 				7D7094B7181CAC0C00CEA280 /* no_image_212_291@2x.png */,
 				7D7094B8181CAC0C00CEA280 /* sub_02_title@2x.png */,
 				7D70934E181C947E00CEA280 /* sub_03@2x.png */,
-				7D709339181C7EE400CEA280 /* 언어선택 */,
+				7D709339181C7EE400CEA280 /* 언어선택 */,
 				7D709333181C773A00CEA280 /* lang_base@2x.png */,
 				7D709329181C764700CEA280 /* Default.png */,
 				7D70932B181C764700CEA280 /* sub_01@2x.png */,
@@ -931,7 +944,7 @@
 			name = image;
 			sourceTree = "<group>";
 		};
-		18ADD0F4181ADDED005D484B /* 언어선택화면 */ = {
+		18ADD0F4181ADDED005D484B /* 언어선택화면 */ = {
 			isa = PBXGroup;
 			children = (
 				18ADD0EF181ADDE4005D484B /* SelectLangaugeViewController.h */,
@@ -941,7 +954,7 @@
 			name = "언어선택화면";
 			sourceTree = "<group>";
 		};
-		18ADD0F5181AE161005D484B /* 레인보우+ */ = {
+		18ADD0F5181AE161005D484B /* 레인보우+ */ = {
 			isa = PBXGroup;
 			children = (
 				18D524B4181B248200CDF355 /* model */,
@@ -954,7 +967,7 @@
 			name = "레인보우+";
 			sourceTree = "<group>";
 		};
-		18ADD0F6181AE171005D484B /* 한국생활가이드 */ = {
+		18ADD0F6181AE171005D484B /* 한국생활가이드 */ = {
 			isa = PBXGroup;
 			children = (
 				18ADD0FE181AE1D3005D484B /* KoreaGuideViewController.h */,
@@ -964,10 +977,10 @@
 			name = "한국생활가이드";
 			sourceTree = "<group>";
 		};
-		18ADD0F7181AE17B005D484B /* 한국생활동영상 */ = {
+		18ADD0F7181AE17B005D484B /* 한국생활동영상 */ = {
 			isa = PBXGroup;
 			children = (
-				7D709305181BF8C700CEA280 /* 1:1상담실 */,
+				7D709305181BF8C700CEA280 /* 1:1상담실 */,
 				18ADD103181AE1E2005D484B /* KoreanMovieViewController.h */,
 				18ADD104181AE1E2005D484B /* KoreanMovieViewController.m */,
 				18ADD105181AE1E2005D484B /* KoreanMovieViewController.xib */,
@@ -975,11 +988,11 @@
 			name = "한국생활동영상";
 			sourceTree = "<group>";
 		};
-		18ADD0F8181AE18A005D484B /* 도움받는곳 */ = {
+		18ADD0F8181AE18A005D484B /* 도움받는곳 */ = {
 			isa = PBXGroup;
 			children = (
-				7D7092AC181B960800CEA280 /* 다문화지원센터 */,
-				7D7092AA181B95CF00CEA280 /* 긴급연락처 */,
+				7D7092AC181B960800CEA280 /* 다문화지원센터 */,
+				7D7092AA181B95CF00CEA280 /* 긴급연락처 */,
 				18ADD108181AE1FB005D484B /* HelpCenterViewController.h */,
 				18ADD109181AE1FB005D484B /* HelpCenterViewController.m */,
 				18ADD10A181AE1FB005D484B /* HelpCenterViewController.xib */,
@@ -1198,7 +1211,7 @@
 			name = call;
 			sourceTree = "<group>";
 		};
-		7D7092AA181B95CF00CEA280 /* 긴급연락처 */ = {
+		7D7092AA181B95CF00CEA280 /* 긴급연락처 */ = {
 			isa = PBXGroup;
 			children = (
 				7D7092A5181B95C600CEA280 /* EmergencyViewController.h */,
@@ -1211,10 +1224,10 @@
 			name = "긴급연락처";
 			sourceTree = "<group>";
 		};
-		7D7092AC181B960800CEA280 /* 다문화지원센터 */ = {
+		7D7092AC181B960800CEA280 /* 다문화지원센터 */ = {
 			isa = PBXGroup;
 			children = (
-				7D7092C7181BAC3900CEA280 /* 팝업테이블 */,
+				7D7092C7181BAC3900CEA280 /* 팝업테이블 */,
 				7D7092AD181B962400CEA280 /* SupportViewController.h */,
 				7D7092AE181B962400CEA280 /* SupportViewController.m */,
 				7D7092AF181B962400CEA280 /* SupportViewController.xib */,
@@ -1239,7 +1252,7 @@
 			name = FPPopover;
 			sourceTree = "<group>";
 		};
-		7D7092C7181BAC3900CEA280 /* 팝업테이블 */ = {
+		7D7092C7181BAC3900CEA280 /* 팝업테이블 */ = {
 			isa = PBXGroup;
 			children = (
 				7D7092C8181BACD600CEA280 /* CityTableViewController.h */,
@@ -1279,7 +1292,7 @@
 			name = tabbar;
 			sourceTree = "<group>";
 		};
-		7D709305181BF8C700CEA280 /* 1:1상담실 */ = {
+		7D709305181BF8C700CEA280 /* 1:1상담실 */ = {
 			isa = PBXGroup;
 			children = (
 				7D709306181BF8DD00CEA280 /* ConsultViewController.h */,
@@ -1289,7 +1302,7 @@
 			name = "1:1상담실";
 			sourceTree = "<group>";
 		};
-		7D709339181C7EE400CEA280 /* 언어선택 */ = {
+		7D709339181C7EE400CEA280 /* 언어선택 */ = {
 			isa = PBXGroup;
 			children = (
 				BE8575A718BDEFBF0045F08D /* lang_01_p@2x.png */,
@@ -1377,6 +1390,18 @@
 				7D70952D181CCBF900CEA280 /* 4page_banner_215_42@2x.png */,
 			);
 			name = contact;
+			sourceTree = "<group>";
+		};
+		BE3E21691999B210007AAA47 /* 한국생활영상 */ = {
+			isa = PBXGroup;
+			children = (
+				BE3E216A1999B244007AAA47 /* KoreaStoryViewController.h */,
+				BE3E216B1999B244007AAA47 /* KoreaStoryViewController.m */,
+				BE3E216C1999B244007AAA47 /* KoreaStoryViewController.xib */,
+				BE16A0C1199B36E800A8C4B8 /* UIWebView+Javascript.h */,
+				BE16A0C2199B36E800A8C4B8 /* UIWebView+Javascript.m */,
+			);
+			name = "한국생활영상";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1623,6 +1648,7 @@
 				18ADD0DE181ADD0D005D484B /* back_button_p_47_27.png in Resources */,
 				18ACD62D185D91FF005D2CBA /* vn.json in Resources */,
 				7D709334181C773A00CEA280 /* lang_base@2x.png in Resources */,
+				BE3E216E1999B244007AAA47 /* KoreaStoryViewController.xib in Resources */,
 				7D3470571829D91C0049141B /* icon_120_120.png in Resources */,
 				18ADD0E3181ADD0D005D484B /* complete_button_p_46_27@2x.png in Resources */,
 				7D709349181C7EFB00CEA280 /* lang_06@2x.png in Resources */,
@@ -1671,6 +1697,7 @@
 				7D0950111828955900ADCF9F /* ASINetworkQueue.m in Sources */,
 				18ACD60E185D90B4005D2CBA /* SBJsonBase.m in Sources */,
 				7D7092C5181BAB9100CEA280 /* FPPopoverView.m in Sources */,
+				BE3E216D1999B244007AAA47 /* KoreaStoryViewController.m in Sources */,
 				18ACD615185D90B4005D2CBA /* SBJsonStreamWriterAccumulator.m in Sources */,
 				7D0950181828955900ADCF9F /* ASICloudFilesObjectRequest.m in Sources */,
 				18ADD09A181AD5CD005D484B /* ViewController.m in Sources */,
@@ -1702,6 +1729,7 @@
 				7D7092CA181BACD600CEA280 /* CityTableViewController.m in Sources */,
 				7D7094D8181CB56000CEA280 /* UIAlertView+MKBlockAdditions.m in Sources */,
 				18ACD60F185D90B4005D2CBA /* SBJsonParser.m in Sources */,
+				BE16A0C3199B36E800A8C4B8 /* UIWebView+Javascript.m in Sources */,
 				18D524BD181B255B00CDF355 /* AFAppDotNetAPIClient.m in Sources */,
 				7D0950171828955900ADCF9F /* ASICloudFilesObject.m in Sources */,
 				18D524C0181B3A1F00CDF355 /* MBProgressHUD.m in Sources */,

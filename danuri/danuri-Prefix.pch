@@ -17,6 +17,7 @@
 
 #define SuccessCertification  @"SuccessCertification"
 #define LanguageChanged @"LanguageChanged"
+#define JavascriptCall @"JavascriptCall"
 
 #define FONT_SIZE(N)		[UIFont systemFontOfSize:(N)]
 

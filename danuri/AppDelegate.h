@@ -11,6 +11,7 @@
 #import "KoreanMovieViewController.h"
 #import "KoreaGuideViewController.h"
 #import "HelpCenterViewController.h"
+#import "KoreaStoryViewController.h"
 #import "GAI.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate,UINavigationControllerDelegate, UINavigationBarDelegate, UITabBarControllerDelegate>
@@ -21,6 +22,8 @@
     KoreanMovieViewController *koreanMovieViewController;
     HelpCenterViewController *helpCenterViewController;
     KoreaGuideViewController *koreaGuideViewController;
+    KoreaStoryViewController *koreaStoryViewcontroller;
+    
 }
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) NSString *type;

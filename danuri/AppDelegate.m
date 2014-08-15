@@ -120,6 +120,7 @@ static NSString *const kTrackingId = @"UA-45495109-1";
     koreanMovieViewController = [[KoreanMovieViewController alloc] initWithNibName:@"KoreanMovieViewController" bundle:nil];
     koreaGuideViewController = [[KoreaGuideViewController alloc] initWithNibName:@"KoreaGuideViewController" bundle:nil];
     helpCenterViewController = [[HelpCenterViewController alloc] initWithNibName:@"HelpCenterViewController" bundle:nil];
+    koreaStoryViewcontroller = [[KoreaStoryViewController alloc] initWithNibName:@"KoreaStoryViewController" bundle:nil];
     
 #define fTabBarHeight 54
 //    CGRect rectWindow = [[UIScreen mainScreen] bounds];
@@ -140,14 +141,18 @@ static NSString *const kTrackingId = @"UA-45495109-1";
     UINavigationController *navi2 = [[UINavigationController alloc] initWithRootViewController:koreaGuideViewController];
     UINavigationController *navi3 = [[UINavigationController alloc] initWithRootViewController:koreanMovieViewController];
     UINavigationController *navi4 = [[UINavigationController alloc] initWithRootViewController:helpCenterViewController];
+    UINavigationController *navi5 = [[UINavigationController alloc] initWithRootViewController:koreaStoryViewcontroller];
     navi1.delegate = self;
     navi2.delegate = self;
     navi3.delegate = self;
     navi4.delegate = self;
+    navi5.delegate = self;
+
     CustomTabBarItem *tabBarItem1 = [[CustomTabBarItem alloc] init];
     CustomTabBarItem *tabBarItem2 = [[CustomTabBarItem alloc] init] ;
     CustomTabBarItem *tabBarItem3 = [[CustomTabBarItem alloc] init] ;
     CustomTabBarItem *tabBarItem4 = [[CustomTabBarItem alloc] init] ;
+    CustomTabBarItem *tabBarItem5 = [[CustomTabBarItem alloc] init] ;
 
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
     {
@@ -163,6 +168,9 @@ static NSString *const kTrackingId = @"UA-45495109-1";
         tabBarItem4.customStdImage = [[UIImage imageNamed:@"bot_04"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         tabBarItem4.customHighlightedImage = [[UIImage imageNamed:@"bot_04_on"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
+        tabBarItem5.customStdImage = [[UIImage imageNamed:@"bot_05"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        tabBarItem5.customHighlightedImage = [[UIImage imageNamed:@"bot_05_on"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        
     }else{
         tabBarItem1.customStdImage = [UIImage imageNamed:@"bot_01"];
         tabBarItem1.customHighlightedImage = [UIImage imageNamed:@"bot_01_on"];
@@ -175,6 +183,9 @@ static NSString *const kTrackingId = @"UA-45495109-1";
         
         tabBarItem4.customStdImage = [UIImage imageNamed:@"bot_04"];
         tabBarItem4.customHighlightedImage = [UIImage imageNamed:@"bot_04_on"];
+        
+        tabBarItem5.customStdImage = [UIImage imageNamed:@"bot_05"];
+        tabBarItem5.customHighlightedImage = [UIImage imageNamed:@"bot_05_on"];
     }
     
 
@@ -183,8 +194,9 @@ static NSString *const kTrackingId = @"UA-45495109-1";
     [navi2 setTabBarItem:tabBarItem2];
     [navi3 setTabBarItem:tabBarItem3];
     [navi4 setTabBarItem:tabBarItem4];
+    [navi5 setTabBarItem:tabBarItem5];
     
-    tabbarController.viewControllers = [NSArray arrayWithObjects:navi1, navi2, navi3, navi4, nil];
+    tabbarController.viewControllers = [NSArray arrayWithObjects:navi1, navi2, navi3, navi4, navi5, nil];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [self.window setRootViewController:tabbarController];
     tabbarController.delegate = self;
