@@ -186,7 +186,7 @@
     }else if([appDelegate.type isEqualToString:@"jp"]){
         value = 3;
     }else if([appDelegate.type isEqualToString:@"th"]){
-        value = 2;
+        value = 9;
     }else {
         value = 0;
     }
