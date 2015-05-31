@@ -59,6 +59,9 @@ int moveCount = 0.1;
         button8.frame = CGRectMake(button8.frame.origin.x, button8.frame.origin.y + padding, button8.frame.size.width, button8.frame.size.height);
         button9.frame = CGRectMake(button9.frame.origin.x, button9.frame.origin.y + padding, button9.frame.size.width, button9.frame.size.height);
         button10.frame = CGRectMake(button10.frame.origin.x, button10.frame.origin.y + padding, button10.frame.size.width, button10.frame.size.height);
+        button11.frame = CGRectMake(button11.frame.origin.x, button11.frame.origin.y + padding, button11.frame.size.width, button11.frame.size.height );
+        button12.frame = CGRectMake(button12.frame.origin.x, button12.frame.origin.y + padding, button12.frame.size.width, button12.frame.size.height );
+        button13.frame = CGRectMake(button13.frame.origin.x, button13.frame.origin.y + padding, button13.frame.size.width, button13.frame.size.height );
         
         
     }
@@ -451,6 +454,15 @@ int moveCount = 0.1;
             break;
         case 10:
             appDelegate.type = @"th";
+            break;
+        case 11:
+            appDelegate.type = @"la";
+            break;
+        case 12:
+            appDelegate.type = @"ne";
+            break;
+        case 13:
+            appDelegate.type = @"uz";
             break;
         default:
             appDelegate.type = @"kr";

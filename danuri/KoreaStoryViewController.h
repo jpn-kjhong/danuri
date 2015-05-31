@@ -10,7 +10,7 @@
 #import "UIWebView+Javascript.h"
 #import <MediaPlayer/MediaPlayer.h>
 
-@interface KoreaStoryViewController : UIViewController<UIAlertViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UIWebViewDelegate>
+@interface KoreaStoryViewController : UIViewController<UIAlertViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UIWebViewDelegate,UIActionSheetDelegate>
 {
     UIPickerView *pktStatePicker;
     UIToolbar *mypickerToolbar;

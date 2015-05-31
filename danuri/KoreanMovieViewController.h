@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GAIFields.h"
 #import "GAIDictionaryBuilder.h"
-@interface KoreanMovieViewController : UIViewController<UIAlertViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate>{
+@interface KoreanMovieViewController : UIViewController<UIAlertViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UIActionSheetDelegate>{
     
     __weak IBOutlet UIButton *familyButton;
     __weak IBOutlet UILabel *titleLabel;

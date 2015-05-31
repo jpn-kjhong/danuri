@@ -60,6 +60,12 @@
         path = @"/jp_call.json";
     }else if([appDelegate.type isEqualToString:@"th"]){
         path = @"/th_call.json";
+    }else if([appDelegate.type isEqualToString:@"la"]){
+        path = @"/la_call.json";
+    }else if([appDelegate.type isEqualToString:@"ne"]){
+        path = @"/ne_call.json";
+    }else if([appDelegate.type isEqualToString:@"uz"]){
+        path = @"/uz_call.json";
     }else {
         path = @"/kr_call.json";
     }

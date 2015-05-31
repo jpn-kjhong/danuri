@@ -202,7 +202,7 @@ static NSString *const kTrackingId = @"UA-45495109-1";
     tabbarController.delegate = self;
     [tabbarController.view setBackgroundColor:[UIColor whiteColor]];
     
-    _arrState=[[NSArray alloc]initWithObjects:@"한국어",@"English",@"中国语",@"tiếng Việt",@"Tagalog",@"Khmer",@"Mongolian",@"русский",@"日本語",@"ภาษาไทย", nil];
+    _arrState=[[NSArray alloc]initWithObjects:@"한국어",@"English",@"中国语",@"tiếng Việt",@"Tagalog",@"Khmer",@"Mongolian",@"русский",@"日本語",@"ภาษาไทย",@"ລາວ",@"नेपाली",@"O‘zbekiston", nil];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

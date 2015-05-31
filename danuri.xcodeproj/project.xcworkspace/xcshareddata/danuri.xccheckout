@@ -10,29 +10,29 @@
 	<string>danuri</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>471628A0-70F6-4F1D-B3C2-5C1BB6A2F704</key>
+		<key>D09E164D372F60A97CF6FB2B66C345343123F723</key>
 		<string>https://github.com/jpn-kjhong/danuri.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>danuri.xcodeproj/project.xcworkspace</string>
+	<string>danuri.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>471628A0-70F6-4F1D-B3C2-5C1BB6A2F704</key>
+		<key>D09E164D372F60A97CF6FB2B66C345343123F723</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/jpn-kjhong/danuri.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>471628A0-70F6-4F1D-B3C2-5C1BB6A2F704</string>
+	<string>D09E164D372F60A97CF6FB2B66C345343123F723</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>471628A0-70F6-4F1D-B3C2-5C1BB6A2F704</string>
+			<string>D09E164D372F60A97CF6FB2B66C345343123F723</string>
 			<key>IDESourceControlWCCName</key>
 			<string>danuri</string>
 		</dict>

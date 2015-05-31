@@ -89,10 +89,10 @@
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:naviBarBtn];
     self.navigationItem.rightBarButtonItem = rightButton;
     
-    pktStatePicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 43 , 320, 480)];
-    pktStatePicker.delegate = self;
-    pktStatePicker.dataSource = self;
-    [pktStatePicker  setShowsSelectionIndicator:YES];
+//    pktStatePicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 43 , 320, 480)];
+//    pktStatePicker.delegate = self;
+//    pktStatePicker.dataSource = self;
+//    [pktStatePicker  setShowsSelectionIndicator:YES];
     
     // Create done button in UIPickerView
     mypickerToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 56)];
@@ -104,9 +104,9 @@
     UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
     [barItems addObject:flexSpace];
     
-    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pickerDoneClicked)];
-    [barItems addObject:doneBtn];
-    [mypickerToolbar setItems:barItems animated:YES];
+//    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pickerDoneClicked)];
+//    [barItems addObject:doneBtn];
+//    [mypickerToolbar setItems:barItems animated:YES];
     
     if(IS_IPHONE5){
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
@@ -149,6 +149,12 @@
         value = 8;
     }else if([appDelegate.type isEqualToString:@"th"]){
         value = 9;
+    }else if([appDelegate.type isEqualToString:@"la"]){
+        value = 10;
+    }else if([appDelegate.type isEqualToString:@"ne"]){
+        value = 11;
+    }else if([appDelegate.type isEqualToString:@"uz"]){
+        value = 12;
     }else {
         value = 0;
     }
@@ -157,7 +163,14 @@
 
 -(void) setPickInitValue
 {
-    [pktStatePicker selectRow:[self getLaguageIndex] inComponent:0 animated:YES];
+//    [pktStatePicker selectRow:[self getLaguageIndex] inComponent:0 animated:YES];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+
+    int i = 0 ;
+    for(i = 0; i < [appDelegate.arrState count];i++){
+        [sheet addButtonWithTitle:[appDelegate.arrState objectAtIndex:i]];
+    }
+
 }
 -(void)addPickerView
 {
@@ -166,41 +179,23 @@
                                cancelButtonTitle:@"Done"
                           destructiveButtonTitle:nil
                                otherButtonTitles:nil];
-    [sheet addSubview:pktStatePicker];
-    [sheet showInView:self.view.superview];
-    [sheet addSubview:mypickerToolbar];
-    [sheet showInView:self.view.superview];
-    [sheet setBounds:CGRectMake(0, 20, 320, 430)];
     [self setPickInitValue];
+//    [sheet addSubview:pktStatePicker];
+//    [sheet showInView:self.view.superview];
+//    [sheet addSubview:mypickerToolbar];
+//    [sheet showInView:self.view.superview];
+//    [sheet setBounds:CGRectMake(0, 20, 320, 430)];
+    [sheet showInView:self.view];
+//    [self setPickInitValue];
 
 }
 
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 1;
-}
-
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
+// Called when a button is clicked. The view will be automatically dismissed after this call returns
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    return [appDelegate.arrState count];
-}
 
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    return [appDelegate.arrState objectAtIndex:row];
-}
-
-
-- (void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSLog(@"You selected this: %@", [appDelegate.arrState objectAtIndex: row]);
-    switch (row) {
+    NSLog(@"You selected this: %d", buttonIndex);
+    switch (buttonIndex-1) {
         case 0:
             appDelegate.type = @"kr";
             break;
@@ -231,20 +226,95 @@
         case 9:
             appDelegate.type = @"th";
             break;
+        case 10:
+            appDelegate.type = @"la";
+            break;
+        case 11:
+            appDelegate.type = @"ne";
+            break;
+        case 12:
+            appDelegate.type = @"uz";
+            break;
         default:
             appDelegate.type = @"kr";
             break;
     }
-    
-}
-
-
-- (void)pickerDoneClicked
-{
-    NSLog(@"Done Clicked");
-    [sheet dismissWithClickedButtonIndex:0 animated:YES];
     [self selectLanguage];
+
 }
+
+
+//- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+//{
+//    return 1;
+//}
+//
+//
+//- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+//{
+//    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    return [appDelegate.arrState count];
+//}
+//
+//
+//- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+//{
+//    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    return [appDelegate.arrState objectAtIndex:row];
+//}
+//
+//
+//- (void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+//{
+//    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    NSLog(@"You selected this: %@", [appDelegate.arrState objectAtIndex: row]);
+//    switch (row) {
+//        case 0:
+//            appDelegate.type = @"kr";
+//            break;
+//        case 1:
+//            appDelegate.type = @"en";
+//            break;
+//        case 2:
+//            appDelegate.type = @"cn";
+//            break;
+//        case 3:
+//            appDelegate.type = @"vn";
+//            break;
+//        case 4:
+//            appDelegate.type = @"ph";
+//            break;
+//        case 5:
+//            appDelegate.type = @"kh";
+//            break;
+//        case 6:
+//            appDelegate.type = @"mn";
+//            break;
+//        case 7:
+//            appDelegate.type = @"ru";
+//            break;
+//        case 8:
+//            appDelegate.type = @"jp";
+//            break;
+//        case 9:
+//            appDelegate.type = @"th";
+//            break;
+//        default:
+//            appDelegate.type = @"kr";
+//            break;
+//    }
+//    [self selectLanguage];
+//    
+//    
+//}
+//
+//
+//- (void)pickerDoneClicked
+//{
+//    NSLog(@"Done Clicked");
+//    [sheet dismissWithClickedButtonIndex:0 animated:YES];
+//    [self selectLanguage];
+//}
 
 
 - (void) selectLanguage{
@@ -408,18 +478,23 @@
         [viewEntertainment setDataFromDictionary:dictEntData];
         
         NSURL *url = [NSURL URLWithString:[viewEntertainment getTargetURL]];
-        
-        NSArray *comp = [[NSArray alloc] initWithArray:[url pathComponents]];
-        NSString *file = [comp objectAtIndex:[comp count]-1];
-        NSString *filename = file;
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
-        NSString *uniquePath = [documentsDirectory stringByAppendingPathComponent: filename];
-        // Check for a cached version
-        if([[NSFileManager defaultManager] fileExistsAtPath: uniquePath])
-            [viewEntertainment setIsExist:YES];
-        else
+        if([self validateUrl:[url absoluteString]]==false){
             [viewEntertainment setIsExist:NO];
+        }else{
+            NSArray *comp = [[NSArray alloc] initWithArray:[url pathComponents]];
+            NSString *file = [comp objectAtIndex:[comp count]-1];
+            NSString *filename = file;
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentsDirectory = [paths objectAtIndex:0];
+            NSString *uniquePath = [documentsDirectory stringByAppendingPathComponent: filename];
+            // Check for a cached version
+            if([[NSFileManager defaultManager] fileExistsAtPath: uniquePath])
+                [viewEntertainment setIsExist:YES];
+            else
+                [viewEntertainment setIsExist:NO];
+        }
+        
+
         
         [arrayEntertainment addObject:viewEntertainment];
         
@@ -427,6 +502,14 @@
     
     [self refreshView];
 }
+
+- (BOOL) validateUrl: (NSString *) candidate {
+    NSString *urlRegEx =
+    @"(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
+    NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegEx];
+    return [urlTest evaluateWithObject:candidate];
+}
+
 -(void)addDummyEntertainView {
     EntertainView *viewEntertainment = [[EntertainView alloc] initWithFrame:CGRectZero];
     [viewEntertainment setDummyImage];
@@ -556,7 +639,13 @@
     currentItem = entertainView;
 
     NSURL *url = [NSURL URLWithString:[currentItem getTargetURL]];
-    
+    if([self validateUrl:[url absoluteString]]==false){
+        [self.view makeToast:@"Invalid URI: The format of the URI could not be determined."
+                    duration:2.0f
+                    position:@"top"
+                       title:nil];
+        return;
+    }
     NSArray *comp = [[NSArray alloc] initWithArray:[url pathComponents]];
     NSString *file = [comp objectAtIndex:[comp count]-1];
     NSString *filename = file;

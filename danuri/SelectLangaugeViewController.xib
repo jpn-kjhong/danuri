@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SelectLangaugeViewController">
             <connections>
                 <outlet property="button1" destination="2AC-Jb-7rg" id="yT0-8d-xoe"/>
                 <outlet property="button10" destination="dRI-OX-94K" id="sBa-St-p8O"/>
+                <outlet property="button11" destination="Qh9-4h-9x9" id="lia-kW-Ily"/>
+                <outlet property="button12" destination="xro-tx-5Zi" id="774-IZ-mFi"/>
+                <outlet property="button13" destination="P00-kG-5rc" id="Z9Z-Mm-Dk1"/>
                 <outlet property="button2" destination="Oy3-Ho-fN4" id="bdf-bH-ieV"/>
                 <outlet property="button3" destination="Liq-jc-ooN" id="gvf-tQ-epR"/>
                 <outlet property="button4" destination="HnM-EI-dtL" id="XEl-WO-cea"/>
@@ -149,9 +152,41 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
+                <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="xro-tx-5Zi">
+                    <rect key="frame" x="9" y="415" width="50" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" backgroundImage="lang_11.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted" backgroundImage="lang_11_p.png"/>
+                    <connections>
+                        <action selector="ClickButton:" destination="-1" eventType="touchUpInside" id="Ipn-F3-J7x"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="P00-kG-5rc">
+                    <rect key="frame" x="135" y="415" width="50" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" backgroundImage="lang_12.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted" backgroundImage="lang_12_p.png"/>
+                    <connections>
+                        <action selector="ClickButton:" destination="-1" eventType="touchUpInside" id="cEK-ei-dj7"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="Qh9-4h-9x9">
+                    <rect key="frame" x="261" y="415" width="50" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" backgroundImage="lang_13.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted" backgroundImage="lang_13_p.png"/>
+                    <connections>
+                        <action selector="ClickButton:" destination="-1" eventType="touchUpInside" id="4yg-9t-AV7"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
@@ -176,6 +211,17 @@
         <image name="lang_09_p.png" width="60" height="60"/>
         <image name="lang_10.png" width="60" height="60"/>
         <image name="lang_10_p.png" width="60" height="60"/>
+        <image name="lang_11.png" width="85" height="85"/>
+        <image name="lang_11_p.png" width="85" height="85"/>
+        <image name="lang_12.png" width="85" height="85"/>
+        <image name="lang_12_p.png" width="85" height="85"/>
+        <image name="lang_13.png" width="85" height="85"/>
+        <image name="lang_13_p.png" width="85" height="85"/>
         <image name="lang_base.png" width="320" height="480"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

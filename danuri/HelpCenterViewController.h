@@ -10,7 +10,7 @@
 #import "GAI.h"
 #import "GAIFields.h"
 #import "GAIDictionaryBuilder.h"
-@interface HelpCenterViewController : UIViewController<UIAlertViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
+@interface HelpCenterViewController : UIViewController<UIAlertViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UIActionSheetDelegate>
 {
     __weak IBOutlet UIButton *titleButton;
     __weak IBOutlet UIButton *callButton;

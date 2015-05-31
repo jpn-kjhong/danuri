@@ -24,6 +24,10 @@
     __weak IBOutlet UIButton *button8;
     __weak IBOutlet UIButton *button9;
     __weak IBOutlet UIButton *button10;
+    __weak IBOutlet UIButton *button11;
+    __weak IBOutlet UIButton *button12;
+    __weak IBOutlet UIButton *button13;
+
     NSTimer *animateTimer;
     NSTimer *animateTimer1;
     NSTimer *animateTimer2;

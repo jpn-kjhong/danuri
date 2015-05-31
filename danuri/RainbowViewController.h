@@ -11,7 +11,7 @@
 #import "EntertainView.h"
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
-@interface RainbowViewController : UIViewController<UIScrollViewDelegate, EntertainViewDelegate, UIDocumentInteractionControllerDelegate ,UIPickerViewDataSource,UIPickerViewDelegate, UIAlertViewDelegate>
+@interface RainbowViewController : UIViewController<UIScrollViewDelegate, EntertainViewDelegate, UIDocumentInteractionControllerDelegate ,UIAlertViewDelegate, UIActionSheetDelegate>
 {
     
     __weak IBOutlet UIScrollView *scrollView;
@@ -25,7 +25,7 @@
     NSArray                 *_posts;
     bool                    firstConnect;
     NSMutableArray          *requestList;
-    UIPickerView *pktStatePicker;
+//    UIPickerView *pktStatePicker;
     UIToolbar *mypickerToolbar;
     UIActionSheet *sheet;
     EntertainView *currentItem;

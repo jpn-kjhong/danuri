@@ -39,7 +39,8 @@
     NSURL *movieURL = [NSURL URLWithString:movie];
     MPMoviePlayerViewController *playerView = [[MPMoviePlayerViewController alloc] initWithContentURL:movieURL];
     MPMoviePlayerController* moviePlayer = [playerView moviePlayer];
-    
+    [moviePlayer setControlStyle:MPMovieControlStyleDefault];
+
     playerView.view.backgroundColor = [UIColor blackColor];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackDidFinish:)                         name:MPMoviePlayerPlaybackDidFinishNotification object:moviePlayer];
@@ -118,6 +119,12 @@
         value = 8;
     }else if([appDelegate.type isEqualToString:@"th"]){
         value = 9;
+    }else if([appDelegate.type isEqualToString:@"la"]){
+        value = 10;
+    }else if([appDelegate.type isEqualToString:@"ne"]){
+        value = 11;
+    }else if([appDelegate.type isEqualToString:@"uz"]){
+        value = 12;
     }else {
         value = 0;
     }
@@ -126,9 +133,15 @@
 
 -(void) setPickInitValue
 {
-    [pktStatePicker selectRow:[self getLaguageIndex] inComponent:0 animated:YES];
+    //    [pktStatePicker selectRow:[self getLaguageIndex] inComponent:0 animated:YES];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    int i = 0 ;
+    for(i = 0; i < [appDelegate.arrState count];i++){
+        [sheet addButtonWithTitle:[appDelegate.arrState objectAtIndex:i]];
+    }
+    
 }
-
 -(void)addPickerView
 {
     sheet = [[UIActionSheet alloc] initWithTitle:nil
@@ -136,40 +149,23 @@
                                cancelButtonTitle:@"Done"
                           destructiveButtonTitle:nil
                                otherButtonTitles:nil];
-    [sheet addSubview:pktStatePicker];
-    [sheet showInView:self.view.superview];
-    [sheet addSubview:mypickerToolbar];
-    [sheet showInView:self.view.superview];
-    [sheet setBounds:CGRectMake(0, 20, 320, 430)];
     [self setPickInitValue];
+    //    [sheet addSubview:pktStatePicker];
+    //    [sheet showInView:self.view.superview];
+    //    [sheet addSubview:mypickerToolbar];
+    //    [sheet showInView:self.view.superview];
+    //    [sheet setBounds:CGRectMake(0, 20, 320, 430)];
+    [sheet showInView:self.view];
+    //    [self setPickInitValue];
+    
 }
 
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 1;
-}
-
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
+// Called when a button is clicked. The view will be automatically dismissed after this call returns
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    return [appDelegate.arrState count];
-}
-
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    return [appDelegate.arrState objectAtIndex:row];
-}
-
-
-- (void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSLog(@"You selected this: %@", [appDelegate.arrState objectAtIndex: row]);
-    switch (row) {
+    
+    NSLog(@"You selected this: %d", buttonIndex);
+    switch (buttonIndex-1) {
         case 0:
             appDelegate.type = @"kr";
             break;
@@ -200,20 +196,23 @@
         case 9:
             appDelegate.type = @"th";
             break;
+        case 10:
+            appDelegate.type = @"la";
+            break;
+        case 11:
+            appDelegate.type = @"ne";
+            break;
+        case 12:
+            appDelegate.type = @"uz";
+            break;
         default:
             appDelegate.type = @"kr";
             break;
     }
-    
-}
-
-
-- (void)pickerDoneClicked
-{
-    NSLog(@"Done Clicked");
-    [sheet dismissWithClickedButtonIndex:0 animated:YES];
     [self selectLanguage];
+
 }
+
 
 
 - (void) selectLanguage{
