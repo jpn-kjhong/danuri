@@ -66,7 +66,7 @@
     // hits until it is set to a new value or to nil.
     [tracker set:kGAIScreenName value:@"레인보우 +"];
     
-    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
     if (!networkQueue) {
 		networkQueue = [[ASINetworkQueue alloc] init];
 	}

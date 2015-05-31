@@ -10,7 +10,14 @@
 #import "SelectLangaugeViewController.h"
 #import "CustomTabbarItem.h"
 static NSString *const kTrackingId = @"UA-45495109-1";
+static NSString *const kAllowTracking = @"allowTracking";
+@interface AppDelegate ()
 
+// Used for sending Google Analytics traffic in the background.
+@property(nonatomic, assign) BOOL okToWait;
+@property(nonatomic, copy) void (^dispatchHandler)(GAIDispatchResult result);
+
+@end
 
 #pragma mark - UINavigationBarCategory(UINavigationBarCategory)
 @implementation UINavigationBar (UINavigationBarCategory)
@@ -94,22 +101,62 @@ static NSString *const kTrackingId = @"UA-45495109-1";
 @end
 
 @implementation AppDelegate
-
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    [GAI sharedInstance].optOut =
+    ![[NSUserDefaults standardUserDefaults] boolForKey:kAllowTracking];
+}
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
 //    SelectLangaugeViewController *selectLangaugeViewController = [[SelectLangaugeViewController alloc] initWithNibName:@"SelectLangaugeViewController" bundle:nil];
 //    self.window.rootViewController = selectLangaugeViewController;
+    
+    [GAI sharedInstance].optOut =
+    ![[NSUserDefaults standardUserDefaults] boolForKey:kAllowTracking];
+    
+    // If your app runs for long periods of time in the foreground, you might consider turning
+    // on periodic dispatching.  This app doesn't, so it'll dispatch all traffic when it goes
+    // into the background instead.  If you wish to dispatch periodically, we recommend a 120
+    // second dispatch interval.
+    // [GAI sharedInstance].dispatchInterval = 120;
+    [GAI sharedInstance].dispatchInterval = -1;
+    
     [GAI sharedInstance].trackUncaughtExceptions = YES;
-    [GAI sharedInstance].dispatchInterval = 20;
-    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelError];
-    self.tracker = [[GAI sharedInstance] trackerWithTrackingId:kTrackingId];
+    self.tracker = [[GAI sharedInstance] trackerWithName:@"Danuri_iOS"
+                                              trackingId:kTrackingId];
     
     [self appInit];
     
     [self.window makeKeyAndVisible];
     
     return YES;
+}
+
+// This method sends hits in the background until either we're told to stop background processing,
+// we run into an error, or we run out of hits.  We use this to send any pending Google Analytics
+// data since the app won't get a chance once it's in the background.
+- (void)sendHitsInBackground {
+    self.okToWait = YES;
+    __weak AppDelegate *weakSelf = self;
+    __block UIBackgroundTaskIdentifier backgroundTaskId =
+    [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        weakSelf.okToWait = NO;
+    }];
+    
+    if (backgroundTaskId == UIBackgroundTaskInvalid) {
+        return;
+    }
+    
+    self.dispatchHandler = ^(GAIDispatchResult result) {
+        // If the last dispatch succeeded, and we're still OK to stay in the background then kick off
+        // again.
+        if (result == kGAIDispatchGood && weakSelf.okToWait ) {
+            [[GAI sharedInstance] dispatchWithCompletionHandler:weakSelf.dispatchHandler];
+        } else {
+            [[UIApplication sharedApplication] endBackgroundTask:backgroundTaskId];
+        }
+    };
+    [[GAI sharedInstance] dispatchWithCompletionHandler:self.dispatchHandler];
 }
 
 - (void ) appInit
@@ -215,16 +262,13 @@ static NSString *const kTrackingId = @"UA-45495109-1";
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [self sendHitsInBackground];
+
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

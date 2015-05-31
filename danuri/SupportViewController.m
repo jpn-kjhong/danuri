@@ -39,7 +39,7 @@
     // hits until it is set to a new value or to nil.
     [tracker set:kGAIScreenName value:@"지원센터 찾기"];
     
-    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 
     // Do any additional setup after loading the view from its nib.
     float padding = 0;

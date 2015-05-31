@@ -41,7 +41,7 @@
     // hits until it is set to a new value or to nil.
     [tracker set:kGAIScreenName value:@"도움받는 곳"];
     
-    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
     // Do any additional setup after loading the view from its nib.
     UIButton *naviBarBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 53, 37)] ;
     [naviBarBtn setImage:[UIImage imageNamed:@"lang"] forState:UIControlStateNormal];

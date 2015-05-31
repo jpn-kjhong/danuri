@@ -36,7 +36,7 @@
     // hits until it is set to a new value or to nil.
     [tracker set:kGAIScreenName value:@"긴급연락처"];
     
-    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSString *path;

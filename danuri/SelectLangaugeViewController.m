@@ -49,7 +49,7 @@ int moveCount = 0.1;
     // hits until it is set to a new value or to nil.
     [tracker set:kGAIScreenName value:@"언어선택화면"];
     
-    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
     
     if([[UIScreen mainScreen]bounds].size.height > 480.0000){
         padding = 70.f;
