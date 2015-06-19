@@ -349,7 +349,7 @@
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *uniquePath = [documentsDirectory stringByAppendingPathComponent: file];
     NSURL *fileURL = [NSURL fileURLWithPath:uniquePath];
-
+    [self addSkipBackupAttributeToItemAtURL:fileURL];
     UIDocumentInteractionController *controller = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
     controller.delegate = self;
     controller.UTI = @"com.adobe.pdf";
@@ -657,7 +657,7 @@
     {
         NSLog(@"file  exist");
         NSURL *fileURL = [NSURL fileURLWithPath:uniquePath];
-        
+        [self addSkipBackupAttributeToItemAtURL:fileURL];
         UIDocumentInteractionController *controller = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
         controller.delegate = self;
         controller.UTI = @"com.adobe.pdf";
@@ -719,6 +719,7 @@
     {
         NSLog(@"file  exist");
         NSURL *fileURL = [NSURL fileURLWithPath:uniquePath];
+        [self addSkipBackupAttributeToItemAtURL:fileURL];
         
         UIDocumentInteractionController *controller = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
         controller.delegate = self;
@@ -741,5 +742,16 @@
     }
 }
 
-
+- (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL
+{
+    assert([[NSFileManager defaultManager] fileExistsAtPath: [URL path]]);
+    
+    NSError *error = nil;
+    BOOL success = [URL setResourceValue: [NSNumber numberWithBool: YES]
+                                  forKey: NSURLIsExcludedFromBackupKey error: &error];
+    if(!success){
+        NSLog(@"Error excluding %@ from backup %@", [URL lastPathComponent], error);
+    }
+    return success;
+}
 @end

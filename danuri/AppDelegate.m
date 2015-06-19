@@ -110,7 +110,16 @@ static NSString *const kAllowTracking = @"allowTracking";
     // Override point for customization after application launch.
 //    SelectLangaugeViewController *selectLangaugeViewController = [[SelectLangaugeViewController alloc] initWithNibName:@"SelectLangaugeViewController" bundle:nil];
 //    self.window.rootViewController = selectLangaugeViewController;
-    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    NSString *documents = [[NSFileManager defaultManager] directoryContentsAtPath:basePath];
+    NSURL *URL;
+    NSString *completeFilePath;
+    for (NSString *file in documents) {
+        completeFilePath = [NSString stringWithFormat:@"%@/%@", basePath, file];
+        URL = [NSURL fileURLWithPath:completeFilePath];
+        NSLog(@"File %@  is excluded from backup %@", file, [URL resourceValuesForKeys:[NSArray arrayWithObject:NSURLIsExcludedFromBackupKey] error:nil]);
+    }
     [GAI sharedInstance].optOut =
     ![[NSUserDefaults standardUserDefaults] boolForKey:kAllowTracking];
     
