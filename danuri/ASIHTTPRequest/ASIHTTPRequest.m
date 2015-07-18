@@ -3357,6 +3357,10 @@ static NSOperationQueue *sharedQueue = nil;
 					}
 				}
 
+                NSURL * fileURL;
+                fileURL = [NSURL fileURLWithPath:[self temporaryFileDownloadPath]];
+                [fileURL setResourceValue:[NSNumber numberWithBool:YES] forKey:NSURLIsExcludedFromBackupKey error:nil];
+
 				[self setFileDownloadOutputStream:[[[NSOutputStream alloc] initToFileAtPath:[self temporaryFileDownloadPath] append:append] autorelease]];
 				[[self fileDownloadOutputStream] open];
 
@@ -3368,6 +3372,9 @@ static NSOperationQueue *sharedQueue = nil;
 				if (![self inflatedFileDownloadOutputStream]) {
 					if (![self temporaryUncompressedDataDownloadPath]) {
 						[self setTemporaryUncompressedDataDownloadPath:[NSTemporaryDirectory() stringByAppendingPathComponent:[[NSProcessInfo processInfo] globallyUniqueString]]];
+                        NSURL * fileURL;
+                        fileURL = [NSURL fileURLWithPath:[self temporaryUncompressedDataDownloadPath]];
+                        [fileURL setResourceValue:[NSNumber numberWithBool:YES] forKey:NSURLIsExcludedFromBackupKey error:nil];
 					}
 					
 					[self setInflatedFileDownloadOutputStream:[[[NSOutputStream alloc] initToFileAtPath:[self temporaryUncompressedDataDownloadPath] append:append] autorelease]];
@@ -3447,6 +3454,10 @@ static NSOperationQueue *sharedQueue = nil;
 			// Response should already have been inflated, move the temporary file to the destination path
 			} else {
 				NSError *moveError = nil;
+                NSURL * fileURL;
+                fileURL = [NSURL fileURLWithPath:[self downloadDestinationPath]];
+                [fileURL setResourceValue:[NSNumber numberWithBool:YES] forKey:NSURLIsExcludedFromBackupKey error:nil];
+
 				[[[[NSFileManager alloc] init] autorelease] moveItemAtPath:[self temporaryUncompressedDataDownloadPath] toPath:[self downloadDestinationPath] error:&moveError];
 				if (moveError) {
 					fileError = [NSError errorWithDomain:NetworkRequestErrorDomain code:ASIFileManagementError userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Failed to move file from '%@' to '%@'",[self temporaryFileDownloadPath],[self downloadDestinationPath]],NSLocalizedDescriptionKey,moveError,NSUnderlyingErrorKey,nil]];
@@ -3467,6 +3478,10 @@ static NSOperationQueue *sharedQueue = nil;
 
 			//Move the temporary file to the destination path
 			if (!fileError) {
+                NSURL * fileURL;
+                fileURL = [NSURL fileURLWithPath:[self downloadDestinationPath]];
+                [fileURL setResourceValue:[NSNumber numberWithBool:YES] forKey:NSURLIsExcludedFromBackupKey error:nil];
+                
 				[[[[NSFileManager alloc] init] autorelease] moveItemAtPath:[self temporaryFileDownloadPath] toPath:[self downloadDestinationPath] error:&moveError];
 				if (moveError) {
 					fileError = [NSError errorWithDomain:NetworkRequestErrorDomain code:ASIFileManagementError userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Failed to move file from '%@' to '%@'",[self temporaryFileDownloadPath],[self downloadDestinationPath]],NSLocalizedDescriptionKey,moveError,NSUnderlyingErrorKey,nil]];

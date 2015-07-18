@@ -29,6 +29,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(javascriptCall:)
                                                      name:JavascriptCall object:nil];
+        
     }
     return self;
 }
@@ -244,7 +245,13 @@
         path = @"http://liveinkorea.kr/player/mobile/mobile_jp.asp";
     }else if([appDelegate.type isEqualToString:@"th"]){
         path = @"http://liveinkorea.kr/player/mobile/mobile_th.asp";
-    }else {
+    }else if([appDelegate.type isEqualToString:@"la"]){
+        path = @"http://liveinkorea.kr/player/mobile/mobile_la.asp";
+    }else if([appDelegate.type isEqualToString:@"ne"]){
+        path = @"http://liveinkorea.kr/player/mobile/mobile_ne.asp";
+    }else if([appDelegate.type isEqualToString:@"uz"]){
+        path = @"http://liveinkorea.kr/player/mobile/mobile_uz.asp";
+    }else{
         path = @"http://liveinkorea.kr/player/mobile/mobile_kr.asp";
     }
     
@@ -277,7 +284,13 @@
         path = @"http://liveinkorea.kr/player/mobile/mobile_jp.asp";
     }else if([appDelegate.type isEqualToString:@"th"]){
         path = @"http://liveinkorea.kr/player/mobile/mobile_th.asp";
-    }else {
+    }else if([appDelegate.type isEqualToString:@"la"]){
+        path = @"http://liveinkorea.kr/player/mobile/mobile_la.asp";
+    }else if([appDelegate.type isEqualToString:@"ne"]){
+        path = @"http://liveinkorea.kr/player/mobile/mobile_ne.asp";
+    }else if([appDelegate.type isEqualToString:@"uz"]){
+        path = @"http://liveinkorea.kr/player/mobile/mobile_uz.asp";
+    }else{
         path = @"http://liveinkorea.kr/player/mobile/mobile_kr.asp";
     }
     
@@ -315,5 +328,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)webViewDidStartLoad:(UIWebView *)webView{
+    [ai startAnimating];
+}
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    [ai stopAnimating];
+
+}
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    [ai stopAnimating];
+
+}
 
 @end

@@ -16,7 +16,8 @@
     UIToolbar *mypickerToolbar;
     UIActionSheet *sheet;
     __weak IBOutlet UIWebView *webview;
-    
+    __weak IBOutlet UIActivityIndicatorView *ai;
+   
 }
 @end
 

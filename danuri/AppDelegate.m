@@ -107,19 +107,31 @@ static NSString *const kAllowTracking = @"allowTracking";
 }
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSURL *pathURL= [NSURL fileURLWithPath:documentPath];
+    
+    NSLog(@"%@",documentPath);
+    
+    if([[[UIDevice currentDevice] systemVersion] floatValue] > 5.0f){
+        [self addSkipBackupAttributeToItemAtUrl:pathURL];
+    }else{
+        NSLog(@"CANNOT - CUZ VERSION IS UNDER 5.0.1");
+    }
+    
     // Override point for customization after application launch.
 //    SelectLangaugeViewController *selectLangaugeViewController = [[SelectLangaugeViewController alloc] initWithNibName:@"SelectLangaugeViewController" bundle:nil];
 //    self.window.rootViewController = selectLangaugeViewController;
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
-    NSString *documents = [[NSFileManager defaultManager] directoryContentsAtPath:basePath];
-    NSURL *URL;
-    NSString *completeFilePath;
-    for (NSString *file in documents) {
-        completeFilePath = [NSString stringWithFormat:@"%@/%@", basePath, file];
-        URL = [NSURL fileURLWithPath:completeFilePath];
-        NSLog(@"File %@  is excluded from backup %@", file, [URL resourceValuesForKeys:[NSArray arrayWithObject:NSURLIsExcludedFromBackupKey] error:nil]);
-    }
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+//    NSString *documents = [[NSFileManager defaultManager] directoryContentsAtPath:basePath];
+//    NSURL *URL;
+//    NSString *completeFilePath;
+//    for (NSString *file in documents) {
+//        completeFilePath = [NSString stringWithFormat:@"%@/%@", basePath, file];
+//        URL = [NSURL fileURLWithPath:completeFilePath];
+//        NSLog(@"File %@  is excluded from backup %@", file, [URL resourceValuesForKeys:[NSArray arrayWithObject:NSURLIsExcludedFromBackupKey] error:nil]);
+//    }
     [GAI sharedInstance].optOut =
     ![[NSUserDefaults standardUserDefaults] boolForKey:kAllowTracking];
     
@@ -139,6 +151,20 @@ static NSString *const kAllowTracking = @"allowTracking";
     [self.window makeKeyAndVisible];
     
     return YES;
+}
+
+- (BOOL)addSkipBackupAttributeToItemAtUrl:(NSURL *) URL
+{
+    //    NSURL* URL= [NSURL fileURLWithPath: filePathString];
+    assert([[NSFileManager defaultManager] fileExistsAtPath: [URL path]]);
+    
+    NSError *error = nil;
+    BOOL success = [URL setResourceValue: [NSNumber numberWithBool: YES]
+                                  forKey: NSURLIsExcludedFromBackupKey error: &error];
+    if(!success){
+        NSLog(@"Error excluding %@ from backup %@", [URL lastPathComponent], error);
+    }
+    return success;
 }
 
 // This method sends hits in the background until either we're told to stop background processing,

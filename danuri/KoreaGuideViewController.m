@@ -9,13 +9,13 @@
 #import "KoreaGuideViewController.h"
 #import "SelectLangaugeViewController.h"
 #import "AppDelegate.h"
-#import "AFNetworking.h"
-#import "Post.h"
+//#import "Post.h"
 #import "MBProgressHUD.h"
 #import "ModalWebViewController.h"
-#import "ASIHTTPRequest.h"
-#import "ASINetworkQueue.h"
 #import "JSON.h"
+#import "AFNetworking.h"
+#import "UIProgressView+AFNetworking.h"
+#import "Toast+UIView.h"
 #define Height_UITabBar                         54
 #define Height_UINavigationBar                  44
 #define Height_StatusBar                        20
@@ -29,7 +29,6 @@
 
 @interface KoreaGuideViewController ()
 {
-    ASINetworkQueue *networkQueue;
     
 }
 @end
@@ -43,6 +42,8 @@
         // Custom initialization
 //        self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostViewed tag:1];
         requestList = [[NSMutableArray alloc] init];
+        TaskList = [[NSMutableArray alloc] init];
+
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(languageChanged)
                                                      name:LanguageChanged object:nil];
@@ -67,34 +68,47 @@
     [naviBarBtn addTarget:self action:@selector(addPickerView) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:naviBarBtn];
     self.navigationItem.rightBarButtonItem = rightButton;
-    if (!networkQueue) {
-		networkQueue = [[ASINetworkQueue alloc] init];
-	}
-	[networkQueue setRequestDidFinishSelector:@selector(imageFetchComplete:)];
-	[networkQueue setRequestDidFailSelector:@selector(imageFetchFailed:)];
-	[networkQueue setShowAccurateProgress:YES];
-	[networkQueue setDelegate:self];
+
+//	[networkQueue setRequestDidFinishSelector:@selector(imageFetchComplete:)];
+//	[networkQueue setRequestDidFailSelector:@selector(imageFetchFailed:)];
+//	[networkQueue setShowAccurateProgress:YES];
+//	[networkQueue setDelegate:self];
     
     // Do any additional setup after loading the view from its nib.
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSDictionary *param  = @{@"language": appDelegate.type};
     _posts = [NSMutableArray array];
     [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    [Post globalTimelinePostsWithParameter:param withPath:@"include/json/guidebook_json.asp" Block:^(NSArray *posts, NSError *error) {
-        if (error) {
-            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
-        } else {
-            NSLog(@"%@",posts);
-            
-            _posts = posts;
-            [self setThumbnail];
-            [scrollView setContentOffset:CGPointMake([self getGuideBookIndex] * fViewWidth, 0) animated:YES];
-            //            [self.tableView reloadData];
-        }
+//    [Post globalTimelinePostsWithParameter:param withPath:@"include/json/guidebook_json.asp" Block:^(NSArray *posts, NSError *error) {
+//        if (error) {
+//            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+//        } else {
+//            NSLog(@"%@",posts);
+//            
+//            _posts = posts;
+//            [self setThumbnail];
+//            [scrollView setContentOffset:CGPointMake([self getGuideBookIndex] * fViewWidth, 0) animated:YES];
+//            //            [self.tableView reloadData];
+//        }
+//        
+//        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+//        //        [_activityIndicatorView stopAnimating];
+//        //        self.navigationItem.rightBarButtonItem.enabled = YES;
+//    }];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
+
+    [manager GET:@"http://www.liveinkorea.kr/include/json/guidebook_json.asp" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        NSLog(@"%@",responseObject);
         
+        _posts = responseObject;
+        [self setThumbnail];
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
-        //        [_activityIndicatorView stopAnimating];
-        //        self.navigationItem.rightBarButtonItem.enabled = YES;
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
     }];
     
     if(IS_IPHONE5){
@@ -378,71 +392,71 @@
     [titleButton setTitle:title forState:UIControlStateNormal];
 }
 
-- (void)imageFetchComplete:(ASIHTTPRequest *)request
-{
-    NSLog(@"%@", request);
-    for(EntertainView *temp in requestList)
-    {
-        if([[[request url] absoluteString] isEqualToString:[temp getTargetURL]]){
-            [temp.progress setHidden:YES];
-            [temp.close setHidden:YES];
-            [requestList removeObject:temp];
-            break;
-        }
-    }
-    
-
-    NSArray *comp = [[NSArray alloc] initWithArray:[request.url pathComponents]];
-    NSString *file = [comp objectAtIndex:[comp count]-1];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *uniquePath = [documentsDirectory stringByAppendingPathComponent: file];
-    NSURL *fileURL = [NSURL fileURLWithPath:uniquePath];
-    [self addSkipBackupAttributeToItemAtURL:fileURL];
-    UIDocumentInteractionController *controller = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
-    controller.delegate = self;
-    controller.UTI = @"com.adobe.pdf";
-    //CGRect rect = CGRectMake(0, 0, 300, 300);
-    [controller presentPreviewAnimated:YES];
-    
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSDictionary *param  = @{@"language": appDelegate.type};
-    _posts = [NSMutableArray array];
-    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    [Post globalTimelinePostsWithParameter:param withPath:@"include/json/guidebook_json.asp" Block:^(NSArray *posts, NSError *error) {
-        if (error) {
-            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
-        } else {
-            NSLog(@"%@",posts);
-            
-            _posts = posts;
-            [self setThumbnail];
-
-            //            [self.tableView reloadData];
-        }
-        
-        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
-        //        [_activityIndicatorView stopAnimating];
-        //        self.navigationItem.rightBarButtonItem.enabled = YES;
-    }];
-    
-}
-
-- (void)imageFetchFailed:(ASIHTTPRequest *)request
-{
-    for(EntertainView *temp in requestList)
-    {
-        if([[[request url] absoluteString] isEqualToString:[temp getTargetURL]]){
-            [temp.progress setHidden:YES];
-            [temp.close setHidden:YES];
-            [requestList removeObject:temp];
-            break;
-        }
-    }
-
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Download failed" message:@"Failed to download pdf" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alertView show];
-}
+//- (void)imageFetchComplete:(ASIHTTPRequest *)request
+//{
+//    NSLog(@"%@", request);
+//    for(EntertainView *temp in requestList)
+//    {
+//        if([[[request url] absoluteString] isEqualToString:[temp getTargetURL]]){
+//            [temp.progress setHidden:YES];
+//            [temp.close setHidden:YES];
+//            [requestList removeObject:temp];
+//            break;
+//        }
+//    }
+//    
+//
+//    NSArray *comp = [[NSArray alloc] initWithArray:[request.url pathComponents]];
+//    NSString *file = [comp objectAtIndex:[comp count]-1];
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentsDirectory = [paths objectAtIndex:0];
+//    NSString *uniquePath = [documentsDirectory stringByAppendingPathComponent: file];
+//    NSURL *fileURL = [NSURL fileURLWithPath:uniquePath];
+//    [self addSkipBackupAttributeToItemAtURL:fileURL];
+//    UIDocumentInteractionController *controller = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
+//    controller.delegate = self;
+//    controller.UTI = @"com.adobe.pdf";
+//    //CGRect rect = CGRectMake(0, 0, 300, 300);
+//    [controller presentPreviewAnimated:YES];
+//    
+//    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    NSDictionary *param  = @{@"language": appDelegate.type};
+//    _posts = [NSMutableArray array];
+//    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+//    [Post globalTimelinePostsWithParameter:param withPath:@"include/json/guidebook_json.asp" Block:^(NSArray *posts, NSError *error) {
+//        if (error) {
+//            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+//        } else {
+//            NSLog(@"%@",posts);
+//            
+//            _posts = posts;
+//            [self setThumbnail];
+//
+//            //            [self.tableView reloadData];
+//        }
+//        
+//        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+//        //        [_activityIndicatorView stopAnimating];
+//        //        self.navigationItem.rightBarButtonItem.enabled = YES;
+//    }];
+//    
+//}
+//
+//- (void)imageFetchFailed:(ASIHTTPRequest *)request
+//{
+//    for(EntertainView *temp in requestList)
+//    {
+//        if([[[request url] absoluteString] isEqualToString:[temp getTargetURL]]){
+//            [temp.progress setHidden:YES];
+//            [temp.close setHidden:YES];
+//            [requestList removeObject:temp];
+//            break;
+//        }
+//    }
+//
+//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Download failed" message:@"Failed to download pdf" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//    [alertView show];
+//}
 
 - (void) documentInteractionController: (UIDocumentInteractionController *) controller willBeginSendingToApplication: (NSString *) application {
 }
@@ -618,7 +632,6 @@
     {
         NSLog(@"file  exist");
         NSURL *fileURL = [NSURL fileURLWithPath:uniquePath];
-        [self addSkipBackupAttributeToItemAtURL:fileURL];
         UIDocumentInteractionController *controller = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
         controller.delegate = self;
         controller.UTI = @"com.adobe.pdf";
@@ -664,10 +677,8 @@
                                                            label:actionContent          // Event label
                                                            value:nil] build]];    // Event value
     
-    ASIHTTPRequest *request;
     NSURL *url = [NSURL URLWithString:[currentItem getTargetURL]];
     
-	request = [ASIHTTPRequest requestWithURL:url];
     
     NSArray *comp = [[NSArray alloc] initWithArray:[url pathComponents]];
     NSString *file = [comp objectAtIndex:[comp count]-1];
@@ -680,7 +691,6 @@
     {
         NSLog(@"file  exist");
         NSURL *fileURL = [NSURL fileURLWithPath:uniquePath];
-        [self addSkipBackupAttributeToItemAtURL:fileURL];
 
         UIDocumentInteractionController *controller = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
         controller.delegate = self;
@@ -690,32 +700,87 @@
     else
     {
         NSLog(@"file not exist - so get a new one");
-        [request setDownloadDestinationPath:[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:file]];
-        [request setDownloadProgressDelegate:currentItem.progress];
-        [request setUserInfo:[NSDictionary dictionaryWithObject:@"request1" forKey:@"name"]];
-        [networkQueue addOperation:request];
+        NSProgress *p;
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        NSURL *URL = [NSURL URLWithString:[currentItem getTargetURL]];
+        NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+        NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:&p destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+            NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            NSURL *pathURL= [NSURL fileURLWithPath:documentPath];
+            
+            NSLog(@"%@",documentPath);
+            
+            if([[[UIDevice currentDevice] systemVersion] floatValue] > 5.0f){
+                [self addSkipBackupAttributeToItemAtUrl:pathURL];
+            }else{
+                NSLog(@"CANNOT - CUZ VERSION IS UNDER 5.0.1");
+            }
+            
+            return [NSURL fileURLWithPath:[documentPath stringByAppendingPathComponent:[response suggestedFilename]]];
+        } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+            if (error) {
+                NSLog(@"File error: %@", filePath);
+                [self.view makeToast:@"Download failed."
+                            duration:2.0f
+                            position:@"center"
+                               title:nil];
+            }else{
+                NSLog(@"File downloaded to: %@", filePath);
+                [self.view makeToast:@"Download completed."
+                            duration:2.0f
+                            position:@"center"
+                               title:nil];
+                
+            }
+            [self setThumbnail];
+        }];
+        
+        [downloadTask resume];
+        [currentItem.progress setProgressWithDownloadProgressOfTask:downloadTask animated:YES];
+        
+        
+        
         [currentItem.progress setHidden:NO];
         [currentItem.close setHidden:NO];
-        
-        [networkQueue go];
-        NSLog(@"%@",[[request url] absoluteString]);
         [requestList addObject:currentItem];
+        [TaskList addObject:downloadTask];
     }
 }
 
 -(void)didCloseClicked:(EntertainView*)entertainView
 {
-    for(EntertainView *temp in requestList)
+    int i= 0;
+    for(i = 0 ; i< [requestList count]; i++)
+        //    for(EntertainView *temp in requestList)
     {
-        if([[entertainView getTargetURL]  isEqualToString:[temp getTargetURL]]){
-            [networkQueue cancelAllOperations];
+        if([[entertainView getTargetURL]  isEqualToString:[[requestList objectAtIndex:i] getTargetURL]]){
+            //            [operationQueue cancelAllOperations];
+            [[TaskList objectAtIndex:i] cancel];
+            [self setThumbnail];
             break;
         }
     }
+    
 }
 
-- (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL
+- (BOOL)addSkipBackupAttributeToItemAtPath:(NSString *) filePathString
 {
+    NSURL* URL= [NSURL fileURLWithPath: filePathString];
+    assert([[NSFileManager defaultManager] fileExistsAtPath: [URL path]]);
+    
+    NSError *error = nil;
+    BOOL success = [URL setResourceValue: [NSNumber numberWithBool: YES]
+                                  forKey: NSURLIsExcludedFromBackupKey error: &error];
+    if(!success){
+        NSLog(@"Error excluding %@ from backup %@", [URL lastPathComponent], error);
+    }
+    return success;
+}
+
+- (BOOL)addSkipBackupAttributeToItemAtUrl:(NSURL *) URL
+{
+//    NSURL* URL= [NSURL fileURLWithPath: filePathString];
     assert([[NSFileManager defaultManager] fileExistsAtPath: [URL path]]);
     
     NSError *error = nil;

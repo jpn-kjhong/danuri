@@ -23,7 +23,7 @@
 #import "Post.h"
 #import "User.h"
 
-#import "AFAppDotNetAPIClient.h"
+//#import "AFAppDotNetAPIClient.h"
 
 @implementation Post
 @synthesize postID = _postID;
@@ -45,23 +45,23 @@
 }
 
 #pragma mark -
-
-+ (void)globalTimelinePostsWithParameter:(NSDictionary *)parameter withPath:(NSString *)path Block:(void (^)(NSArray *posts, NSError *error))block{
-    [[AFAppDotNetAPIClient sharedClient] getPath:path parameters:parameter success:^(AFHTTPRequestOperation *operation, id JSON) {
-//        NSArray *postsFromResponse = [JSON valueForKeyPath:@"data"];
-//        NSMutableArray *mutablePosts = [NSMutableArray arrayWithCapacity:[JSON count]];
-//        for (NSDictionary *attributes in postsFromResponse) {
-//            [mutablePosts addObject:attributes];
+//
+//+ (void)globalTimelinePostsWithParameter:(NSDictionary *)parameter withPath:(NSString *)path Block:(void (^)(NSArray *posts, NSError *error))block{
+//    [[AFAppDotNetAPIClient sharedClient] getPath:path parameters:parameter success:^(AFHTTPRequestOperation *operation, id JSON) {
+////        NSArray *postsFromResponse = [JSON valueForKeyPath:@"data"];
+////        NSMutableArray *mutablePosts = [NSMutableArray arrayWithCapacity:[JSON count]];
+////        for (NSDictionary *attributes in postsFromResponse) {
+////            [mutablePosts addObject:attributes];
+////        }
+//        
+//        if (block) {
+//            block([NSArray arrayWithArray:JSON], nil);
 //        }
-        
-        if (block) {
-            block([NSArray arrayWithArray:JSON], nil);
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (block) {
-            block([NSArray array], error);
-        }
-    }];
-}
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        if (block) {
+//            block([NSArray array], error);
+//        }
+//    }];
+//}
 
 @end

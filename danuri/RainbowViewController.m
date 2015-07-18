@@ -14,11 +14,12 @@
 #import "MBProgressHUD.h"
 #import "ModalWebViewController.h"
 #import "Toast+UIView.h"
-#import "ASIHTTPRequest.h"
-#import "ASINetworkQueue.h"
 #import "CityTableViewController.h"
 #import "FPPopoverController.h"
 #import "JSON.h"
+#import "UIKit+AFNetworking.h"
+#import "UIViewController+MJPopupViewController.h"
+#import "NoticeViewController.h"
 
 #define Height_UITabBar                         54
 #define Height_UINavigationBar                  44
@@ -33,8 +34,7 @@
 
 @interface RainbowViewController ()
 {
-    ASINetworkQueue *networkQueue;
-
+    NSOperationQueue *operationQueue;
 }
 @end
 
@@ -45,7 +45,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-//        self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostViewed tag:0];
+        //        self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostViewed tag:0];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(successCertification)
                                                      name:SuccessCertification object:nil];
@@ -53,6 +53,10 @@
                                                  selector:@selector(languageChanged)
                                                      name:LanguageChanged object:nil];
         requestList = [[NSMutableArray alloc] init];
+        TaskList = [[NSMutableArray alloc] init];
+
+        operationQueue = [[NSOperationQueue alloc] init];
+        NSLog(@"Version %i", __IPHONE_OS_VERSION_MIN_REQUIRED);
     }
     return self;
 }
@@ -67,19 +71,42 @@
     [tracker set:kGAIScreenName value:@"레인보우 +"];
     
     [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
-    if (!networkQueue) {
-		networkQueue = [[ASINetworkQueue alloc] init];
-	}
-	[networkQueue setRequestDidFinishSelector:@selector(imageFetchComplete:)];
-	[networkQueue setRequestDidFailSelector:@selector(imageFetchFailed:)];
-	[networkQueue setShowAccurateProgress:YES];
-	[networkQueue setDelegate:self];
+
     
     firstConnect = YES;
     SelectLangaugeViewController *sel = [[SelectLangaugeViewController alloc] initWithNibName:@"SelectLangaugeViewController" bundle:nil];
-    [self.navigationController presentViewController:sel animated:NO completion:^{        
+    [self.navigationController presentViewController:sel animated:NO completion:^{
     }
      ];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
+    
+    [manager GET:@"http://www.liveinkorea.kr/include/json/appimage_json.asp" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        NSArray *temp = responseObject;
+        for(int i = 0;i < [temp count];i++){
+            NSDictionary *dictEntData = [temp objectAtIndex:i];
+            if([[dictEntData objectForKey:@"img_type"] isEqualToString:@"web"])
+            {
+                NSString *path = [dictEntData objectForKey:@"weburl"];
+                NoticeViewController *detailViewController = [[NoticeViewController alloc] initWithNibName:@"NoticeViewController" bundle:nil path:path];
+                [self presentPopupViewController:detailViewController animationType:MJPopupViewAnimationSlideTopTop];
+//                [self.navigationController presentViewController:detailViewController animated:YES completion:^{
+//                }
+//                 ];
+            }
+            break;
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    
+    }];
+    
+//    http://www.liveinkorea.kr/include/json/appimage_json.asp
+    
+    
     // Do any additional setup after loading the view from its nib.
     
     UIButton *naviBarBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 53, 37)] ;
@@ -89,10 +116,10 @@
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:naviBarBtn];
     self.navigationItem.rightBarButtonItem = rightButton;
     
-//    pktStatePicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 43 , 320, 480)];
-//    pktStatePicker.delegate = self;
-//    pktStatePicker.dataSource = self;
-//    [pktStatePicker  setShowsSelectionIndicator:YES];
+    //    pktStatePicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 43 , 320, 480)];
+    //    pktStatePicker.delegate = self;
+    //    pktStatePicker.dataSource = self;
+    //    [pktStatePicker  setShowsSelectionIndicator:YES];
     
     // Create done button in UIPickerView
     mypickerToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 56)];
@@ -104,9 +131,9 @@
     UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
     [barItems addObject:flexSpace];
     
-//    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pickerDoneClicked)];
-//    [barItems addObject:doneBtn];
-//    [mypickerToolbar setItems:barItems animated:YES];
+    //    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pickerDoneClicked)];
+    //    [barItems addObject:doneBtn];
+    //    [mypickerToolbar setItems:barItems animated:YES];
     
     if(IS_IPHONE5){
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
@@ -163,14 +190,14 @@
 
 -(void) setPickInitValue
 {
-//    [pktStatePicker selectRow:[self getLaguageIndex] inComponent:0 animated:YES];
+    //    [pktStatePicker selectRow:[self getLaguageIndex] inComponent:0 animated:YES];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-
+    
     int i = 0 ;
     for(i = 0; i < [appDelegate.arrState count];i++){
         [sheet addButtonWithTitle:[appDelegate.arrState objectAtIndex:i]];
     }
-
+    
 }
 -(void)addPickerView
 {
@@ -180,21 +207,21 @@
                           destructiveButtonTitle:nil
                                otherButtonTitles:nil];
     [self setPickInitValue];
-//    [sheet addSubview:pktStatePicker];
-//    [sheet showInView:self.view.superview];
-//    [sheet addSubview:mypickerToolbar];
-//    [sheet showInView:self.view.superview];
-//    [sheet setBounds:CGRectMake(0, 20, 320, 430)];
+    //    [sheet addSubview:pktStatePicker];
+    //    [sheet showInView:self.view.superview];
+    //    [sheet addSubview:mypickerToolbar];
+    //    [sheet showInView:self.view.superview];
+    //    [sheet setBounds:CGRectMake(0, 20, 320, 430)];
     [sheet showInView:self.view];
-//    [self setPickInitValue];
-
+    //    [self setPickInitValue];
+    
 }
 
 // Called when a button is clicked. The view will be automatically dismissed after this call returns
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-
-    NSLog(@"You selected this: %d", buttonIndex);
+    
+    NSLog(@"You selected this: %", buttonIndex);
     switch (buttonIndex-1) {
         case 0:
             appDelegate.type = @"kr";
@@ -240,7 +267,7 @@
             break;
     }
     [self selectLanguage];
-
+    
 }
 
 
@@ -304,8 +331,8 @@
 //            break;
 //    }
 //    [self selectLanguage];
-//    
-//    
+//
+//
 //}
 //
 //
@@ -330,50 +357,50 @@
      ];
 }
 
-- (void)imageFetchComplete:(ASIHTTPRequest *)request
-{
-    NSLog(@"imageFetchComplete : %@", request);
-    for(EntertainView *temp in requestList)
-    {
-        if([[[request url] absoluteString] isEqualToString:[temp getTargetURL]]){
-            [temp.progress setHidden:YES];
-            [temp.close setHidden:YES];
-            [requestList removeObject:temp];
-            break;
-        }
-    }
-    
-    NSArray *comp = [[NSArray alloc] initWithArray:[request.url pathComponents]];
-    NSString *file = [comp objectAtIndex:[comp count]-1];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *uniquePath = [documentsDirectory stringByAppendingPathComponent: file];
-    NSURL *fileURL = [NSURL fileURLWithPath:uniquePath];
-    [self addSkipBackupAttributeToItemAtURL:fileURL];
-    UIDocumentInteractionController *controller = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
-    controller.delegate = self;
-    controller.UTI = @"com.adobe.pdf";
-    //CGRect rect = CGRectMake(0, 0, 300, 300);
-    [controller presentPreviewAnimated:YES];
-
-    [self selectLanguage];
-}
-
-- (void)imageFetchFailed:(ASIHTTPRequest *)request
-{
-    for(EntertainView *temp in requestList)
-    {
-        if([[[request url] absoluteString] isEqualToString:[temp getTargetURL]]){
-            [temp.progress setHidden:YES];
-            [temp.close setHidden:YES];
-            [requestList removeObject:temp];
-            break;
-        }
-    }
-    
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Download failed" message:@"Failed to download pdf" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alertView show];
-}
+//- (void)imageFetchComplete:(ASIHTTPRequest *)request
+//{
+//    NSLog(@"imageFetchComplete : %@", request);
+//    for(EntertainView *temp in requestList)
+//    {
+//        if([[[request url] absoluteString] isEqualToString:[temp getTargetURL]]){
+//            [temp.progress setHidden:YES];
+//            [temp.close setHidden:YES];
+//            [requestList removeObject:temp];
+//            break;
+//        }
+//    }
+//
+//    NSArray *comp = [[NSArray alloc] initWithArray:[request.url pathComponents]];
+//    NSString *file = [comp objectAtIndex:[comp count]-1];
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentsDirectory = [paths objectAtIndex:0];
+//    NSString *uniquePath = [documentsDirectory stringByAppendingPathComponent: file];
+//    NSURL *fileURL = [NSURL fileURLWithPath:uniquePath];
+//    [self addSkipBackupAttributeToItemAtURL:fileURL];
+//    UIDocumentInteractionController *controller = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
+//    controller.delegate = self;
+//    controller.UTI = @"com.adobe.pdf";
+//    //CGRect rect = CGRectMake(0, 0, 300, 300);
+//    [controller presentPreviewAnimated:YES];
+//
+//    [self selectLanguage];
+//}
+//
+//- (void)imageFetchFailed:(ASIHTTPRequest *)request
+//{
+//    for(EntertainView *temp in requestList)
+//    {
+//        if([[[request url] absoluteString] isEqualToString:[temp getTargetURL]]){
+//            [temp.progress setHidden:YES];
+//            [temp.close setHidden:YES];
+//            [requestList removeObject:temp];
+//            break;
+//        }
+//    }
+//
+//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Download failed" message:@"Failed to download pdf" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//    [alertView show];
+//}
 
 - (void) documentInteractionController: (UIDocumentInteractionController *) controller willBeginSendingToApplication: (NSString *) application {
 }
@@ -387,8 +414,8 @@
 }
 
 -(UIViewController*)documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller {
-	
-	return self;
+    
+    return self;
 }
 
 
@@ -401,7 +428,7 @@
         [[self.navigationController navigationBar] setBackgroundImage:[UIImage imageNamed:@"top"] forBarMetrics:UIBarMetricsDefault];
         
     }
-
+    
 }
 
 - (void) languageChanged
@@ -411,18 +438,33 @@
     
     NSDictionary *param  = @{@"language": appDelegate.type};
     [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    [Post globalTimelinePostsWithParameter:param withPath:@"include/json/rainbow_json.asp" Block:^(NSArray *posts, NSError *error) {
-        if (error) {
-            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
-        } else {
-            NSLog(@"%@",posts);
-            
-            _posts = posts;
-            [self setThumbnail];
-        }
+    //    [Post globalTimelinePostsWithParameter:param withPath:@"include/json/rainbow_json.asp" Block:^(NSArray *posts, NSError *error) {
+    //        if (error) {
+    //            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+    //        } else {
+    //            NSLog(@"%@",posts);
+    //
+    //            _posts = posts;
+    //            [self setThumbnail];
+    //        }
+    //        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+    //
+    //
+    //    }];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
+
+    [manager GET:@"http://www.liveinkorea.kr/include/json/rainbow_json.asp" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        NSLog(@"%@",responseObject);
+        
+        _posts = responseObject;
+        [self setThumbnail];
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
-        
-        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
     }];
 }
 
@@ -433,20 +475,29 @@
     _posts = [NSMutableArray array];
     NSDictionary *param  = @{@"language": appDelegate.type};
     [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    [Post globalTimelinePostsWithParameter:param withPath:@"include/json/rainbow_json.asp" Block:^(NSArray *posts, NSError *error) {
-        if (error) {
-            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
-        } else {
-            NSLog(@"%@",posts);
-            
-            _posts = posts;
-            [self setThumbnail];
-        }
-        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
-        
+//    [Post globalTimelinePostsWithParameter:param withPath:@"include/json/rainbow_json.asp" Block:^(NSArray *posts, NSError *error) {
+//        if (error) {
+//            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+//        } else {
+//            NSLog(@"%@",posts);
+//            
+//            _posts = posts;
+//            [self setThumbnail];
+//        }
+//        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+//    }];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
 
+    [manager GET:@"http://www.liveinkorea.kr/include/json/rainbow_json.asp" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        _posts = responseObject;
+        [self setThumbnail];
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
     }];
-    
 }
 
 -(void) setThumbnail{
@@ -472,7 +523,7 @@
         EntertainView *viewEntertainment = [[EntertainView alloc] initWithFrame:CGRectZero] ;
         viewEntertainment.imageType =@"rb_app_image";
         viewEntertainment.linkType =@"rb_pdf_link";
-
+        
         [viewEntertainment setDelegate:self];
         [viewEntertainment setEntertainViewType:EntertainViewType_Normal];
         [viewEntertainment setDataFromDictionary:dictEntData];
@@ -494,7 +545,7 @@
                 [viewEntertainment setIsExist:NO];
         }
         
-
+        
         
         [arrayEntertainment addObject:viewEntertainment];
         
@@ -543,18 +594,18 @@
     
     if(IS_IPHONE5){
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
-//            fCardYPoint = 70.0;
+            //            fCardYPoint = 70.0;
         }
         else{
         }
     }else
     {
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
-//            fCardYPoint = 70.0;
-
+            //            fCardYPoint = 70.0;
+            
         }
         else{
-
+            
         }
     }
     
@@ -573,7 +624,7 @@
     NSString *year = nil;
     @try {
         year = [[_posts objectAtIndex:pageControl.currentPage] objectForKey:@"rb_year"];
-//        [self.view makeToast:year];
+        //        [self.view makeToast:year];
         [yearButton setTitle:year forState:UIControlStateNormal];
         
     }
@@ -588,7 +639,7 @@
 #pragma mark - UIPageControl Action
 
 -(void)pageControlValueChanged:(id)sender {
-//    [scrollView setContentOffset:CGPointMake(pageControl.currentPage * fViewWidth, 0) animated:YES];
+    //    [scrollView setContentOffset:CGPointMake(pageControl.currentPage * fViewWidth, 0) animated:YES];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -600,13 +651,13 @@
 
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-//    NSLog(@"%d", pageControl.currentPage);
+    //    NSLog(@"%d", pageControl.currentPage);
     NSString *year = nil;
     @try {
         year = [[_posts objectAtIndex:pageControl.currentPage] objectForKey:@"rb_year"];
-//        [self.view makeToast:year];
+        //        [self.view makeToast:year];
         [yearButton setTitle:year forState:UIControlStateNormal];
-
+        
     }
     @catch (NSException *exception) {
         return;
@@ -624,20 +675,25 @@
 }
 -(void)didCloseClicked:(EntertainView*)entertainView
 {
-    for(EntertainView *temp in requestList)
+    int i= 0;
+    for(i = 0 ; i< [requestList count]; i++)
+//    for(EntertainView *temp in requestList)
     {
-        if([[entertainView getTargetURL]  isEqualToString:[temp getTargetURL]]){
-            [networkQueue cancelAllOperations];
+        if([[entertainView getTargetURL]  isEqualToString:[[requestList objectAtIndex:i] getTargetURL]]){
+//            [operationQueue cancelAllOperations];
+            [[TaskList objectAtIndex:i] cancel];
+            [self setThumbnail];
             break;
         }
     }
+    
 }
 
 
 -(void)didEntertainViewClicked:(EntertainView*)entertainView
 {
     currentItem = entertainView;
-
+    
     NSURL *url = [NSURL URLWithString:[currentItem getTargetURL]];
     if([self validateUrl:[url absoluteString]]==false){
         [self.view makeToast:@"Invalid URI: The format of the URI could not be determined."
@@ -657,7 +713,6 @@
     {
         NSLog(@"file  exist");
         NSURL *fileURL = [NSURL fileURLWithPath:uniquePath];
-        [self addSkipBackupAttributeToItemAtURL:fileURL];
         UIDocumentInteractionController *controller = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
         controller.delegate = self;
         controller.UTI = @"com.adobe.pdf";
@@ -703,10 +758,10 @@
                                                            label:actionContent          // Event label
                                                            value:nil] build]];    // Event value
     
-    ASIHTTPRequest *request;
+//    ASIHTTPRequest *request;
     NSURL *url = [NSURL URLWithString:[currentItem getTargetURL]];
     
-	request = [ASIHTTPRequest requestWithURL:url];
+//    request = [ASIHTTPRequest requestWithURL:url];
     
     NSArray *comp = [[NSArray alloc] initWithArray:[url pathComponents]];
     NSString *file = [comp objectAtIndex:[comp count]-1];
@@ -719,7 +774,6 @@
     {
         NSLog(@"file  exist");
         NSURL *fileURL = [NSURL fileURLWithPath:uniquePath];
-        [self addSkipBackupAttributeToItemAtURL:fileURL];
         
         UIDocumentInteractionController *controller = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
         controller.delegate = self;
@@ -729,21 +783,70 @@
     else
     {
         NSLog(@"file not exist - so get a new one");
-        [request setDownloadDestinationPath:[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:file]];
-        [request setDownloadProgressDelegate:currentItem.progress];
-        [request setUserInfo:[NSDictionary dictionaryWithObject:@"request1" forKey:@"name"]];
-        [networkQueue addOperation:request];
+        NSProgress *p;
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        NSURL *URL = [NSURL URLWithString:[currentItem getTargetURL]];
+        NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+        NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:&p destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+            NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            NSURL *pathURL= [NSURL fileURLWithPath:documentPath];
+            
+            NSLog(@"%@",documentPath);
+            
+            if([[[UIDevice currentDevice] systemVersion] floatValue] > 5.0f){
+                [self addSkipBackupAttributeToItemAtUrl:pathURL];
+            }else{
+                NSLog(@"CANNOT - CUZ VERSION IS UNDER 5.0.1");
+            }
+            return [NSURL fileURLWithPath:[documentPath stringByAppendingPathComponent:[response suggestedFilename]]];
+        } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+            if (error) {
+                NSLog(@"File error: %@", filePath);
+                [self.view makeToast:@"Download failed."
+                            duration:2.0f
+                            position:@"center"
+                               title:nil];
+            }else{
+            NSLog(@"File downloaded to: %@", filePath);
+                [self.view makeToast:@"Download completed."
+                            duration:2.0f
+                            position:@"center"
+                               title:nil];
+        
+            }
+            [self setThumbnail];
+        }];
+        
+        [downloadTask resume];
+        [currentItem.progress setProgressWithDownloadProgressOfTask:downloadTask animated:YES];
+        
+        
+        
         [currentItem.progress setHidden:NO];
         [currentItem.close setHidden:NO];
-        
-        [networkQueue go];
-        NSLog(@"%@",[[request url] absoluteString]);
         [requestList addObject:currentItem];
+        [TaskList addObject:downloadTask];
     }
 }
 
-- (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL
+- (BOOL)addSkipBackupAttributeToItemAtPath:(NSString *) filePathString
 {
+    NSURL* URL= [NSURL fileURLWithPath: filePathString];
+    assert([[NSFileManager defaultManager] fileExistsAtPath: [URL path]]);
+    
+    NSError *error = nil;
+    BOOL success = [URL setResourceValue: [NSNumber numberWithBool: YES]
+                                  forKey: NSURLIsExcludedFromBackupKey error: &error];
+    if(!success){
+        NSLog(@"Error excluding %@ from backup %@", [URL lastPathComponent], error);
+    }
+    return success;
+}
+
+- (BOOL)addSkipBackupAttributeToItemAtUrl:(NSURL *) URL
+{
+    //    NSURL* URL= [NSURL fileURLWithPath: filePathString];
     assert([[NSFileManager defaultManager] fileExistsAtPath: [URL path]]);
     
     NSError *error = nil;

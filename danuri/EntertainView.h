@@ -4,6 +4,8 @@
 #define Notification_UpdateTimer        @"NotificationUpdateTimer"
 
 #import <UIKit/UIKit.h>
+#import "UIKit+AFNetworking.h"
+
 enum {
     EntertainViewType_None          = 101,
     EntertainViewType_Normal        = 111,

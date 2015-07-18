@@ -15,6 +15,7 @@
 #import "Toast+UIView.h"
 #import "AppDelegate.h"
 #import "JSON.h"
+#import "AFNetworking.h"
 @interface SupportViewController ()
 
 @end
@@ -166,18 +167,33 @@
     _sigungu = [NSMutableArray array];
     NSDictionary *param  = @{@"language": appDelegate.type,@"num": attrs};
     [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    [Post globalTimelinePostsWithParameter:param withPath:@"include/json/gugun_json.asp" Block:^(NSArray *posts, NSError *error) {
-        if (error) {
-            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
-        } else {
-            NSLog(@"%@",posts);
-            
-            _sigungu = posts;
-            [self listUp];
-        }
+//    [Post globalTimelinePostsWithParameter:param withPath:@"include/json/gugun_json.asp" Block:^(NSArray *posts, NSError *error) {
+//        if (error) {
+//            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+//        } else {
+//            NSLog(@"%@",posts);
+//            
+//            _sigungu = posts;
+//            [self listUp];
+//        }
+//        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+//        
+//        
+//    }];
+
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
+
+    [manager GET:@"http://www.liveinkorea.kr/include/json/gugun_json.asp" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        NSLog(@"%@",responseObject);
+        
+        _sigungu = responseObject;
+        [self listUp];
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
-        
-        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
     }];
     
 }
@@ -241,19 +257,35 @@
 //    http://1.209.82.166:8180/danuri/mobile/support?city=gunposi
     NSDictionary *param  = @{@"language": appDelegate.type,@"mbidx": stateCode};
     [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    [Post globalTimelinePostsWithParameter:param withPath:@"include/json/center_json.asp" Block:^(NSArray *posts, NSError *error) {
-        if (error) {
-            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
-        } else {
-            NSLog(@"%@",posts);
-            
-            _posts = posts;
-            [tableView reloadData];
-        }
+//    [Post globalTimelinePostsWithParameter:param withPath:@"include/json/center_json.asp" Block:^(NSArray *posts, NSError *error) {
+//        if (error) {
+//            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+//        } else {
+//            NSLog(@"%@",posts);
+//            
+//            _posts = posts;
+//            [tableView reloadData];
+//        }
+//        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+//        
+//        
+//    }];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
+
+    [manager GET:@"http://www.liveinkorea.kr/include/json/center_json.asp" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        NSLog(@"%@",responseObject);
+        
+        _posts = responseObject;
+        [tableView reloadData];
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
-        
-        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
     }];
+    
 }
 
 - (void)didReceiveMemoryWarning

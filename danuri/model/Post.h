@@ -33,9 +33,9 @@
 
 - (id)initWithAttributes:(NSDictionary *)attributes;
 
-+ (void)globalTimelinePostsWithBlock:(void (^)(NSArray *posts, NSError *error))block;
-
-+ (void)globalTimelinePostsWithParameter:(NSDictionary *)parameter withPath:(NSString *)path Block:(void (^)(NSArray *posts, NSError *error))block;
+//+ (void)globalTimelinePostsWithBlock:(void (^)(NSArray *posts, NSError *error))block;
+//
+//+ (void)globalTimelinePostsWithParameter:(NSDictionary *)parameter withPath:(NSString *)path Block:(void (^)(NSArray *posts, NSError *error))block;
 
 
 @end

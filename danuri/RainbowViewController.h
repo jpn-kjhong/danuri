@@ -25,6 +25,7 @@
     NSArray                 *_posts;
     bool                    firstConnect;
     NSMutableArray          *requestList;
+    NSMutableArray          *TaskList;
 //    UIPickerView *pktStatePicker;
     UIToolbar *mypickerToolbar;
     UIActionSheet *sheet;

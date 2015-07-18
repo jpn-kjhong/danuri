@@ -24,6 +24,7 @@
 
     __weak IBOutlet UIButton *titleButton;
     NSMutableArray          *requestList;
+    NSMutableArray          *TaskList;
 
     UIPickerView *pktStatePicker;
     UIToolbar *mypickerToolbar;
